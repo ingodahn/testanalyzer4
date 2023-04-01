@@ -5,9 +5,13 @@
 
       Base Preset {{ $t("Test.title") }}
     </v-app-bar-title>
+    <LanguageSwitcher></LanguageSwitcher>
   </v-app-bar>
 </template>
 
-<script setup>
-  //
+<script>
+  import LanguageSwitcher from "@/components/LanguageSwitcher.vue"
+  export default {
+    components: { LanguageSwitcher }
+  }
 </script>
