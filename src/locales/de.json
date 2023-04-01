@@ -1,0 +1,186 @@
+{
+  "nav": {
+    "basics": "Daten",
+    "scoreDistribution": "Punkteverteilung",
+    "more": "Viele Punkte",
+    "less": "Wenige Punkte",
+    "attempts": "Ungenutzt",
+    "best": "Die Besten",
+    "questionStatistics": "Fragen-Statistik",
+    "discriminator": "Trennschärfe"
+  },
+  "Test": {
+    "title": "Test-Analyse",
+    "btn1": "Neue Datei laden",
+    "btn2": "Nur Hinweise anzeigen",
+    "btn3": "Alles anzeigen",
+    "btn4": "Problem melden",
+    "h21": "Daten",
+    "p1": "Diese Webseite kann die Ergebnisse Ihrer Tests analysieren. Sie kann Ihnen dabei helfen, die Qualität Ihrer Testfragen einzuschätzen. Sie kann dabei einige Probleme erkennen und Lösungsmöglichkeiten vorschlagen.",
+    "p2": "Die Qualität einer Testfrage hängt vom Kontext, von der Zielstellung des jeweiligen Tests ab. So wird man bei einem Test zur Motivierung der Studierenden oder bei einem Test zum Üben eine höhere Erfolgsquote anstreben, als bei einem Diagnose-Test, der die Grenzen von Wissen, Können und Kompetenzen der Studierenden ausloten soll. Letztlich können nur Sie als Lehrende(r) entscheiden, welche der gegebenen Empfehlungen in Ihrem Kontext anwendbar sind.",
+    "p3b": "Datenschutzhinweis:",
+    "p3": "Diese Webseite überträgt nach ihrem Aufruf keine Daten an andere Systeme. Alle Berechnungen erfolgen ausschließlich in Ihrem Browser.",
+    "p4": "<b>Bitte bachten Sie:</b> Es wird keinerlei Garantie übernommen. Hinweise auf Probleme und Wünsche zur Verbesserung der Seite sind jedoch <a href='mailto:dahn@dahn-research.eu'>ausdrücklich erwünscht</a>.",
+    "p5": "Der Test hat {0} Fragen. Es liegen Daten von {1} Studierenden vor. Maximal können {2} Punkte erreicht werden."
+  },
+  "Selector": {
+    "h2": "Bitte wählen Sie Ihr System",
+    "p1": "Falls Sie <i>WAMAP</i> oder <i>MyOpenMath</i> nutzen, so wählen Sie <b><i>IMathAS</i></b>."
+  },
+  "IMathAS": {
+    "data": "Daten",
+    "demo": "Demo-Daten",
+    "p1": "Testergebnisse finden Sie im Gradebook von IMathAS (bzw. WAMAP/MyOPenMath). Sie erreichen das Gradebook, wenn Sie auf das Zahnrad neben dem Test klicken und dann <i>Noten</i> auswählen. Auf der dann erscheinenden Seite gibt es unten den Link <i>Export Student Answer Details</i>. Klicken Sie darauf und nehmen Sie die Einstellungen genau so vor, wie auf diesem Bild gezeigt.",
+    "p2": "Ziehen Sie die so erstellte csv-Datei mit der Maus in diese Webseite auf die Fläche unten."
+  },
+  "Printer": {
+    "btn1": "Seite drucken"
+  },
+  "EditScores": {
+    "h3": "Maximal erreichbare Punkte",
+    "p0": "Ihre Datei enthielt keine Information über die maximalen Punktzahlen, die bei den einzelnen Aufgaben erreicht werden können.",
+    "p1": "Insgesamt können {0} Punkte erreicht werden, die Summe der ermittelten Punktzahlen der einzelnen Aufgaben ergibt {1}.",
+    "p2": "Bitte prüfen Sie, ob die maximal erreichbaren Punkte für alle Aufgaben richtig ermittelt wurden und korrigieren Sie ggf. die Werte.",
+    "th1": "Frage",
+    "th2": "Maximale Punktzahl"
+  },
+  "Control": {
+    "h3": "Art des Tests",
+    "btn1": "Auswahl ausblenden",
+    "btn2": "Einstellungen ändern",
+    "vct1": "Auswahl",
+    "vcst1": "Der Test ist...",
+    "vc1": "... verpflichtend. Es wird erwartet, dass alle Studierenden alle Fragen bearbeiten. Eine nicht beantwortete Frage wird genauso bewertet, wie eine falsch beantwortete Frage.",
+    "vc2": "... freiwillig. Die Studierenden können wählen, welche Fragen sie bearbeiten. Fragen, die nicht beantwortet wurden, werden bei der Leistungsbewertung nicht berücksichtigt.",
+    "vct3": "Studierende haben den Test mehrfach aufgerufen:",
+    "vcst3": "Welcher Versuch zählt für die Gesamtleistung?",
+    "r1": "Für jede Frage wird immer die beste Antwort gewertet.",
+    "r2": "Es wird der Versuch mit der höchsten Gesamtpunktzahl gewertet.",
+    "r3": "Es wird der Durchschnitt aller Versuche gewertet.",
+    "r4": "Jeder Versuch wird separat gewertet.",
+    "t1": "Bei der Analyse wird von folgenden Annahmen ausgegangen.",
+    "t2": "Der Test ist freiwillig. Die Studierenden können wählen, welche Fragen sie bearbeiten. Fragen, die nicht beantwortet wurden, werden bei der Leistungsbewertung nicht berücksichtigt.",
+    "t3": "Der Test ist verpflichtend. Es wird erwartet, dass alle Studierenden alle Fragen bearbeiten. Eine nicht beantwortete Frage wird genauso bewertet, wie eine falsch beantwortete Frage.",
+    "t4": "Es wird der Versuchs mit der höchsten Gesamtpunktzahl gewertet.",
+    "t5": "Es wird der Durchschnitt aller Versuche gewertet.",
+    "t6": "Jeder Versuch wird separat gewertet.",
+    "t7": "Für jede Frage wird immer die beste Antwort gewertet."
+  },
+  "Problem": {
+    "btn1": "Abbrechen",
+    "msg1": "Die Datei konnte nicht geladen werden. Wenn diese Datei wirklich von {0} erzeugt wurde, so melden Sie bitte das Problem. Fügen Sie möglichst eine anonymisierte Version Ihrer Datei bei.",
+    "msg2": "Die Datei wurde geladen, konnte aber nicht verarbeitet werden. Wenn diese Datei wirklich von {0} erzeugt wurde, so melden Sie bitte das Problem. Dabei können Sie eine anonymisierte Version Ihrer Datei erzeugen. Bitte fügen Sie diese Ihrer Problembeschreibung bei.",
+    "msg4": "<p>Sie können eine <b>anonymisierte</b> Version Ihrer Datei einschicken.</p>",
+    "msg5": "<p>Bitte prüfen Sie die Anonymisierung mit einem Texteditor oder einer Tabellenverarbeitung. Eine Tabellenverarbeitung gibt beim Öffnen der anonymisierten Datei möglicherweise eine Warnung aus, da die Datei aus einer unbekannten Quelle stammt. Diese Warnung können Sie ignorieren.</p><p><i>Absenden</i> verschickt die Daten noch nicht; dies erledigen Sie mit Ihrem eMail-Programm. Bitte fügen Sie dabei die anonymisierte Datei als Anlage an.</p>",
+    "msg6": "Problem melden",
+    "msg7": "Daten anonymisieren",
+    "msg8": "Absenden",
+    "msg9": "Problem melden"
+  },
+  "Score": {
+    "h2": "Punkteverteilung",
+    "p1": "Hinweis:",
+    "li1": "Gibt es Verständnisprobleme?",
+    "li2": "Brauchen die Studierenden mehr Zeit?",
+    "li3": "Fehlt ihnen die Motivation (insbesondere, wenn sie die Frage gar nicht erst versucht haben)?",
+    "title": "Punkteverteilung",
+    "chartLabel": "Studierende",
+    "hint1": "Sehen Sie sich insbesondere die Antworten der Studierenden mit {0} Punkten auf die Frage {1} an, z.B. von {2}, bzw. fragen Sie sie, warum sie diese Frage nicht bearbeitet haben.",
+    "hint2": "Nur wenige Studierende haben {0} Punkte."
+  },
+  "Race": {
+    "h2": "Wo stehen die Studierenden?",
+    "track": "Studierende"
+  },
+  "More": {
+    "h2": "Bei welchen Fragen wurden oft viele Punkte erreicht?",
+    "p1": "Bei allen Aufgaben wurden im Mittel höchstens {0} erreicht.",
+    "p2N": "| Bei der Aufgabe | Bei den Aufgaben",
+    "p2": "Bei der Aufgabe",
+    "p3": "wurden im Mittel mehr als {0} erreicht.",
+    "p4": "Bei den Aufgaben",
+    "p5": "wurden im Mittel mehr als {0} erreicht.",
+    "hint": "Hinweis:",
+    "qq": "| Ist die Frage | Sind die Fragen",
+    "qt": "| diese Frage | diese Fragen",
+    "qValue": "| Wert der Frage | Wert der Fragen",
+    "hintText": "Viele Studierende haben sehr viele Punkte erreicht. Woran kann das liegen? {0} zu leicht? Überlegen Sie, warum Sie {1} in den Test aufgenommen haben. <dl><dt style='font-style:italic;'>Wollten Sie die Studierenden mit einem guten Ergebnis motivieren?</dt><dd>Dann ist das in Ordnung.</dd><dt style='font-style:italic;'>Wollten Sie überprüfen, ob die Studierenden die für das Kommende benötigten Vorkenntnisse haben?</dt><dd>Dann ist dieses Ergebnis eine schöne Bestätigung, aber vielleicht können die Studierenden ja sogar noch mehr? Vielleicht können Sie {1} doch noch etwas schwerer machen? Eventuell könnten Sie auch die Anzahl der für {1} vergebenen Punkte reduzieren.</dd><dt  style='font-style:italic;'>Wollten Sie die besonders schwachen Studierenden herausfinden, die selbst daran scheitern?</dt><dd>Verdeutlichen Sie den Studierenden den {2}, damit sie sich nicht überschätzen.</dd></dl>",
+    "hintText2": "So sollte es sein. Ihre Aufgaben sind nicht zu leicht.",
+    "percent": "% der Punkte"
+  },
+  "Attempts": {
+    "h2": "Ungenutzte Fragen?",
+    "li": "z.B. nicht versucht von",
+    "hint": "Hinweis:",
+    "label": "% der Studierenden, die die Frage bearbeitet haben",
+    "r1": "% der Studierenden bearbeitet.",
+    "r2": "Alle Aufgaben wurden von mindestens",
+    "r3": "Diese Aufgabe wurde von weniger als",
+    "r4": "Diese Aufgaben wurden von weniger als",
+    "question": " | diese Frage | diese Fragen",
+    "hintText1": "<p>Versuchen Sie, durch Gespräche mit diesen Studierenden, herauszubekommen, warum sie {0} nicht versucht haben. Sprechen Sie insbesondere mit den zuerst genannten Studierenden, denn diese haben insgesamt am Besten abgeschnitten.</p><p>Vielleicht war die Formulierung nicht verständlich? Insbesondere bei den letzten Fragen des Tests könnte es auch daran liegen, dass die Zeit für den Test zu knapp bemessen war. Sie sollten {0} modifizieren, sie durch andere Fragen ersetzen oder weglassen.</p>",
+    "hintText2": "<p>So sollte es sein. Ihre Aufgaben sind verständlich.</p>"
+  },
+  "Best": {
+    "h2": "Wo machen auch die Besten Fehler?",
+    "hint": "Hinweis:",
+    "msg": "Die besten {0} Studierenden erreichten immer die volle Punktzahl. | Bei der folgenden Frage erreichten die besten {0} Studierenden nicht immer die volle Punktzahl. | Bei den folgenden Fragen erreichten die besten {0} Studierenden nicht immer die volle Punktzahl.",
+    "hint2": "Bei einem <span  style='font-style:italic;'>Vortest</span> zur Feststellung von Vorkenntnissen ist das in Ordnung.<br/><span  style='font-style:italic;'>Ansonsten</span> deutet es darauf hin, dass eine Frage unklar formuliert ist oder dass benötigtes Vorwissen nicht bekannt ist. Eine genauere Prüfung der Antworten der genannten Studierenden könnte genauere Hinweise liefern.",
+    "hint3": "Wie erwartet haben die besten Studierenden alle Fragen richtig beantwortet."
+  },
+  "Disc": {
+    "h2": "Trennschärfe",
+    "p1": "Die <a href='https://de.wikipedia.org/wiki/Trennsch%C3%A4rfe_eines_Items' target='_blank'>Trennschärfe</a> einer Frage in einem Test misst, inwieweit die Verteilung der Punkte der Frage der Leistungsverteilung der Gesamtpunktzahl des Tests entspricht.",
+    "p2": "Die Trennschärfe der Fragen kann nicht ermittelt werden, wenn die Bearbeitung der Fragen freiwillig ist (dies kann in den <a href='#controlCenter'>Einstellungen des Tests</a> geändert werden) oder wenn es mehrere Versuche gibt.",
+    "h4": "Ist das relevant?",
+    "ul": "Die Trennschärfe ist nur von Interesse...",
+    "li1": "... wenn der Test das Ziel hat, die Fähigkeiten der Studierenden auf einem bestimmten Gebiet zu bestimmen und alle Fragen diesem Ziel dienen. Dann sollten alle Fragen eine Trennschärfe &geq; 0.3 aufweisen.",
+    "li2": "... wenn jedem Teilnehmer des Tests alle Fragen vorgelegt wurden, also nicht für Tests mit zufälliger Fragenauswahl.",
+    "li3": "... für Fragen, bei denen nicht alle Studierenden die gleiche Punktzahl erhalten haben; andernfalls ist eine Berechnung der Trennschärfe der Frage nicht möglich.",
+    "p3": "Vielleicht kann man sie noch besser auf das Ziel des Tests abstimmen?",
+    "low": " | Die folgende Frage hat eine niedrige Trennschärfe. | Die folgenden Fragen haben eine niedrige Trennschärfe.",
+    "zero": " | Die folgende Frage hat eine Trennschärfe nahe 0. Sie scheint mit dem restlichen Test wenig gemeinsam zu haben. | Die folgenden Fragen haben eine Trennschärfe nahe 0. Sie scheinen mit dem restlichen Test wenig gemeinsam zu haben.",
+    "neg": " | Die folgende Frage hat eine negative Trennschärfe. Wurde sie umgekehrt verstanden? | Die folgenden Fragen haben eine negative Trennschärfe. Wurden sie umgekehrt verstanden?"
+  },
+  "Less": {
+    "h2": "Bei welchen Fragen wurden oft wenige Punkte erreicht?",
+    "p0": "Es wurden bei allen Aufgaben im Mittel mindestens {0} erreicht.",
+    "p11": "Bei der Aufgabe",
+    "p12": "Bei jeder der Aufgaben",
+    "p2": "wurden im Mittel weniger als {0} erreicht.",
+    "question": " | diese Frage | diese Fragen",
+    "question1": " | Frage | Fragen",
+    "question2": " | dieser Frage | diesen Fragen",
+    "is": " | Ist | Sind",
+    "hint0": "Hinweis",
+    "hint": "Viele Studierende haben damit Probleme. Woran kann das liegen? {0} {1} für alle eindeutig und verständlich formuliert? Haben die Studierenden das benötigte Wissen? Sprechen Sie mit den Studierenden darüber! Überlegen Sie, warum Sie {1} in den Test aufgenommen haben. <br/><dl><dt style='font-style:italic;'>Wollten Sie Wissensdefizit deutlich machen?</dt><dd> Dies kann leicht demotivieren. <br/>Vielleicht können Sie {1} in Teilaufgaben zerlegen, so dass die Studierenden schrittweise zur Lösung geführt werden? <br/>Sie könnten auch mehr Punkte für {1} vergeben, um die besondere Schwierigkeit zu berücksichtigen (s. Abschnitt Fragen-Statistik).</dd><dt style='font-style:italic;'>Wollten Sie die besonders guten Studierenden herausfinden, die auch {1} lösen können?</dt><dd>Dann ist das in Ordnung. Die Studierenden sollten Ihre Absicht kennen, damit sie die Ergebnisse auch selbst richtig werten können.</dd></dl>",
+    "hint2": "So sollte es sein. Ihre Aufgaben sind nicht zu schwer.",
+    "qsuccess": "Bei jeder Frage | Bei jeder der übrigen Fragen",
+    "qsuccess2": "haben die meisten Studierenden die volle Punktzahl erreicht.",
+    "start501": "Die meisten Studierenden konnten bei | Außerdem konnten die meisten Studierenden bei",
+    "start502": " | der Frage | den Fragen",
+    "multi": "auch nach mehreren Versuchen ",
+    "notfull": "nicht die volle Punktzahl erreichen.",
+    "hint50": "<p><b>Hinweis:</b> Da viele Studierende die volle Punktzahl erreicht haben, sollten sie sich bei Fragen gegenseitig gut helfen können.</p>",
+    "hint50x": "Sie können sich auf obige {0} konzentrieren; bei den übrigen Fragen sollten sich die Studierenden auch gut untereinander helfen können.</p>",
+    "hint50y": "<br/>Bei einem <span  style='font-style:italic;'>Vortest</span> wäre das normal. <br/><span  style='font-style:italic;'>Ansonsten</span>  brauchen die Studierenden bei {0}  möglicherweise Ihre Hilfe, da sie sich nicht ausreichend gegenseitig helfen können.<br/>Sie könnten z.B. die Studierenden auf Literatur oder analoge Online-Selbsttests hinweisen und gelegentlich ähnliche Aufgaben zur Wiederholung stellen.</p>",
+    "tp": "% der Punkte"
+  },
+  "Stat": {
+    "h2": "Fragen-Statistik",
+    "info": "Genauer: Blau: Für jede(n) Studierende(n) wird zunächst die bei allen Versuchen im Mittel erreichte Punktzahl bestimmt. Rot: Es wird für jede(n) Studierende(n) die maximal erreichte Punktzahl ermittelt. Diese Werte werden dann über alle Studierenden gemittelt. Bei freiwilligen Tests zählen nur die Versuche, bei denen eine Antwort eingegeben wurde.",
+    "hint": "Hinweis",
+    "div1": "Wenn die maximal mögliche Punktzahl der Schwierigkeit der Aufgabe entsprechen soll, so vergleichen Sie die blaue mit der grünen Kurve. Bei schwierigen Fragen ist der mittlere Punktwert niedrig, verglichen mit dem Maximalpunktwert. Derartige Fragen kann man mit einem entsprechend höheren Maximalpunktwert belohnen.",
+    "p1": "Eine angepasste Punkteverteilung wäre z.B.",
+    "img": "Zur Ermittlung der unten vorgeschlagenen Punktzahlen wurde ein Standardwert von 5 Punkten mit einem Schwierigkeitsfaktor multipliziert. Dabei wird der Schwierigkeitsfaktor als Quotient aus der bisherigen Maximalpunktzahl und der im Mittel erreichten Punktzahl der jeweiligen Frage berechnet.",
+    "p2": "Es kann aber gute Gründe geben, von dieser Punkteverteilung abzuweichen, z.B. um die Studierenden zur Beschäftigung mit einzelnen Fragen besonders zu motivieren.",
+    "mlhint": "Studierende haben Fragen mehrfach bearbeitet. Die <span style='color:red; font-weight:bold'>rote Kurve </span>zeigt, wieviele Punkte die Studierenden dabei maximal erreicht haben. Dies ist ein Hinweis auf den erreichten Leistungsstand (sofern die Aufgabe nicht durch mehrfaches Raten gelöst werden kann). Die <span style='color:blue; font-weight:bold'>blaue Kurve</span> zeigt die von den Studierenden im Mittel aller Versuche erreichte Punktzahl. Die Differenz zwischen der blauen und der roten Kurve ist ein Indiz für den Lernerfolg während der Laufzeit des Tests.",
+    "label1": "Maximale Punktzahl",
+    "label2": "Mittlere Punktzahl",
+    "label3": "Mittlere maximal erreichte Punktzahl",
+    "pts": "Punkte"
+  },
+  "Player": {
+    "q": "Fragen"
+  }
+}
