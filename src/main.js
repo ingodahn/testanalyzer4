@@ -9,6 +9,7 @@ import App from './App.vue'
 
 // Composables
 import { createApp } from 'vue'
+// import { createApp } from 'vue/dist/vue.esm-bundler'  // Alternative: ESM Bundler für i18n
 
 // Plugins
 import { registerPlugins } from '@/plugins'

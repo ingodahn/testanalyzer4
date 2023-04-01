@@ -16,7 +16,7 @@ export default defineConfig({
     }),
     // https://lokalise.com/blog/vue-i18n/#Installing_and_configuring_the_Vue_I18n_plugin
     VueI18nPlugin({
-      include: resolve(dirname(fileURLToPath(import.meta.url)), './src/locales/**'), // provide a path to the folder where you'll store translation data (see below)
+      include: resolve(dirname(fileURLToPath(import.meta.url)), './src/i18n/locales/**'), // provide a path to the folder where you'll store translation data (see below)
     }),
     // https://github.com/vuetifyjs/vuetify-loader/tree/next/packages/vite-plugin
     vuetify({
