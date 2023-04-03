@@ -2,7 +2,7 @@
 import { createRouter, createWebHistory, RouterView } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import Tr from "@/i18n/translation"
-/*
+
 const routes = [
   {
     path: '/',
@@ -14,13 +14,13 @@ const routes = [
         // route level code-splitting
         // this generates a separate chunk (about.[hash].js) for this route
         // which is lazy-loaded when the route is visited.
-        component: () => import(/* webpackChunkName: "home" *\/ '@/views/Home.vue'),
+        component: () => import(/* webpackChunkName: "home" */ '@/views/Home.vue'),
       },
     ],
   },
 ]
-*/
 
+/*
 const routes = [
   {
     path: '/:locale?',
@@ -32,7 +32,6 @@ const routes = [
         path: '',
         name: 'home',
         component: HomeView
-        //component: () => import('@/views/HomeView.vue')
       },
       {
         path: 'system',
@@ -42,7 +41,7 @@ const routes = [
     ]
   }
 ]
-
+*/
 
 const router = createRouter({
   //In i18n tutorial: history: createWebHistory(import.meta.env.VITE_BASE_URL),

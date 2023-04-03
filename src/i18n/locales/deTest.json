@@ -1,0 +1,10 @@
+{
+    "locale": {
+        "de": "Deutsch",
+        "en": "Englisch"
+    },
+    "pSystem": "pSystem-de",
+    "Test": {
+        "title": "<em>Testtitel-2-de</em>"
+    }
+}

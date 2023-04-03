@@ -10,13 +10,24 @@ import { fileURLToPath, URL } from 'node:url'
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  optimizeDeps: {
+    include: ['@intlify/vite-plugin-vue-i18n']
+  },
+  build: {
+    rollupOptions: {
+      output: {
+        sanitizeHtml: false,
+      },
+    },
+  },
   plugins: [
-    vue({ 
+    vue({
       template: { transformAssetUrls }
     }),
     // https://lokalise.com/blog/vue-i18n/#Installing_and_configuring_the_Vue_I18n_plugin
     VueI18nPlugin({
       include: resolve(dirname(fileURLToPath(import.meta.url)), './src/i18n/locales/**'), // provide a path to the folder where you'll store translation data (see below)
+      strictMessage: false
     }),
     // https://github.com/vuetifyjs/vuetify-loader/tree/next/packages/vite-plugin
     vuetify({
