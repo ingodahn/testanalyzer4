@@ -1,7 +1,7 @@
 // Composables
 import { createRouter, createWebHistory, RouterView } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
-import Tr from "@/i18n/translation"
+
+//import Tr from "@/i18n/translation"
 
 const routes = [
   {
@@ -16,8 +16,20 @@ const routes = [
         // which is lazy-loaded when the route is visited.
         component: () => import(/* webpackChunkName: "home" */ '@/views/Home.vue'),
       },
+      {
+        path: ':system',
+        name: "System",
+        component: () => import('@/views/SystemView.vue')
+      }
     ],
   },
+  /*
+  {
+    path: "/:system",
+    name: "system",
+    component: () => import('@/views/SystemView.vue')
+  },
+  */
 ]
 
 /*
