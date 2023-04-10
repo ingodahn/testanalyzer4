@@ -35,7 +35,8 @@
     "data": "Data",
     "demo": "Demo-Data",
     "p1": "You can find test results in the gradebook of IMathAS (resp. WAMAP/MyOpenMath). You can access the gradebook by clicking on the gear icon aside of the test and then select <i>Grades</i>. At the bottom of the following page there is a link <i>Export Student Answer Details</i>. Click it and make the export settings as shown in this image.",
-    "p2": "Drop the generated csv file with the mouse on the area below."
+    "p2": "Drop the generated csv file with the mouse on the area below.",
+    "p3": "Drop the csv file here."
   },
   "Printer": {
     "btn1": "Print page"

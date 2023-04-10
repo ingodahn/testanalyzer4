@@ -35,7 +35,8 @@
     "data": "Daten",
     "demo": "Demo-Daten",
     "p1": "Testergebnisse finden Sie im Gradebook von IMathAS (bzw. WAMAP/MyOPenMath). Sie erreichen das Gradebook, wenn Sie auf das Zahnrad neben dem Test klicken und dann <i>Noten</i> auswählen. Auf der dann erscheinenden Seite gibt es unten den Link <i>Export Student Answer Details</i>. Klicken Sie darauf und nehmen Sie die Einstellungen genau so vor, wie auf diesem Bild gezeigt.",
-    "p2": "Ziehen Sie die so erstellte csv-Datei mit der Maus in diese Webseite auf die Fläche unten."
+    "p2": "Ziehen Sie die so erstellte csv-Datei mit der Maus in diese Webseite auf die Fläche unten.",
+    "p3": "Ziehen Sie die csv-Datei hier hin."
   },
   "Printer": {
     "btn1": "Seite drucken"
