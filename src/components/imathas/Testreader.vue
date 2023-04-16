@@ -19,8 +19,7 @@
                 {{ $t("IMathAS.p2") }}
             </p>
         </div>
-        <reader></reader>
-        <!-- <reader @dataRead="handleData"></reader> -->
+        <reader @dataRead="handleData"></reader>
     </v-container>
 </template>
 
@@ -38,6 +37,11 @@ export default {
     components: {
         Context,
         Reader
+    },
+    methods: {
+        handleData(data) {
+            console.log('Testreader got data', data)
+        }
     }
 }
 </script>

@@ -13,14 +13,25 @@
 </template>
 
 <script>
+import LanguageSwitcher from './LanguageSwitcher.vue';
+import csv from 'csvtojson';
+
 export default {
     name: "Reader",
     data() {
         return {
             loading: false,
             error: false,
-            errorMessage: ""
+            errorMessage: "",
+            lineArray: null
         };
+    },
+    watch: {
+        lineArray: function (val) {
+            if (! typeof val === 'object') return
+            console.log('lineArray changed', val.length)
+            this.$emit('dataRead', JSON.parse(JSON.stringify(val)))
+        }
     },
     methods: {
         handleDrop: function (e) {
@@ -30,7 +41,6 @@ export default {
                 e.stopPropagation();
                 e.preventDefault();
                 this.loading = true;
-                //this.cancelError();
                 var files = e.dataTransfer.files,
                     f = files[0],
                     csv;
@@ -51,55 +61,41 @@ export default {
                 if (er == "loadError") component.handleLoadError();
             }
         },
-        handleData(csv) {
+        handleData(csvData) {
             console.log('Handling Data')
             let component = this
             try {
-                const csv_1 = csv.replace(/^\s*\n/gm, "");
-                const lineArray = this.parseCSV(csv_1, ",");
-                component.$emit('dataRead', lineArray)
+                const csv_1 = csvData.replace(/^\s*\n/gm, "");
+                let lineArray=[];
+                lineArray = this.parseCSV(csv_1, ",");
                 console.log('Data parsed', lineArray)
             } catch (er) {
                 if (er == "loadError") component.handleLoadError(er);
             }
-            this.$emit('dataRead', csv)
         },
         handleLoadError(er) {
             console.log('Handling Load Error', er.errorMessage)
             this.loading = false;
             this.error = true;
-            this.errorMessage = er;
+            this.errorMessage = er.errorMessage;
         },
         
-        /* parseCSV(str, delimiter = ",") {
-            console.log('Parsing Data-0')
-            const headers = str.slice(0, str.indexOf("\n")).split(delimiter);
-            const rows = str.slice(str.indexOf("\n") + 1).split("\n");
-            return rows.map(row => {
-                const values = row.split(delimiter);
-                return headers.reduce((object, header, index) => {
-                    object[header] = values[index];
-                    return object;
-                }, {});
-            });
-        }, */
         
-        parseCSV(csv, del = ",") {
-            console.log('Parsing Data-1')
-            let parse = require("csv-parse/lib/sync");
-            console.log('Parsing Data')
-            let lineArray = [];
+        parseCSV(csvData, del = ",") {
             try {
-                lineArray = parse(csv, {
-                    delimiter: del,
-                    trim: true,
-                    relax_column_count: true
-                });
-            } catch {
-                throw "loadError";
+                csv({
+                    noheader: true,
+                    output: "csv",
+                    delimiter: del
+                })
+                    .fromString(csvData)
+                    .then(csvRow => {
+                        // We might emit the data here
+                        this.lineArray = csvRow
+                    })
+            } catch (er) {
+                if (er == "loadError") component.handleLoadError(er);
             }
-            console.log('Data parsed', lineArray)
-            return lineArray;
         },
        
         handleDragover(e) {
