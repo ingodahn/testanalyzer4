@@ -26,13 +26,6 @@ export default {
             lineArray: null
         };
     },
-    watch: {
-        lineArray: function (val) {
-            if (! typeof val === 'object') return
-            console.log('lineArray changed', val.length)
-            //this.$emit('dataRead', JSON.parse(JSON.stringify(val)))
-        }
-    },
     methods: {
         handleDrop: function (e) {
             console.log('Handling Drop')
@@ -67,8 +60,8 @@ export default {
             try {
                 const csv_1 = csvData.replace(/^\s*\n/gm, "");
                 let lineArray=[];
-                lineArray = this.parseCSV(csv_1, ",");
-                console.log('Data parsed', lineArray)
+                this.parseCSV(csv_1, ",");
+                console.log('Data parsed')
             } catch (er) {
                 if (er == "loadError") component.handleLoadError(er);
             }
@@ -92,7 +85,8 @@ export default {
                     .then(csvRow => {
                         // We might emit the data here
                         //this.lineArray = csvRow
-                        this.$emit('dataRead', csvRow)
+                        this.$root.$data.lineArray=csvRow;
+                        this.$emit('dataRead')
                     })
             } catch (er) {
                 if (er == "loadError") component.handleLoadError(er);

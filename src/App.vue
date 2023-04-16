@@ -2,6 +2,13 @@
   <router-view />
 </template>
 
-<script setup>
-  //
+<script>
+  export default {
+    data () {
+      return {
+        lineArray: null,
+        Test: null
+      }
+    }
+  }
 </script>

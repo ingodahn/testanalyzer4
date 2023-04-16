@@ -33,7 +33,7 @@ export default {
     data() {
         return {
             ShowUpload: true,
-            lineArray: []
+            //lineArray: []
         }
     },
     components: {
@@ -41,24 +41,25 @@ export default {
         Reader
     },
     methods: {
-        handleData(data) {
-            this.lineArray = data;
+        handleData() {
+            //this.lineArray = data;
             try {
-            // 5. table2test
-            var test = this.table2Test();
-            //  6. Emit signal (or modify Test object's parts?)
-        this.$emit("testRead", test);
-        console.log('Testreader emitted test', test)
-        this.loading = false;
-        this.Error.type = "loaded";
-      } catch (er) {
-        //if (er == "loadError") component.handleLoadError();
-        if (er == "processError") component.handleProcessError();
-      }
+                // 5. table2test
+                //var test = this.table2Test();
+                this.table2Test();
+                //  6. Emit signal (or modify Test object's parts?)
+                this.$emit("testRead");
+                console.log('Testreader emitted testRead at', JSON.parse(JSON.stringify(this.$root.$data.Test)))
+                this.loading = false;
+                this.Error.type = "loaded";
+            } catch (er) {
+                //if (er == "loadError") component.handleLoadError();
+                if (er == "processError") component.handleProcessError();
+            }
         },
         table2Test() {
             try {
-                var Test = {
+                this.$root.$data.Test = {
                     system: "IMathAS",
                     info: "",
                     questionsNr: 0,
@@ -67,13 +68,15 @@ export default {
                     questions: [],
                     studentNameLines: []
                 };
-                const table=this.lineArray;
-                const headings = this.lineArray[0];
+                let Test = this.$root.$data.Test;
+                //const table=this.lineArray;
+                const table = this.$root.$data.lineArray;
+                const headings = table[0];
                 // Making up Test.questions
                 // getQuestions returns the array of column nrs for the questionscores
-                let qCols = this.getQuestions(Test, headings);
+                let qCols = this.getQuestions(headings);
                 if (qCols.length == 0) throw "processError";
-                Test.setMaxScore = this.getMaxScore(Test);
+                Test.setMaxScore = this.getMaxScore();
                 console.log('setMaxScore:', Test.setMaxScore)
                 Test.studentsNr = table.length - 2;
                 for (let i = 2; i < table.length; i++) {
@@ -91,15 +94,17 @@ export default {
                     }
                     Test.studentNameLines.push(lineItems);
                 }
-                return Test;
+                //return Test;
+                //this.$root.$data.Test = Test;
             } catch (err) {
                 //throw "processError";
                 console.log('TR-70:', err)
             }
         },
-        getQuestions(Test, headings) {
+        getQuestions(headings) {
             try {
-                let table = this.lineArray,
+                let table = this.$root.$data.lineArray,
+                    Test = this.$root.$data.Test,
                     qPkt = new Array(),
                     questionsNr = 0,
                     cNr = 0,
@@ -124,8 +129,9 @@ export default {
                 console.log('TR-96:', er)
             }
         },
-        getMaxScore(Test) {
-            let maxScore = 0,
+        getMaxScore() {
+            let Test = this.$root.$data.Test,
+                maxScore = 0,
                 rex = /(Question\s\d+)-/,
                 root = "",
                 ssq = 0;
