@@ -8,12 +8,21 @@
             }}
         </p>
     </v-container>
+    <score-distribution :ScoredSorted="scoredSorted" :TotalScore="calcMaxScore" :Questions="questions"
+        :ComponentStatus="componentStatus" :Layout="layout">
+    </score-distribution>
 </template>
 
 <script>
 import { Student } from "@/components/Scoring.js";
+
+import ScoreDistribution from "@/components/ScoreDistribution.vue";
+
 export default {
     name: "AnalysisView",
+    components: {
+        ScoreDistribution
+    },
     data() {
         return {
             fab: false,
@@ -41,7 +50,7 @@ export default {
                 status: "start"
             },
             componentStatus: {
-                scoreDistribution: "warn_0",
+                ScoreDistribution: "warn_0",
                 less: "warn_0",
                 more: "warn_0",
                 attempts: "warn_0",
@@ -55,7 +64,6 @@ export default {
         };
     },
     mounted() {
-        console.log('AnalysisView mounted at', JSON.parse(JSON.stringify(this.$root.$data.Test)));
         this.testread();
     },
     methods: {
@@ -127,6 +135,7 @@ export default {
 
             this.showUpload = false;
             this.showContext = false;
+            // READ FINISHED
         },
     },
     computed: {
@@ -144,6 +153,53 @@ export default {
         calcMaxScore: function () {
             if (isNaN(this.setMaxScore)) return this.totalScore;
             return this.setMaxScore;
+        },
+        testStudentScores: function () {
+            let studentScores = [];
+            let nameArray = Object.keys(this.students);
+
+            if (!this.mode.multiLine) {
+                nameArray.forEach(sname => {
+                    studentScores.push({
+                        name: sname,
+                        realName: sname,
+                        totalScore: this.students[sname].getScore(this.mode, this.questions)
+                    });
+                });
+            } else if (this.mode.multiLine && this.mode.multiLineScore == "single") {
+                nameArray.forEach(sname => {
+                    {
+                        let scoreArray = this.students[sname].getScore(
+                            this.mode,
+                            this.questions
+                        );
+                        scoreArray.forEach(ll => {
+                            studentScores.push({
+                                name: sname + " (" + ll.lineNr + ")",
+                                realName: sname,
+                                lineNr: ll.lineNr,
+                                totalScore: ll.lineScore
+                            });
+                        });
+                    }
+                });
+            } else if (this.mode.multiLine) {
+                nameArray.forEach(sname => {
+                    studentScores.push({
+                        name: sname,
+                        realName: sname,
+                        totalScore: this.students[sname].getScore(this.mode, this.questions)
+                    });
+                });
+            }
+            return studentScores;
+        },
+        scoredSorted: function () {
+            var ss = this.testStudentScores.slice(0);
+            var scoredSorted = ss.sort(function (a, b) {
+                return a.totalScore - b.totalScore;
+            });
+            return scoredSorted;
         },
     }
 }
