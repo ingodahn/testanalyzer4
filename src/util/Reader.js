@@ -1,5 +1,3 @@
-import { parse } from 'csv-parse';
-
 export const ReaderErrors = {
   data() {
     return {
@@ -38,47 +36,8 @@ export const ReaderErrors = {
 
 //import { saveAs } from "file-saver";
 
-export const CSV = {
-  data() {
-    return {};
-  },
-  methods: {
-    parseCSV: function (csv, del = ",") {
-      //let parse = require("csv-parse/lib/sync");
-      let lineArray = [];
-      try {
-        const parser = parse(csv, {
-          delimiter: del,
-          trim: true,
-          relax_column_count: true
-        });
-        parser.on('readable', function () {
-          let record;
-          while ((record = parser.read()) !== null) {
-            lineArray.push(record);
-          }
-        });
-      } catch (e) {
-        throw "loadError";
-      }
-      return lineArray;
-    },
-/*
-    writeCSV: function (lineArray, del, fileName) {
-      let outLines = lineArray.map(line =>
-        line
-          .map(entry => entry.replaceAll(del, "").replaceAll('"', ""))
-          .join(del)
-      );
-      let outData = outLines.join("\n");
-      let blob = new Blob([outData], {
-        type: "text/plain; charset=utf-8"
-      });
-      saveAs(blob, fileName);
-    }
-    */
-  }
-};
+
+// Path: src/util/Question.js
 export class Question {
   constructor(name) {
     this.name = name;

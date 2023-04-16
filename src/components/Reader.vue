@@ -30,7 +30,7 @@ export default {
         lineArray: function (val) {
             if (! typeof val === 'object') return
             console.log('lineArray changed', val.length)
-            this.$emit('dataRead', JSON.parse(JSON.stringify(val)))
+            //this.$emit('dataRead', JSON.parse(JSON.stringify(val)))
         }
     },
     methods: {
@@ -91,7 +91,8 @@ export default {
                     .fromString(csvData)
                     .then(csvRow => {
                         // We might emit the data here
-                        this.lineArray = csvRow
+                        //this.lineArray = csvRow
+                        this.$emit('dataRead', csvRow)
                     })
             } catch (er) {
                 if (er == "loadError") component.handleLoadError(er);
