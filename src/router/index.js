@@ -20,6 +20,11 @@ const routes = [
         path: ':system',
         name: "System",
         component: () => import('@/views/SystemView.vue')
+      },
+      {
+        path: 'analysis',
+        name: "Analysis",
+        component: () => import('@/views/AnalysisView.vue')
       }
     ],
   },

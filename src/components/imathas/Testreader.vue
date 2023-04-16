@@ -30,6 +30,7 @@ import { Question, Line, ReaderErrors } from "@/util/Reader";
 
 export default {
     name: "IMathASTestreader",
+    emits: ["testRead"],
     data() {
         return {
             ShowUpload: true,
@@ -49,7 +50,7 @@ export default {
                 this.table2Test();
                 //  6. Emit signal (or modify Test object's parts?)
                 this.$emit("testRead");
-                console.log('Testreader emitted testRead at', JSON.parse(JSON.stringify(this.$root.$data.Test)))
+                //console.log('Testreader emitted testRead at', JSON.parse(JSON.stringify(this.$root.$data.Test)))
                 this.loading = false;
                 this.Error.type = "loaded";
             } catch (er) {
