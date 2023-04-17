@@ -12,11 +12,28 @@
             <b>{{ $t("Score.p1") }}</b>
             {{ hint }}
         </v-container>
+        <v-container v-if="hintDetails != ''">
+        <p>{{ hintDetails }}</p>
+
+        <ul>
+          <li>{{ $t("Score.li1") }}</li>
+          <li>{{ $t("Score.li2") }}</li>
+          <li>{{ $t("Score.li3") }}</li>
+        </ul>
+      </v-container>
+      <Race
+        id="trackComponent"
+        :ScoredSorted="ScoredSorted"
+        :TotalScore="TotalScore"
+        :Questions="Questions"
+        v-if="Layout == 'all'"
+      ></Race>
     </div>
 </template>
 
 <script>
 import BarChart from "@/components/Graphics/BarChart.vue";
+import Race from "@/components/Race.vue"
 export default {
     data() {
         return {
@@ -38,7 +55,7 @@ export default {
     ],
     components: {
         BarChart,
-        //Race
+        Race
     },
     computed: {
         scoreClasses: function () {
