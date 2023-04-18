@@ -124,12 +124,25 @@ export default {
                     }
                 }
                 Test.questionsNr = questionsNr;
+                console.log('questionsNr:', Test.questionsNr);
+                console.log('questions:', JSON.parse(JSON.stringify(Test.questions)))
+                console.log('qpkt:', qPkt)
                 return qPkt;
             } catch (er) {
                 //throw "processError";
                 console.log('TR-96:', er)
             }
         },
+        // We consider each part of a multipart question as a separate question
+        getMaxScore () {
+            let Test = this.$root.$data.Test,
+                maxScore = 0;
+                Test.questions.forEach(q => {
+                    maxScore += q.maxScore;
+                });
+            return maxScore;
+        },
+        /*
         getMaxScore() {
             let Test = this.$root.$data.Test,
                 maxScore = 0,
@@ -138,15 +151,19 @@ export default {
                 ssq = 0;
             Test.questions.forEach(q => {
                 let qnParts = rex.exec(q.name);
+                // For multipart questions qnParts[1] =='Questin Nr' for q
                 if (qnParts) {
                     if (qnParts[1] != root) {
+                        // This is a column for a new question
                         maxScore += ssq;
                         root = qnParts[1];
                         ssq = q.maxScore;
                     } else {
+                        // Why Max?
                         ssq = Math.max(ssq, q.maxScore);
                     }
                 } else {
+                    // This is not a multipart question
                     maxScore += ssq;
                     maxScore += q.maxScore;
                 }
@@ -154,6 +171,7 @@ export default {
             maxScore += ssq;
             return maxScore;
         }
+        */
     }
 }
 /*

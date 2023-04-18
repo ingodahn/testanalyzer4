@@ -14,13 +14,14 @@
         </v-container>
         <v-container v-if="hintDetails != ''">
         <p>{{ hintDetails }}</p>
-
-        <ul>
+            <ul>
           <li>{{ $t("Score.li1") }}</li>
           <li>{{ $t("Score.li2") }}</li>
           <li>{{ $t("Score.li3") }}</li>
         </ul>
-      </v-container>
+        </v-container>
+        
+    
       <Race
         id="trackComponent"
         :ScoredSorted="ScoredSorted"

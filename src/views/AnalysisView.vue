@@ -11,17 +11,20 @@
     <score-distribution :ScoredSorted="scoredSorted" :TotalScore="calcMaxScore" :Questions="questions"
         :ComponentStatus="componentStatus" :Layout="layout">
     </score-distribution>
+    <More id="more" :Score="score" :ComponentStatus="componentStatus" :Layout="layout"></More>
 </template>
 
 <script>
 import { Student } from "@/components/Scoring.js";
 
 import ScoreDistribution from "@/components/ScoreDistribution.vue";
+import More from "@/components/More.vue";
 
 export default {
     name: "AnalysisView",
     components: {
-        ScoreDistribution
+        ScoreDistribution,
+        More
     },
     data() {
         return {
@@ -69,6 +72,7 @@ export default {
     methods: {
         testread() {
             const test = this.$root.$data.Test;
+            console.log("testread: ", JSON.parse(JSON.stringify(test)))
             this.system = test.system;
             this.questionsNr = test.questions.length;
             if (Object.prototype.hasOwnProperty.call(test, "setMaxScore"))
@@ -143,6 +147,35 @@ export default {
             if (this.mode.multiLine) return Object.keys(this.students).length;
             return this.studentLinesNr;
         },
+        /* score is an array containing for each question
+     * - its name
+     * - its maximum score
+     *  - an array of student scores for this questions, considering only studentScores who have been presented this question and - in voluntary case only - who have attempted that question
+     */
+    score: function() {
+      var scores = [];
+      for (var i = 0; i < this.questionsNr; i++) {
+        var q = this.questions[i];
+        //var qscores = q.scores;
+        var triedqscores = [];
+        Object.keys(this.students).forEach(j => {
+          if (this.mode.questionScore == "compulsory") {
+            if (q.presentedTo(j)) triedqscores.push(q.scoreOf(j));
+          } else {
+            if (q.attemptedBy(j)) triedqscores.push(q.scoreOf(j));
+          }
+        });
+        var totals =
+          this.mode.questionScore == "compulsory" ? q.presented : q.attempted;
+        scores.push({
+          name: q.name,
+          maxScore: q.getMaxScore(),
+          scores: triedqscores,
+          total: totals
+        });
+      }
+      return scores;
+    },
         totalScore: function () {
             var tScore = 0;
             for (var i = 0; i < this.questionsNr; i++) {
