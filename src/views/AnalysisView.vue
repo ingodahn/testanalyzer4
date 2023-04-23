@@ -1,5 +1,7 @@
 <template>
     <h2>Here comes the AnalysisView</h2>
+    <adapt v-if="adaptable"/>
+    <control-center v-if="layout == 'all'" id="controlCenter" :Mode="mode" v-on:typeselected="setMode"></control-center>
     <v-container v-if="layout == 'all' && questionsNr != 0">
         <h2>{{ $t("Test.h21") }}</h2>
         <p>
@@ -16,6 +18,8 @@
 
 <script>
 import { Student } from "@/components/Scoring.js";
+import Adapt from "@/components/imathas/Adapt.vue"
+import ControlCenter from "@/components/ControlCenter.vue";
 
 import ScoreDistribution from "@/components/ScoreDistribution.vue";
 import More from "@/components/More.vue";
@@ -23,6 +27,8 @@ import More from "@/components/More.vue";
 export default {
     name: "AnalysisView",
     components: {
+        Adapt,
+        ControlCenter,
         ScoreDistribution,
         More
     },
@@ -48,6 +54,7 @@ export default {
                 //mode.multiLineScore is false if each student has a single line. Otherwise it is one of 'maxQuestion', 'maxLine' or 'single'
                 multiLineScore: false
             },
+            Test: this.$root.$data.Test,
             error: {
                 type: "empty",
                 status: "start"
@@ -141,8 +148,17 @@ export default {
             this.showContext = false;
             // READ FINISHED
         },
+        setMode: function (typeval) {
+            this.mode[typeval[0]] = typeval[1];
+        },
+        adaptable () {
+            return Object.keys(this.Test.adaptOptions).length
+        },
     },
     computed: {
+        needsAdapt() {
+            return Object.keys(this.adaptOptions).length
+        },
         studentsNr: function () {
             if (this.mode.multiLine) return Object.keys(this.students).length;
             return this.studentLinesNr;
@@ -152,30 +168,30 @@ export default {
      * - its maximum score
      *  - an array of student scores for this questions, considering only studentScores who have been presented this question and - in voluntary case only - who have attempted that question
      */
-    score: function() {
-      var scores = [];
-      for (var i = 0; i < this.questionsNr; i++) {
-        var q = this.questions[i];
-        //var qscores = q.scores;
-        var triedqscores = [];
-        Object.keys(this.students).forEach(j => {
-          if (this.mode.questionScore == "compulsory") {
-            if (q.presentedTo(j)) triedqscores.push(q.scoreOf(j));
-          } else {
-            if (q.attemptedBy(j)) triedqscores.push(q.scoreOf(j));
-          }
-        });
-        var totals =
-          this.mode.questionScore == "compulsory" ? q.presented : q.attempted;
-        scores.push({
-          name: q.name,
-          maxScore: q.getMaxScore(),
-          scores: triedqscores,
-          total: totals
-        });
-      }
-      return scores;
-    },
+        score: function () {
+            var scores = [];
+            for (var i = 0; i < this.questionsNr; i++) {
+                var q = this.questions[i];
+                //var qscores = q.scores;
+                var triedqscores = [];
+                Object.keys(this.students).forEach(j => {
+                    if (this.mode.questionScore == "compulsory") {
+                        if (q.presentedTo(j)) triedqscores.push(q.scoreOf(j));
+                    } else {
+                        if (q.attemptedBy(j)) triedqscores.push(q.scoreOf(j));
+                    }
+                });
+                var totals =
+                    this.mode.questionScore == "compulsory" ? q.presented : q.attempted;
+                scores.push({
+                    name: q.name,
+                    maxScore: q.getMaxScore(),
+                    scores: triedqscores,
+                    total: totals
+                });
+            }
+            return scores;
+        },
         totalScore: function () {
             var tScore = 0;
             for (var i = 0; i < this.questionsNr; i++) {

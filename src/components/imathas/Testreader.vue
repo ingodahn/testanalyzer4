@@ -34,12 +34,11 @@ export default {
     data() {
         return {
             ShowUpload: true,
-            //lineArray: []
         }
     },
     components: {
         Context,
-        Reader
+        Reader,
     },
     methods: {
         handleData() {
@@ -67,7 +66,15 @@ export default {
                     studentsNr: 0,
                     setMaxScore: "none",
                     questions: [],
-                    studentNameLines: []
+                    studentNameLines: [],
+                    adaptOptions: {
+                        groups: [],
+                        attempts: 1,
+                        best: 1,
+                        discriminator: 0.3,
+                        less: 0.3,
+                        more: 0.7
+                    }
                 };
                 let Test = this.$root.$data.Test;
                 //const table=this.lineArray;
@@ -76,6 +83,7 @@ export default {
                 // Making up Test.questions
                 // getQuestions returns the array of column nrs for the questionscores
                 let qCols = this.getQuestions(headings);
+                console.log('qCols:', qCols)
                 if (qCols.length == 0) throw "processError";
                 Test.setMaxScore = this.getMaxScore();
                 console.log('setMaxScore:', Test.setMaxScore)
@@ -102,44 +110,113 @@ export default {
                 console.log('TR-70:', err)
             }
         },
+        makeQuestion(cNr) {
+            try {
+                let table = this.$root.$data.lineArray,
+                    Test = this.$root.$data.Test,
+                    qTitle = table[0][cNr],
+                    regexP = /Points \((\d+) possible\)/;
+                let qq = new Question(qTitle);
+                var ms = regexP.exec(table[1][cNr])[1];
+                qq.maxScore = parseInt(ms);
+                Test.questions.push(qq);
+                return qq;
+            } catch (err) {
+                console.log('TR_121:', cNr)
+                console.log('TR-80113', err);
+                throw "processError";
+            }
+
+        },
         getQuestions(headings) {
             try {
                 let table = this.$root.$data.lineArray,
                     Test = this.$root.$data.Test,
+                    // qPkt gets the column numbers of the questionscores
                     qPkt = new Array(),
                     questionsNr = 0,
                     cNr = 0,
-                    regex = /Points \((\d+) possible\)/;
+                    // groupOptions ???
+                    //groups gets roots of group question names, number of questions of group and number of presented questions from group
+                    lastGroup = null,
+                    regexQ = /^Question\s(\d+)/,
+                    regexG = /^Question\s(\d+)-\d+/ // Question Group
                 while (cNr < headings.length) {
-                    if (headings[cNr].match(/^Question/)) {
-                        let qq = new Question(headings[cNr]);
-                        var ms = regex.exec(table[1][cNr])[1];
-                        qq.maxScore = parseInt(ms);
+                    if (headings[cNr].match(regexQ)) {
                         qPkt.push(cNr);
-                        Test.questions.push(qq);
-                        questionsNr++;
+                        let qq = this.makeQuestion(cNr);
+                        let qTitle = qq.name;
+                        if (qTitle.match(regexG)) {
+                            // getting question number
+                            let qNr = regexQ.exec(qTitle)[1];
+                            let qRoot = "Question " + qNr.toString();
+                            if (lastGroup != qRoot) {
+                                Test.adaptOptions.groups.push(this.groupData(qRoot, headings))
+                                //Test.adaptOptions.groups.push(qRoot);
+                                lastGroup = qRoot;
+                            }
+                        }
                         cNr = cNr + 2;
                     } else {
                         cNr++;
                     }
                 }
-                Test.questionsNr = questionsNr;
-                console.log('questionsNr:', Test.questionsNr);
-                console.log('questions:', JSON.parse(JSON.stringify(Test.questions)))
-                console.log('qpkt:', qPkt)
+                Test.questionsNr = Test.questions.length;
+                console.log('questionsNr:', questionsNr)
+                console.log('qPkt:', qPkt)
                 return qPkt;
             } catch (er) {
                 //throw "processError";
-                console.log('TR-96:', er)
+                console.log('TR-109:', er)
             }
         },
-        // We consider each part of a multipart question as a separate question
-        getMaxScore () {
+        groupData(qRoot, headings) {
+            let qData = { name: qRoot, nrQuestions: 0, nrSelected: 0, groupMaxScore: 0, achievedScore: 0 }, table = this.$root.$data.lineArray, groupColumns = new Array()
+            //Get all columns relevant for group
+            let qi = 0;
+            while (qi < headings.length) {
+                if (headings[qi].startsWith(qRoot + '-')) {
+                    groupColumns.push(qi)
+                    qi = qi + 2;
+                } else {
+                    qi++;
+                }
+            }
+            qData.nrQuestions = groupColumns.length
+            let groupScores = new Array(), regexP = /Points \((\d+) possible\)/;
+            // Get max score for each question in group
+            for (let c = 0; c < groupColumns.length; c++) {
+                let cc = groupColumns[c]
+                let ms = regexP.exec(table[1][cc])[1];
+                groupScores.push(parseInt(ms));
+            }
+            // How many questions from group have been presented to students and what is the maximum score achieved?
+            for (let row = 2; row < table.length; row++) {
+                let rn = 0, rScore = 0, rScoreAchieved = 0;
+                for (let c = 0; c < groupColumns.length; c++) {
+                    let cc = groupColumns[c]
+                    // If there is a score in the column, we count the nr of points of this question and increase the number of questions presented
+                    if (table[row][cc] != '') {
+                        rScore += groupScores[c]
+                        rScoreAchieved += parseFloat(table[row][cc])
+                        rn++
+                    }
+                }
+                qData.groupMaxScore = Math.max(rScore, qData.groupMaxScore)
+                qData.achievedScore = Math.max(rScoreAchieved, qData.achievedScore)
+                qData.nrSelected = Math.max(rn, qData.nrSelected)
+            }
+            console.log('TR-278 qData:', qData)
+            return qData
+
+        },
+        // We consider each part of a question group as a separate question
+        getMaxScore() {
             let Test = this.$root.$data.Test,
                 maxScore = 0;
-                Test.questions.forEach(q => {
-                    maxScore += q.maxScore;
-                });
+            Test.questions.forEach(q => {
+                maxScore += q.maxScore;
+            });
             return maxScore;
         },
         /*
