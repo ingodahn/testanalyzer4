@@ -17,6 +17,12 @@
     <Less id="less" :Score="score" :Mode="mode" :ComponentStatus="componentStatus" :Layout="layout"></Less>
     <Attempts id="attempts" :Questions="questions" :Mode="mode" :ComponentStatus="componentStatus" :Layout="layout">
     </Attempts>
+    <BestStudents id="best" :ScoredSorted="scoredSorted" :Questions="questions" :ComponentStatus="componentStatus"
+        :Layout="layout"></BestStudents>
+    <QuestionStatistics id="questionStatistics" :Questions="questions" :Mode="mode" v-if="layout == 'all'">
+    </QuestionStatistics>
+    <Discriminator :ScoredSorted="scoredSorted" :Questions="questions" :Mode="mode" :ComponentStatus="componentStatus"
+        :Layout="layout"></Discriminator>
 </template>
 
 <script>
@@ -28,6 +34,9 @@ import ScoreDistribution from "@/components/ScoreDistribution.vue";
 import More from "@/components/More.vue";
 import Less from "@/components/Less.vue";
 import Attempts from "@/components/Attempts.vue";
+import BestStudents from "@/components/BestStudents.vue";
+import QuestionStatistics from "@/components/QuestionStatistics.vue";
+import Discriminator from "@/components/Discriminator.vue";
 
 export default {
     name: "AnalysisView",
@@ -37,7 +46,10 @@ export default {
         ScoreDistribution,
         More,
         Less,
-        Attempts
+        Attempts,
+        BestStudents,
+        QuestionStatistics,
+        Discriminator
     },
     data() {
         return {

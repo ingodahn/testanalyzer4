@@ -1,5 +1,5 @@
 <template>
-  <span>
+  <v-container>
     <span v-if="PlayerType == 'selector'">
       <span v-if="ListData.length == 1">{{ ListData[0] }}</span>
       <span v-else>
@@ -73,7 +73,7 @@
         </span>
       </span>
     </span>
-  </span>
+  </v-container>
 </template>
 
 <script>
