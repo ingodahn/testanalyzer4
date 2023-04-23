@@ -1,5 +1,5 @@
 <template>
-  <div id="controlCenter">
+  <v-container id="controlCenter">
     <h3>{{ $t("Control.h3") }}</h3>
     <p></p>
     <div v-html="modeText"></div>
@@ -90,7 +90,7 @@
         </v-radio-group>
       </v-card-text>
     </v-card>
-  </div>
+  </v-container>
 </template>
 
 <script>

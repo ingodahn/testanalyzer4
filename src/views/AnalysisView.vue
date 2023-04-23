@@ -1,6 +1,6 @@
 <template>
     <h2>Here comes the AnalysisView</h2>
-    <adapt v-if="adaptable"/>
+    <adapt v-if="adaptable" />
     <control-center v-if="layout == 'all'" id="controlCenter" :Mode="mode" v-on:typeselected="setMode"></control-center>
     <v-container v-if="layout == 'all' && questionsNr != 0">
         <h2>{{ $t("Test.h21") }}</h2>
@@ -14,6 +14,9 @@
         :ComponentStatus="componentStatus" :Layout="layout">
     </score-distribution>
     <More id="more" :Score="score" :ComponentStatus="componentStatus" :Layout="layout"></More>
+    <Less id="less" :Score="score" :Mode="mode" :ComponentStatus="componentStatus" :Layout="layout"></Less>
+    <Attempts id="attempts" :Questions="questions" :Mode="mode" :ComponentStatus="componentStatus" :Layout="layout">
+    </Attempts>
 </template>
 
 <script>
@@ -23,6 +26,8 @@ import ControlCenter from "@/components/ControlCenter.vue";
 
 import ScoreDistribution from "@/components/ScoreDistribution.vue";
 import More from "@/components/More.vue";
+import Less from "@/components/Less.vue";
+import Attempts from "@/components/Attempts.vue";
 
 export default {
     name: "AnalysisView",
@@ -30,7 +35,9 @@ export default {
         Adapt,
         ControlCenter,
         ScoreDistribution,
-        More
+        More,
+        Less,
+        Attempts
     },
     data() {
         return {
@@ -151,7 +158,7 @@ export default {
         setMode: function (typeval) {
             this.mode[typeval[0]] = typeval[1];
         },
-        adaptable () {
+        adaptable() {
             return Object.keys(this.Test.adaptOptions).length
         },
     },
