@@ -75,10 +75,11 @@ export default {
   components: {
     ChartPlayer
   },
-  props: ["ScoredSorted", "Questions", "Mode", "ComponentStatus", "Layout"],
+  props: ["ScoredSorted", "Questions", "ComponentStatus", "Layout"],
   data() {
     return {
-      curGroup: 0
+      curGroup: 0,
+      Mode: this.$root.$data.Mode,
     };
   },
 

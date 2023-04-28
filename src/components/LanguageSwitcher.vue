@@ -60,7 +60,6 @@ export default {
     const { t, locale } = useI18n()
 
     const supportedLocales = Tr.supportedLocales
-    console.log('supportedLocales:', supportedLocales)
     //const router = useRouter()
 
     const switchLanguage = async (event) => {

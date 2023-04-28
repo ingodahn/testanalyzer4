@@ -11,15 +11,23 @@
   export default {
     name: 'BarChart',
     components: { Bar },
+    data () {
+      return {
+        height: 400
+      }
+    },
     props: {
       chartData: {
           type: Object,
           required: true
         },
+        
       chartOptions: {
         type: Object,
         default: () => {}
       }
+    },
+    computed: {
     },
   }
   </script>

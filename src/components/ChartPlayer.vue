@@ -1,74 +1,25 @@
 <template>
-  <v-container style="text-align: center;">
-    <div class="chart-container" style="display: inline-block; max-width: 50%;">
-      <h3>
-        <v-hover
-          v-if="curGroup > 1"
-          v-slot:default="{ hover }"
-          open-delay="200"
-          class="ma-1"
-        >
-          <v-btn
-            icon
-            color="primary"
-            v-on:click="curGroup = 0"
-            :elevation="hover ? 16 : 2"
-          >
-            <v-icon>mdi-skip-backward</v-icon>
-          </v-btn>
-        </v-hover>
-        <v-hover
-          v-if="curGroup > 0"
-          v-slot:default="{ hover }"
-          open-delay="200"
-          class="ma-1"
-        >
-          <v-btn
-            icon
-            color="primary"
-            v-on:click="curGroup--"
-            :elevation="hover ? 16 : 2"
-          >
-            <v-icon>mdi-step-backward</v-icon>
-          </v-btn>
-        </v-hover>
-        <span
-          >{{ $t("Player.q") }} {{ curGroupStart + 1 }} -
-          {{ curGroupEnd }}</span
-        >
-        <v-hover
-          v-if="curGroup < ChartGroups.length - 1"
-          v-slot:default="{ hover }"
-          open-delay="200"
-          class="ma-1"
-        >
-          <v-btn
-            icon
-            color="primary"
-            v-on:click="curGroup++"
-            :elevation="hover ? 16 : 2"
-          >
-            <v-icon>mdi-step-forward</v-icon>
-          </v-btn>
-        </v-hover>
-        <v-hover
-          v-if="curGroup < ChartGroups.length - 2"
-          v-slot:default="{ hover }"
-          open-delay="200"
-          class="ma-1"
-        >
-          <v-btn
-            icon
-            color="primary"
-            v-on:click="curGroup = ChartGroups.length - 1"
-            :elevation="hover ? 16 : 2"
-          >
-            <v-icon>mdi-skip-forward</v-icon>
-          </v-btn>
-        </v-hover>
-      </h3>
+  <v-container>
+    <v-card class="chart-containerx" elevation="20">
+      <v-card-title class="text-center">
+        <span>{{ $t("Player.q") }} {{ curGroupStart + 1 }} -
+          {{ curGroupEnd }}</span>
+      </v-card-title>
+      <v-card-actions class="justify-center">
+        <!-- Go to first -->
+        <v-btn icon color="primary" v-on:click="curGroup = 0" :disabled="curGroup == 0" v-if="ChartGroups.length > 2"><v-icon>mdi-skip-backward</v-icon>
+        </v-btn>
+        <v-btn icon color="primary" v-on:click="curGroup--" :disabled="curGroup == 0"><v-icon>mdi-step-backward</v-icon>
+        </v-btn>
+        <v-btn icon color="primary" v-on:click="curGroup++"
+          :disabled="curGroup == ChartGroups.length - 1"><v-icon>mdi-step-forward</v-icon>
+        </v-btn>
+        <v-btn icon color="primary" v-on:click="curGroup = ChartGroups.length - 1"
+          :disabled="curGroup == ChartGroups.length - 1" v-if="ChartGroups.length > 2"><v-icon>mdi-skip-forward</v-icon>
+        </v-btn>
+      </v-card-actions>
       <LineChart :chartData="ThisChart(curGroupStart, curGroupEnd)"></LineChart>
-    </div>
+    </v-card>
   </v-container>
 </template>
 
@@ -85,7 +36,7 @@ export default {
     };
   },
   methods: {
-    ThisChart: function(start, end) {
+    ThisChart: function (start, end) {
       var chart = {
         labels: [],
         datasets: []
@@ -110,16 +61,16 @@ export default {
 
       return chart;
     },
-    ResetCurGroup: function() {
+    ResetCurGroup: function () {
       this.curGroup = 0;
     }
   },
   computed: {
     // Chart-Funktionen
-    ShowChart: function() {
+    ShowChart: function () {
       return this.Chart.labels.length;
     },
-    ChartGroups: function() {
+    ChartGroups: function () {
       var ar1 = [];
       var n = 20;
       var start = 0;
@@ -144,11 +95,11 @@ export default {
       } while (start < ln);
       return ar1;
     },
-    curGroupStart: function() {
+    curGroupStart: function () {
       if (this.curGroup >= this.ChartGroups.length) this.ResetCurGroup();
       return this.ChartGroups.length ? this.ChartGroups[this.curGroup][0] : 0;
     },
-    curGroupEnd: function() {
+    curGroupEnd: function () {
       if (this.curGroup >= this.ChartGroups.length) this.ResetCurGroup();
       return this.ChartGroups.length ? this.ChartGroups[this.curGroup][1] : 0;
     }
@@ -156,22 +107,10 @@ export default {
 };
 </script>
 
-<style>
-#line-chart {
-  border: 1px solid hsl(198, 65%, 40%);
-  border-radius: 10px;
-  box-shadow: -10px 19px 15px silver;
-  margin-bottom: 2em;
-}
-.player {
-  border: 1px solid #ccc;
-  display: inline-block;
-  padding: 6px 12px;
-  margin: 3px;
-  cursor: pointer;
-  background-color: hsl(198, 65%, 40%);
-  color: white;
-  border-radius: 10px;
-  font-weight: bold;
+<style scoped>
+.chart-container {
+    border: 1px solid hsl(198, 65%, 40%);
+    border-radius: 10px;
+    box-shadow: -10px 19px 15px silver;
 }
 </style>

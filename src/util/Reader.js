@@ -140,6 +140,7 @@ export class Question {
   // and then the average of these averages -
   //this prevents individual students with many attempts from dominating the statistics
   getStudentScoreAvg(questionScore) {
+    //console.log("getStudentScoreAvg", questionScore, this.studentScoreAvg)
     if (this.studentScoreAvg[questionScore] == "none") {
       let ssa = Object.values(this.studentScores);
       let sz = 0,
@@ -152,6 +153,7 @@ export class Question {
         }
       });
       this.studentScoreAvg[questionScore] = sn ? sz / sn : 0;
+      console.log("studentScoreAvg", JSON.parse(JSON.stringify(this.studentScoreAvg[questionScore])))
     }
     return this.studentScoreAvg[questionScore];
   }

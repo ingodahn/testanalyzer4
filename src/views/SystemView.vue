@@ -1,6 +1,6 @@
 <template>
     <h2>SystemView {{ $route.params.system }}</h2>
-    <imathas-testreader @testRead="gotoAnalysis"></imathas-testreader>
+    <imathas-testreader @testRead="gotoSettings"></imathas-testreader>
 </template>
 
 <script>
@@ -17,6 +17,10 @@ export default {
         gotoAnalysis() {
             console.log('TestReader emitted testRead at', JSON.parse(JSON.stringify(this.$root.$data.Test)))
             this.$router.push({ name: "Analysis" })
+        },
+        gotoSettings() {
+            console.log('TestReader emitted testRead for Settings at', JSON.parse(JSON.stringify(this.$root.$data.Test)))
+            this.$router.push({ name: "Settings" })
         }
     }
 }

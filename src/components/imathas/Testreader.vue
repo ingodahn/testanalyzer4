@@ -83,10 +83,8 @@ export default {
                 // Making up Test.questions
                 // getQuestions returns the array of column nrs for the questionscores
                 let qCols = this.getQuestions(headings);
-                console.log('qCols:', qCols)
                 if (qCols.length == 0) throw "processError";
                 Test.setMaxScore = this.getMaxScore();
-                console.log('setMaxScore:', Test.setMaxScore)
                 Test.studentsNr = table.length - 2;
                 for (let i = 2; i < table.length; i++) {
                     let line = table[i];
@@ -122,8 +120,6 @@ export default {
                 Test.questions.push(qq);
                 return qq;
             } catch (err) {
-                console.log('TR_121:', cNr)
-                console.log('TR-80113', err);
                 throw "processError";
             }
 
@@ -162,8 +158,6 @@ export default {
                     }
                 }
                 Test.questionsNr = Test.questions.length;
-                console.log('questionsNr:', questionsNr)
-                console.log('qPkt:', qPkt)
                 return qPkt;
             } catch (er) {
                 //throw "processError";
@@ -206,7 +200,6 @@ export default {
                 qData.achievedScore = Math.max(rScoreAchieved, qData.achievedScore)
                 qData.nrSelected = Math.max(rn, qData.nrSelected)
             }
-            console.log('TR-278 qData:', qData)
             return qData
 
         },
@@ -219,36 +212,6 @@ export default {
             });
             return maxScore;
         },
-        /*
-        getMaxScore() {
-            let Test = this.$root.$data.Test,
-                maxScore = 0,
-                rex = /(Question\s\d+)-/,
-                root = "",
-                ssq = 0;
-            Test.questions.forEach(q => {
-                let qnParts = rex.exec(q.name);
-                // For multipart questions qnParts[1] =='Questin Nr' for q
-                if (qnParts) {
-                    if (qnParts[1] != root) {
-                        // This is a column for a new question
-                        maxScore += ssq;
-                        root = qnParts[1];
-                        ssq = q.maxScore;
-                    } else {
-                        // Why Max?
-                        ssq = Math.max(ssq, q.maxScore);
-                    }
-                } else {
-                    // This is not a multipart question
-                    maxScore += ssq;
-                    maxScore += q.maxScore;
-                }
-            });
-            maxScore += ssq;
-            return maxScore;
-        }
-        */
     }
 }
 /*

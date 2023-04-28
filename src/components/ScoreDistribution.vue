@@ -2,37 +2,16 @@
     <v-container id="diagram" :class="warnLevel" v-if="Layout == 'all' || warnLevel == 'warn_1'">
         <h2>{{ $t("Score.h2") }}</h2>
     </v-container>
-    <div v-if="ScoredSorted.length > 0">
-        <v-container style="text-align: center;" v-if="Layout == 'all'">
-            <div class="chart-container" style="display: inline-block; max-width: 50%; margin-bottom: 25px;">
-                <BarChart :chartData="studentScoreChart"></BarChart>
-            </div>
-        </v-container>
-        <v-container v-if="hint">
-            <b>{{ $t("Score.p1") }}</b>
-            {{ hint }}
-        </v-container>
-        <v-container v-if="hintDetails != ''">
-        <p>{{ hintDetails }}</p>
-            <ul>
-          <li>{{ $t("Score.li1") }}</li>
-          <li>{{ $t("Score.li2") }}</li>
-          <li>{{ $t("Score.li3") }}</li>
-        </ul>
-        </v-container>
-        
+    <v-container>
+        <v-card elevation="20">
+            <BarChart :chartData="studentScoreChart" :chartOptions="chartOptions"></BarChart>
+        </v-card>
+    </v-container>
     
-      <Race
-        id="trackComponent"
-        :ScoredSorted="ScoredSorted"
-        :TotalScore="TotalScore"
-        :Questions="Questions"
-        v-if="Layout == 'all'"
-      ></Race>
-    </div>
 </template>
 
 <script>
+import Testgraph from "@/components/Graphics/Testgraph.vue";
 import BarChart from "@/components/Graphics/BarChart.vue";
 import Race from "@/components/Race.vue"
 export default {
@@ -55,10 +34,43 @@ export default {
         "Layout"
     ],
     components: {
+        Testgraph,
         BarChart,
         Race
     },
     computed: {
+        chartOptions() {
+            return {
+                responsive: true,
+                scales: {
+                    xAxes: [
+                        {
+                            ticks: {
+                                autoSkip: false,
+                                maxRotation: 90
+                                //minRotation: 90
+                            }
+                        }
+                    ],
+
+                }
+            };
+        },
+        responsive: true,
+        scales: {
+            xAxes: [
+                {
+                    ticks: {
+                        autoSkip: false,
+                        maxRotation: 90
+                        //minRotation: 90
+                    }
+                }
+            ],
+            y: {
+                beginAtZero: true
+            }
+        },
         scoreClasses: function () {
             // Return list of numbers of students in n groups by score
             const n = this.bucketsNr;
@@ -253,11 +265,3 @@ function sum(array, start, end) {
     return tmpArray.reduce((a, b) => a + b, 0);
 }
 </script>
-
-<style>
-.chart-container {
-    border: 1px solid hsl(198, 65%, 40%);
-    border-radius: 10px;
-    box-shadow: -10px 19px 15px silver;
-}
-</style>

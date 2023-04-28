@@ -4,20 +4,13 @@
     <p></p>
     <div v-html="modeText"></div>
     <p>
-      <v-hover
-        v-if="showControls"
-        v-slot:default="{ hover }"
-        open-delay="200"
-        class="ma-1"
-      >
-        <v-btn
-          color="primary"
-          v-on:click="showControls = false"
-          :elevation="hover ? 16 : 2"
-        >
-          {{ $t("Control.btn1") }}
-        </v-btn>
-      </v-hover>
+    <nav>
+      <v-btn class="hvr-grow" color="primary" large v-on:click="showControls = false" v-if="showControls">{{
+        $t("Control.btn1") }}</v-btn>
+        <v-btn class="hvr-grow" color="primary" large v-on:click="showControls = true" v-if="!showControls">{{
+        $t("Control.btn2") }}</v-btn>
+    </nav>
+    <!--
       <v-hover
         v-if="!showControls"
         v-slot:default="{ hover }"
@@ -32,7 +25,9 @@
           {{ $t("Control.btn2") }}
         </v-btn>
       </v-hover>
+    -->
     </p>
+  
     <v-card v-if="showControls" class="ma-auto" raised elevation="12">
       <v-card-title>{{ $t("Control.vct1") }}</v-card-title>
       <v-card-subtitle>{{ $t("Control.vcst1") }}</v-card-subtitle>
@@ -96,19 +91,19 @@
 <script>
 export default {
   name: "ControlCenter",
-  props: ["Mode"],
   data() {
     return {
-      showControls: false
+      showControls: true,
+      Mode: this.$root.$data.Mode
     };
   },
   methods: {
-    typeSelected: function(typeval) {
-      this.$emit("typeselected", typeval);
+    typeSelected: function (typeval) {
+      this.Mode[typeval[0]] = typeval[1];
     }
   },
   computed: {
-    modeText: function() {
+    modeText: function () {
       let text = "<p>" + this.$t("Control.t1") + "<br/>";
       switch (this.Mode.questionScore) {
         case "voluntary": {
@@ -162,6 +157,7 @@ export default {
 .hvr-grow:active {
   transform: scale(1.1);
 }
+
 .hvr-grow:not(:hover) {
   transform: scale(1);
 }

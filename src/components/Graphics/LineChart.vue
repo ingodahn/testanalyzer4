@@ -1,6 +1,6 @@
 <template>
-    <Line :data="chartData" :options="chartOptions" />
-  </template>
+  <Line :data="chartData" :options="chartOptions" />
+</template>
 <script>
 // See vue-charts documentation
 import {
@@ -33,11 +33,40 @@ export default {
       type: Object,
       required: true
     },
-    chartOptions: {
-      type: Object,
-      default: () => { }
-    }
   },
-  
-};
+  data() {
+    return {
+      chartOptions: {
+        responsive: true,
+        scales: {
+          xAxes: [
+            {
+              ticks: {
+                autoSkip: false,
+                maxRotation: 90
+                //minRotation: 90
+              }
+            }
+          ],
+          /*
+          yAxes: [
+            {
+              ticks: {
+                display: true,
+                beginAtZero: true,
+                suggestedMin: 0,
+                //min: 0
+              }
+            }
+          ]
+          */
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    }
+  }
+
+}
 </script>

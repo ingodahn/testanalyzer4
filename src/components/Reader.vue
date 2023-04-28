@@ -55,13 +55,11 @@ export default {
             }
         },
         handleData(csvData) {
-            console.log('Handling Data')
             let component = this
             try {
                 const csv_1 = csvData.replace(/^\s*\n/gm, "");
                 let lineArray=[];
                 this.parseCSV(csv_1, ",");
-                console.log('Data parsed')
             } catch (er) {
                 if (er == "loadError") component.handleLoadError(er);
             }

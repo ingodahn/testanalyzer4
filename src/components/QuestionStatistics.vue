@@ -31,13 +31,17 @@ export default {
   components: {
     ChartPlayer
   },
-  props: ["Questions", "Mode"],
+  props: [],
   data() {
     return {
-      multiLineHint: this.$t("Stat.mlhint")
+      Questions: this.$root.$data.Test.questions,
+      multiLineHint: this.$t("Stat.mlhint"),
+      Mode: this.$root.$data.Mode,
     };
   },
-
+mounted () {
+  console.log('Statistics:',JSON.parse(JSON.stringify(this.Questions)))
+},
   computed: {
     statChart: function () {
       let chart = {
@@ -60,7 +64,7 @@ export default {
         data: this.QAvgs,
         borderColor: "blue"
       };
-
+      console.log('Mode:',JSON.parse(JSON.stringify(this.Mode)))
       if (this.Mode.multiLine || this.Mode.multiQuestion) {
         chart.datasets[2] = {
           label: this.$t("Stat.label3"),
@@ -68,6 +72,7 @@ export default {
           borderColor: "red"
         };
       }
+      console.log('Chart:',JSON.parse(JSON.stringify(chart)))
       return chart;
     },
     QNames: function () {

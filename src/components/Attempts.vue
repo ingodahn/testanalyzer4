@@ -33,10 +33,11 @@ import ChartPlayer from "./ChartPlayer.vue";
 import ListPlayer from "./ListPlayer.vue";
 export default {
   name: "Attempts",
-  props: ["Questions", "Mode", "ComponentStatus", "Layout"],
+  props: ["Questions", "ComponentStatus", "Layout"],
   data() {
     return {
-      curGroup: 0
+      curGroup: 0,
+      Mode: this.$root.$data.Mode,
     };
   },
   components: {

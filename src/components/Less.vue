@@ -55,10 +55,11 @@ function avg(qScore) {
 }
 export default {
   name: "Less",
-  props: ["Score", "Mode", "ComponentStatus", "Layout"],
+  props: ["Score", "ComponentStatus", "Layout"],
   data() {
     return {
-      threshold: 0.2
+      threshold: 0.2,
+      Mode: this.$root.$data.Mode
     };
   },
   computed: {
