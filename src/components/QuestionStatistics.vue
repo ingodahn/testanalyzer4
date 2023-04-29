@@ -64,7 +64,6 @@ mounted () {
         data: this.QAvgs,
         borderColor: "blue"
       };
-      console.log('Mode:',JSON.parse(JSON.stringify(this.Mode)))
       if (this.Mode.multiLine || this.Mode.multiQuestion) {
         chart.datasets[2] = {
           label: this.$t("Stat.label3"),
@@ -72,7 +71,7 @@ mounted () {
           borderColor: "red"
         };
       }
-      console.log('Chart:',JSON.parse(JSON.stringify(chart)))
+      console.log('QS-Chart:',JSON.parse(JSON.stringify(chart)))
       return chart;
     },
     QNames: function () {

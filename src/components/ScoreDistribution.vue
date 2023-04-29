@@ -4,10 +4,27 @@
     </v-container>
     <v-container>
         <v-card elevation="20">
-            <BarChart :chartData="studentScoreChart" :chartOptions="chartOptions"></BarChart>
+            <BarChart :chartData="studentScoreChart"></BarChart>
         </v-card>
     </v-container>
-    
+    <v-container v-if="hint">
+        <b>{{ $t("Score.p1") }}</b>
+        {{ hint }}
+    </v-container>
+    <v-container v-if="hintDetails != ''">
+        <p>{{ hintDetails }}</p>
+
+        <ul>
+            <li>{{ $t("Score.li1") }}</li>
+            <li>{{ $t("Score.li2") }}</li>
+            <li>{{ $t("Score.li3") }}</li>
+        </ul>
+    </v-container>
+
+    <v-container>
+        <Race id="trackComponent" :ScoredSorted="ScoredSorted" :TotalScore="TotalScore" :Questions="Questions"
+            v-if="Layout == 'all'"></Race>
+    </v-container>
 </template>
 
 <script>
@@ -20,6 +37,14 @@ export default {
             diagrams: {
                 scoreDistribution: {
                     title: this.$t("Score.title")
+                }
+            },
+            chartOptions: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
                 }
             },
             bucketsNr: 5,
@@ -39,38 +64,6 @@ export default {
         Race
     },
     computed: {
-        chartOptions() {
-            return {
-                responsive: true,
-                scales: {
-                    xAxes: [
-                        {
-                            ticks: {
-                                autoSkip: false,
-                                maxRotation: 90
-                                //minRotation: 90
-                            }
-                        }
-                    ],
-
-                }
-            };
-        },
-        responsive: true,
-        scales: {
-            xAxes: [
-                {
-                    ticks: {
-                        autoSkip: false,
-                        maxRotation: 90
-                        //minRotation: 90
-                    }
-                }
-            ],
-            y: {
-                beginAtZero: true
-            }
-        },
         scoreClasses: function () {
             // Return list of numbers of students in n groups by score
             const n = this.bucketsNr;

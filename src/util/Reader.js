@@ -153,7 +153,6 @@ export class Question {
         }
       });
       this.studentScoreAvg[questionScore] = sn ? sz / sn : 0;
-      console.log("studentScoreAvg", JSON.parse(JSON.stringify(this.studentScoreAvg[questionScore])))
     }
     return this.studentScoreAvg[questionScore];
   }

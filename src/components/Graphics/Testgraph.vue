@@ -21,6 +21,7 @@ export default {
       chartOptions: {
         responsive: true,
         scales: {
+          /*
           xAxes: [
             {
               ticks: {
@@ -30,7 +31,6 @@ export default {
               }
             }
           ],
-          /*
           yAxes: [
             {
               ticks: {

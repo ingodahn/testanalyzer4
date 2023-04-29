@@ -38,28 +38,8 @@ export default {
     return {
       chartOptions: {
         responsive: true,
+        tension: 0.4,
         scales: {
-          xAxes: [
-            {
-              ticks: {
-                autoSkip: false,
-                maxRotation: 90
-                //minRotation: 90
-              }
-            }
-          ],
-          /*
-          yAxes: [
-            {
-              ticks: {
-                display: true,
-                beginAtZero: true,
-                suggestedMin: 0,
-                //min: 0
-              }
-            }
-          ]
-          */
           y: {
             beginAtZero: true
           }
