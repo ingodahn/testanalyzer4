@@ -1,5 +1,4 @@
 <template>
-    <h2>Here comes the AnalysisView</h2>
     <v-container v-if="layout == 'all' && questionsNr != 0">
         <h2>{{ $t("Test.h21") }}</h2>
         <p>

@@ -1,5 +1,4 @@
 <template>
-    <h3>IMathAS Testreader</h3>
     <context></context>
     <v-container>
 

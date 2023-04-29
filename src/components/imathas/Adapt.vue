@@ -1,16 +1,11 @@
 <template>
     <v-container>
-        <h2>Please Check:</h2>
-        <p>The test has {{ groups.length }} groups:</p>
+        <p>{{ allGroupsText }}</p>
         <v-list>
-            <v-list-item v-for="g in groups" :key="g.name" :title="g.name">Each student attempted at most {{ g.nrSelected }}
-                out of {{ g.nrQuestions }} questions from this group. At most {{ g.achievedScore }} points have been achieved. It is assumed that the maximum possible score for this
-                group is <input type="number" :min="initialMinScores[g.name]" :max="initialMaxScores[g.name]" step="1" v-model="g.groupMaxScore" /> <b v-if="toCheck(g)">&#8592; edit!</b>.</v-list-item>
+            <v-list-item v-for="g in groups" :key="g.name" :title="g.name">{{ groupItemText(g) }} <input type="number" :min="initialMinScores[g.name]" :max="initialMaxScores[g.name]" step="1"
+                    v-model="g.groupMaxScore" /> <b v-if="toCheck(g)">&#8592; edit!</b></v-list-item>
         </v-list>
-    </v-container>
-    <v-container>
-        <h2>Test Score</h2>
-        <p>The maximum possible score for this test is {{ testMaxScore }}.</p>
+        <p>{{ maxScoreText }}.</p>
     </v-container>
 </template>
 
@@ -32,6 +27,12 @@ export default {
         groups() {
             return this.$root.$data.Test.adaptOptions.groups
         },
+        allGroupsText() {
+            return this.$t("IMathAS.adaptGroups", { count: this.groups.length })
+        },
+        maxScoreText() {
+            return this.$t("IMathAS.adaptMaxTestScore", { maxTestScore: this.testMaxScore })
+        },
         testMaxScore() {
             let Test = this.$root.$data.Test, maxScore = 0, regexG = /^Question\s(\d+)-\d+/
             for (let i = 0; i < Test.questions.length; i++) {
@@ -47,6 +48,9 @@ export default {
         }
     },
     methods: {
+        groupItemText(g) {
+            return this.$t("IMathAS.adaptGroupItem", { nrSelected: g.nrSelected, nrQuestions: g.nrQuestions, achievedScore: g.achievedScore })
+        },
         toCheck(group) {
             return group.nrSelected < group.nrQuestions || group.achievedScore < group.groupMaxScore
         },

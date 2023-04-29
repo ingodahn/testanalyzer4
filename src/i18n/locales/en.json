@@ -36,7 +36,10 @@
     "demo": "Demo-Data",
     "p1": "You can find test results in the gradebook of IMathAS (resp. WAMAP/MyOpenMath). You can access the gradebook by clicking on the gear icon aside of the test and then select <i>Grades</i>. At the bottom of the following page there is a link <i>Export Student Answer Details</i>. Click it and make the export settings as shown in this image.",
     "p2": "Drop the generated csv file with the mouse on the area below.",
-    "p3": "Drop the csv file here."
+    "p3": "Drop the csv file here.",
+    "adaptGroups": "This test has no question groups. | This test has one group of questions: | This test has %{count} groups of questions:",
+    "adaptGroupItem": "Each student attempted at most %{ nrSelected} out of %{ nrQuestions } questions from this group. At most %{ achievedScore } points have been achieved. It is assumed that the maximum possible score for this group is:",
+    "adaptMaxTestScore": "The maximum possible score for this test is %{ maxTestScore } points."
   },
   "Printer": {
     "btn1": "Print page"
@@ -49,11 +52,16 @@
     "th1": "Question",
     "th2": "Maximum number of points"
   },
+  "Settings": {
+    "h2": "Settings",
+    "p1": "The following information has been inferred from the data. Please check whether the information is correct and correct it if necessary.",
+    "continue": "Continue"
+  },
   "Control": {
     "h3": "Type of Test",
     "btn1": "Hide selection",
     "btn2": "Change settings",
-    "vct1": "Selection",
+    "vct1": "Type of Test",
     "vcst1": "The test is ...",
     "vc1": "... mandatory. All students are expected to answer all questions. An unanswered question is scored  the same way as an incorrectly answered question.",
     "vc2": "... voluntarily. Students can choose which questions to work on. Questions that are not answered will not be considered in the performance evaluation.",

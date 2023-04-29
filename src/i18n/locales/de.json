@@ -36,7 +36,10 @@
     "demo": "Demo-Daten",
     "p1": "Testergebnisse finden Sie im Gradebook von IMathAS (bzw. WAMAP/MyOPenMath). Sie erreichen das Gradebook, wenn Sie auf das Zahnrad neben dem Test klicken und dann <i>Noten</i> auswählen. Auf der dann erscheinenden Seite gibt es unten den Link <i>Export Student Answer Details</i>. Klicken Sie darauf und nehmen Sie die Einstellungen genau so vor, wie auf diesem Bild gezeigt.",
     "p2": "Ziehen Sie die so erstellte csv-Datei mit der Maus in diese Webseite auf die Fläche unten.",
-    "p3": "Ziehen Sie die csv-Datei hier hin."
+    "p3": "Ziehen Sie die csv-Datei hier hin.",
+    "adaptGroups": "Dieser Test enthält keine Fragengruppe. | Der Test enthält eine Fragengruppe: | Der Test enthält %{count} Gruppen von Fragen:",
+    "adaptGroupItem": "Jeder Student hat höchstens %{ nrSelected} von den %{ nrQuestions } Fragen dieser Gruppe versucht. Dabei wurden höchstens %{ achievedScore } Punkte erreicht. Angenommene maximale Punktzahl für diese Gruppe:",
+    "adaptMaxTestScore": "Maximal können in diesem Test %{ maxTestScore } Punkte erreicht werden."
   },
   "Printer": {
     "btn1": "Seite drucken"
@@ -49,11 +52,16 @@
     "th1": "Frage",
     "th2": "Maximale Punktzahl"
   },
+  "Settings": {
+    "h2": "Einstellungen",
+    "p1": "Die folgenden Informationen wurden aus Ihrer Datei ermittelt. Bitte prüfen Sie, ob die Werte korrekt sind.",
+    "continue": "Weiter"
+  },
   "Control": {
     "h3": "Art des Tests",
     "btn1": "Auswahl ausblenden",
     "btn2": "Einstellungen ändern",
-    "vct1": "Auswahl",
+    "vct1": "Art des Tests",
     "vcst1": "Der Test ist...",
     "vc1": "... verpflichtend. Es wird erwartet, dass alle Studierenden alle Fragen bearbeiten. Eine nicht beantwortete Frage wird genauso bewertet, wie eine falsch beantwortete Frage.",
     "vc2": "... freiwillig. Die Studierenden können wählen, welche Fragen sie bearbeiten. Fragen, die nicht beantwortet wurden, werden bei der Leistungsbewertung nicht berücksichtigt.",

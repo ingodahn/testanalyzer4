@@ -1,5 +1,4 @@
 <template>
-    <h2>SystemView {{ $route.params.system }}</h2>
     <imathas-testreader @testRead="gotoSettings"></imathas-testreader>
 </template>
 

@@ -1,9 +1,15 @@
 <template>
     <v-container>
-        <h2>SettingsView.vue</h2>
+        <h2>{{ $t("Settings.h2") }}</h2>
+        <p>
+            {{
+                $t("Settings.p1")
+            }}
+        
         <nav>
-            <v-btn class="hvr-grow" color="primary" large @click="gotoAnalysis()">Weiter</v-btn>
+            <v-btn class="hvr-grow" color="primary" large @click="gotoAnalysis()">{{ $t("Settings.continue" )}}</v-btn>
         </nav>
+        </p>
         <adapt v-if="adaptable" />
         <control-center v-if="layout == 'all'" id="controlCenter"></control-center>
     </v-container>
