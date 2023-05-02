@@ -17,10 +17,12 @@ export default {
             console.log('TestReader emitted testRead at', JSON.parse(JSON.stringify(this.$root.$data.Test)))
             this.$router.push({ name: "Analysis" })
         },
-        gotoSettings() {
+        gotoSettings(Test) {
+            Test.update();
+            this.$root.$data.Test = Test
             console.log('TestReader emitted testRead for Settings at', JSON.parse(JSON.stringify(this.$root.$data.Test)))
             this.$router.push({ name: "Settings" })
-        }
+        },
     }
 }
 

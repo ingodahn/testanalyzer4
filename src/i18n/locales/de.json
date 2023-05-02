@@ -147,7 +147,7 @@
     "p2": "Die Trennschärfe der Fragen kann nicht ermittelt werden, wenn die Bearbeitung der Fragen freiwillig ist (dies kann in den <a href='#controlCenter'>Einstellungen des Tests</a> geändert werden) oder wenn es mehrere Versuche gibt.",
     "h4": "Ist das relevant?",
     "ul": "Die Trennschärfe ist nur von Interesse...",
-    "li1": "... wenn der Test das Ziel hat, die Fähigkeiten der Studierenden auf einem bestimmten Gebiet zu bestimmen und alle Fragen diesem Ziel dienen. Dann sollten alle Fragen eine Trennschärfe &geq; 0.3 aufweisen.",
+    "li1": "... wenn der Test das Ziel hat, die Fähigkeiten der Studierenden auf einem bestimmten Gebiet zu bestimmen und alle Fragen diesem Ziel dienen. Dann sollten alle Fragen eine Trennschärfe von midestens 0.3 aufweisen.",
     "li2": "... wenn jedem Teilnehmer des Tests alle Fragen vorgelegt wurden, also nicht für Tests mit zufälliger Fragenauswahl.",
     "li3": "... für Fragen, bei denen nicht alle Studierenden die gleiche Punktzahl erhalten haben; andernfalls ist eine Berechnung der Trennschärfe der Frage nicht möglich.",
     "p3": "Vielleicht kann man sie noch besser auf das Ziel des Tests abstimmen?",

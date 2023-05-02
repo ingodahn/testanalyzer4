@@ -23,7 +23,7 @@ export default {
     data() {
         return {
             Test: this.$root.$data.Test,
-            Mode: this.$root.$data.Mode,
+            Mode: this.$root.$data.Test.Mode,
             layout: 'all',
         }
     },
@@ -39,7 +39,7 @@ export default {
             this.Mode[typeval[0]] = typeval[1];
         },
         gotoAnalysis() {
-            console.log('Going to analysis')
+            console.log('Going to analysis with test', JSON.parse(JSON.stringify(this.Test)))
             this.$router.push({ name: 'Analysis' })
         }
     }

@@ -3,11 +3,11 @@
         <h2>{{ $t("Test.h21") }}</h2>
         <p>
             {{
-                $t("Test.p5", [questionsNr, studentsNr, calcMaxScore])
+                $t("Test.p5", [questionsNr, Test.studentsNr, calcMaxScore])
             }}
         </p>
     </v-container>
-    <score-distribution :ScoredSorted="scoredSorted" :TotalScore="calcMaxScore" :Questions="questions"
+    <score-distribution :ScoredSorted="scoredSorted" :TotalScore="Test.setMaxScore" :Questions="questions"
         :ComponentStatus="componentStatus" :Layout="layout">
     </score-distribution>
     <More id="more" :Score="score" :ComponentStatus="componentStatus" :Layout="layout"></More>
@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import { Student } from "@/components/Scoring.js";
+//import { Student } from "@/components/Scoring.js";
 
 
 import ScoreDistribution from "@/components/ScoreDistribution.vue";
@@ -47,19 +47,18 @@ export default {
     },
     data() {
         return {
+            Test: this.$root.$data.Test,
+            Mode: this.$root.$data.Test.Mode,
             fab: false,
             drawer: null,
             system: "",
             type: "compulsory",
             reportingProblem: false,
-            questionsNr: 0,
+            questionsNr: this.$root.$data.Test.questionsNr,
             studentsDataNr: 0,
-            setMaxScore: "none",
-            questions: [],
-            students: {},
+            questions: this.$root.$data.Test.questions,
+            students: this.$root.$data.Test.students,
             studentLinesNr: 0,
-            Test: this.$root.$data.Test,
-            Mode: this.$root.$data.Mode,
             error: {
                 type: "empty",
                 status: "start"
@@ -79,9 +78,11 @@ export default {
         };
     },
     created() {
-        this.testread();
+        //this.testread();
+        console.log("AnalysisView created");
     },
     methods: {
+        /*
         testread() {
             const test = this.$root.$data.Test;
             console.log("testread: ", JSON.parse(JSON.stringify(test)))
@@ -156,15 +157,18 @@ export default {
         setMode: function (typeval) {
             this.Mode[typeval[0]] = typeval[1];
         },
+        */
     },
     computed: {
         needsAdapt() {
             return Object.keys(this.adaptOptions).length
         },
+        /*
         studentsNr: function () {
             if (this.Mode.multiLine) return Object.keys(this.students).length;
             return this.studentLinesNr;
         },
+        */
         /* score is an array containing for each question
      * - its name
      * - its maximum score
@@ -192,6 +196,7 @@ export default {
                     total: totals
                 });
             }
+            console.log("score: ", scores)
             return scores;
         },
         totalScore: function () {
@@ -202,8 +207,8 @@ export default {
             return tScore;
         },
         calcMaxScore: function () {
-            if (isNaN(this.setMaxScore)) return this.totalScore;
-            return this.setMaxScore;
+            //if (isNaN(this.setMaxScore)) return this.totalScore;
+            return this.Test.setMaxScore;
         },
         testStudentScores: function () {
             let studentScores = [];
@@ -243,6 +248,7 @@ export default {
                     });
                 });
             }
+            console.log("studentScores", studentScores)
             return studentScores;
         },
         scoredSorted: function () {
@@ -250,6 +256,7 @@ export default {
             var scoredSorted = ss.sort(function (a, b) {
                 return a.totalScore - b.totalScore;
             });
+            console.log("scoredSorted", scoredSorted)
             return scoredSorted;
         },
     }

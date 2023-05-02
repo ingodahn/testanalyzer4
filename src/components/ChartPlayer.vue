@@ -5,7 +5,7 @@
         <span>{{ $t("Player.q") }} {{ curGroupStart + 1 }} -
           {{ curGroupEnd }}</span>
       </v-card-title>
-      <v-card-actions class="justify-center">
+      <v-card-actions class="justify-center" v-if="ChartGroups.length > 1">
         <!-- Go to first -->
         <v-btn icon color="primary" v-on:click="curGroup = 0" :disabled="curGroup == 0" v-if="ChartGroups.length > 2"><v-icon>mdi-skip-backward</v-icon>
         </v-btn>

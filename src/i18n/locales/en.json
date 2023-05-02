@@ -147,7 +147,7 @@
     "p2": "The item discrimination of the questions cannot be determined if the processing of the questions is voluntary (this can be changed through the <a href='#controlCenter'>Settings of the test</a>) or if there are multiple attempts allowed.",
     "h4": "Is this relevant?",
     "ul": "Item discrimination is only of interest ...",
-    "li1": "... if the test aims to determine the students' abilities in a single domain and all questions serve that aim. Then all questions should have an item discrimination index &geq; 0.3.",
+    "li1": "... if the test aims to determine the students' abilities in a single domain and all questions serve that aim. Then all questions should have an item discrimination index of at least 0.3.",
     "li2": "... if all questions were presented to each participant in the test, i.e. not for tests with a random selection of questions.",
     "li3": "... for questions for which not all students received the same number of points; otherwise it is not possible to calculate the item discrimination index of the question.",
     "p3": "Perhaps they can be tuned even better to the goal of the test?",

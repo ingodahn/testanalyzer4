@@ -1,6 +1,5 @@
 <template>
   <v-container id="controlCenter">
-    <p>Working in mode {{ Mode.multiLine }}</p>
     <!--
     <h3>{{ $t("Control.h3") }}</h3>
     <p></p>
@@ -102,7 +101,7 @@ export default {
   data() {
     return {
       showControls: true,
-      Mode: this.$root.$data.Mode
+      Mode: this.$root.$data.Test.Mode
     };
   },
   methods: {

@@ -36,7 +36,7 @@ export default {
     return {
       Questions: this.$root.$data.Test.questions,
       multiLineHint: this.$t("Stat.mlhint"),
-      Mode: this.$root.$data.Mode,
+      Mode: this.$root.$data.Test.Mode,
     };
   },
 mounted () {

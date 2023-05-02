@@ -25,7 +25,7 @@
 <script>
 import Context from "@/components/Context.vue"
 import Reader from "@/components/Reader.vue"
-import { Question, Line, ReaderErrors } from "@/util/Reader";
+import { TestObject, Question, Line, ReaderErrors } from "@/util/Reader";
 
 export default {
     name: "IMathASTestreader",
@@ -44,10 +44,9 @@ export default {
             //this.lineArray = data;
             try {
                 // 5. table2test
-                //var test = this.table2Test();
-                this.table2Test();
+                const Test = this.table2Test();
                 //  6. Emit signal (or modify Test object's parts?)
-                this.$emit("testRead");
+                this.$emit("testRead",Test);
                 //console.log('Testreader emitted testRead at', JSON.parse(JSON.stringify(this.$root.$data.Test)))
                 this.loading = false;
                 this.Error.type = "loaded";
@@ -58,32 +57,16 @@ export default {
         },
         table2Test() {
             try {
-                this.$root.$data.Test = {
-                    system: "IMathAS",
-                    info: "",
-                    questionsNr: 0,
-                    studentsNr: 0,
-                    setMaxScore: "none",
-                    questions: [],
-                    studentNameLines: [],
-                    adaptOptions: {
-                        groups: [],
-                        attempts: 1,
-                        best: 1,
-                        discriminator: 0.3,
-                        less: 0.3,
-                        more: 0.7
-                    }
-                };
-                let Test = this.$root.$data.Test;
+                const Test=new TestObject("IMathAS");
+                Test.adaptOptions={groups: []};
                 //const table=this.lineArray;
                 const table = this.$root.$data.lineArray;
                 const headings = table[0];
                 // Making up Test.questions
                 // getQuestions returns the array of column nrs for the questionscores
-                let qCols = this.getQuestions(headings);
+                let qCols = this.getQuestions(Test,headings);
                 if (qCols.length == 0) throw "processError";
-                Test.setMaxScore = this.getMaxScore();
+                Test.setMaxScore = this.getMaxScore(Test);
                 Test.studentsNr = table.length - 2;
                 for (let i = 2; i < table.length; i++) {
                     let line = table[i];
@@ -100,17 +83,16 @@ export default {
                     }
                     Test.studentNameLines.push(lineItems);
                 }
-                //return Test;
+                return Test;
                 //this.$root.$data.Test = Test;
             } catch (err) {
                 //throw "processError";
                 console.log('TR-70:', err)
             }
         },
-        makeQuestion(cNr) {
+        makeQuestion(Test,cNr) {
             try {
                 let table = this.$root.$data.lineArray,
-                    Test = this.$root.$data.Test,
                     qTitle = table[0][cNr],
                     regexP = /Points \((\d+) possible\)/;
                 let qq = new Question(qTitle);
@@ -123,10 +105,9 @@ export default {
             }
 
         },
-        getQuestions(headings) {
+        getQuestions(Test,headings) {
             try {
                 let table = this.$root.$data.lineArray,
-                    Test = this.$root.$data.Test,
                     // qPkt gets the column numbers of the questionscores
                     qPkt = new Array(),
                     questionsNr = 0,
@@ -139,7 +120,7 @@ export default {
                 while (cNr < headings.length) {
                     if (headings[cNr].match(regexQ)) {
                         qPkt.push(cNr);
-                        let qq = this.makeQuestion(cNr);
+                        let qq = this.makeQuestion(Test,cNr);
                         let qTitle = qq.name;
                         if (qTitle.match(regexG)) {
                             // getting question number
@@ -203,9 +184,8 @@ export default {
 
         },
         // We consider each part of a question group as a separate question
-        getMaxScore() {
-            let Test = this.$root.$data.Test,
-                maxScore = 0;
+        getMaxScore(Test) {
+                let maxScore = 0;
             Test.questions.forEach(q => {
                 maxScore += q.maxScore;
             });

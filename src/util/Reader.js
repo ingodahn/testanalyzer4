@@ -238,3 +238,101 @@ export class Line {
     return this.lineAnswers.reduce((a, b) => a + b["score"], 0);
   }
 }
+
+import { Student } from "@/components/Scoring.js";
+
+export class TestObject {
+  constructor(system) {
+    this.system = system;
+    this.reportingProblem = false;
+    this.questionsNr = 0;
+    this.studentsDataNr = 0;
+    this.questions = [];
+    this.students = {};
+    this.studentsNr = 0;
+    this.Mode = {
+      questionScore: "compulsory",
+      // multiLine is true iff at least one student name occurs in more than one line
+      multiLine: false,
+      // multiQuestion is true iff in at least one line at least one question occurs more than once
+      multiQuestion: false,
+      //mode.multiLineScore is false if each student has a single line. Otherwise it is one of 'maxQuestion', 'maxLine' or 'single'
+      multiLineScore: false
+    };
+    this.adaptOptions = null;
+    this.error = {
+      type: "none",
+      status: "start"
+    };
+    this.studentLinesNr = 0;
+    this.studentNameLines = [];
+    this.showContext = true;
+    this.showUpload = true;
+    this.layout = "all";
+    this.setMaxScore = "none";
+    this.loading = false;
+  }
+  update() {
+    this.questionsNr = this.questions.length;
+    let qIndex = new Object();
+    this.questions.forEach(function (v, a) {
+      qIndex[v.name] = a;
+    });
+    this.studentsDataNr = this.studentsNr;
+    var snlThis = new Object();
+    this.studentLinesNr = 0;
+    var snlThat = this.studentNameLines;
+    for (var i = 0; i < snlThat.length; i++) {
+      let snli = snlThat[i],
+        snlName = snli.lineName,
+        snlScore = snli.lineScore,
+        snlNr = snli.lineNr;
+      this.students = snlThis;
+      if (snli.participated) {
+        let s;
+        let snlEntry = { lineNr: snlNr, lineScore: snlScore };
+        if (!Object.prototype.hasOwnProperty.call(snlThis, snlName)) {
+          s = new Student(snlName);
+          s.lines = [snlEntry];
+          snlThis[snlName] = s;
+        } else {
+          s = snlThis[snlName];
+          s.lines.push(snlEntry);
+        }
+        let snliAnswers = snli.lineAnswers;
+        snliAnswers.forEach(ans => {
+          let qn = this.questions[qIndex[ans.name]];
+
+          let cnt = qn.addStudentLineAnswer(
+            snlName,
+            snlNr,
+            ans.attempted,
+            ans.score
+          );
+          if (cnt > 1) this.Mode.multiQuestion = true;
+        });
+        this.studentLinesNr++;
+      }
+    }
+    let sNames = Object.keys(snlThis);
+
+    this.stundentsNr == sNames.length;
+    // if a student has more attempts, we sort her lines by lineScore
+    if (sNames.length < this.studentLinesNr) {
+      sNames.forEach(sn => {
+        snlThis[sn].lines = snlThis[sn].lines.sort(
+          (a, b) => b.lineScore - a.lineScore
+        );
+      });
+      this.Mode.multiLine = true;
+      this.Mode.questionScore = "voluntary";
+      this.Mode.multiLineScore = "maxQuestion";
+    }
+    this.studentsNr = (this.Mode.multiLine) ? Object.keys(this.students).length : this.studentLinesNr;
+    this.showUpload = false;
+    this.showContext = false;
+    console.log('Update finished')
+    // Update FINISHED
+  }
+
+}

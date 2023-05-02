@@ -59,7 +59,7 @@ export default {
   data() {
     return {
       threshold: 0.2,
-      Mode: this.$root.$data.Mode
+      Mode: this.$root.$data.Test.Mode
     };
   },
   computed: {

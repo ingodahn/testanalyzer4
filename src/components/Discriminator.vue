@@ -79,7 +79,7 @@ export default {
   data() {
     return {
       curGroup: 0,
-      Mode: this.$root.$data.Mode,
+      Mode: this.$root.$data.Test.Mode,
     };
   },
 
