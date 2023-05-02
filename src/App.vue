@@ -8,6 +8,7 @@ export default {
     return {
       lineArray: null,
       Test: null,
+      /*
       Mode: {
         questionScore: "compulsory",
         // multiLine is true iff at least one student name occurs in more than one line
@@ -17,6 +18,7 @@ export default {
         //mode.multiLineScore is false if each student has a single line. Otherwise it is one of 'maxQuestion', 'maxLine' or 'single'
         multiLineScore: false
       },
+      */
     }
   }
 }

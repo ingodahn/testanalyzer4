@@ -1,4 +1,5 @@
 <template>
+   
     <v-container v-if="layout == 'all' && questionsNr != 0">
         <h2>{{ $t("Test.h21") }}</h2>
         <p>
@@ -23,7 +24,6 @@
 </template>
 
 <script>
-
 import ScoreDistribution from "@/components/ScoreDistribution.vue";
 import More from "@/components/More.vue";
 import Less from "@/components/Less.vue";
