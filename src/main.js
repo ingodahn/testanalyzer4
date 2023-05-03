@@ -14,11 +14,16 @@ import { createApp } from 'vue'
 // Plugins
 import { registerPlugins } from '@/plugins'
 
+//Autoregistering layouts
+import { registerLayouts } from '@/layouts/register';
+
 import i18n from "./i18n";
 
 const app = createApp(App)
 
 registerPlugins(app)
+
+registerLayouts(app)
 
 app.use(i18n)
 

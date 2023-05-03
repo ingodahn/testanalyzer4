@@ -1,4 +1,5 @@
 <template>
+    <tool-bar></tool-bar>
     <v-container>
         <h2>{{ $t("Settings.h2") }}</h2>
         <p>
@@ -16,6 +17,7 @@
 </template>
 
 <script>
+import ToolBar from '@/components/ToolBar.vue'
 import Adapt from '@/components/imathas/Adapt.vue'
 import ControlCenter from '@/components/ControlCenter.vue'
 export default {
@@ -28,6 +30,7 @@ export default {
         }
     },
     components: {
+        ToolBar,
         Adapt,
         ControlCenter
     },

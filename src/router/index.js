@@ -6,40 +6,35 @@ import { createRouter, createWebHistory, RouterView } from 'vue-router'
 const routes = [
   {
     path: '/',
-    component: () => import('@/layouts/default/Default.vue'),
-    children: [
-      {
-        path: '',
-        name: 'Home',
-        // route level code-splitting
-        // this generates a separate chunk (about.[hash].js) for this route
-        // which is lazy-loaded when the route is visited.
-        component: () => import(/* webpackChunkName: "home" */ '@/views/Home.vue'),
-      },
-      {
-        path: ':system',
-        name: "System",
-        component: () => import('@/views/SystemView.vue')
-      },
-      {
-        path: 'settings',
-        name: "Settings",
-        component: () => import('@/views/SettingsView.vue')
-      },
-      {
-        path: 'analysis',
-        name: "Analysis",
-        component: () => import('@/views/AnalysisView.vue')
-      }
-    ],
+    component: () => import(/* webpackChunkName: "home" */ '@/views/Home.vue'),
+    meta: {
+      layout: 'Default',
+    },
   },
-  /*
+  {
+    path: '/:system/settings',
+    name: "Settings",
+    component: () => import('@/views/SettingsView.vue'),
+    meta: {
+      layout: 'Default',
+    },
+  },
+  {
+    path: '/:system/analysis',
+    name: "Analysis",
+    component: () => import('@/views/AnalysisView.vue'),
+    meta: {
+      layout: 'Default',
+    },
+  },
   {
     path: "/:system",
     name: "system",
-    component: () => import('@/views/SystemView.vue')
+    component: () => import('@/views/SystemView.vue'),
+    meta: {
+      layout: 'Default',
+    },
   },
-  */
 ]
 
 /*

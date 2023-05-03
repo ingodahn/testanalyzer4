@@ -1,15 +1,18 @@
 <template>
+    <tool-bar></tool-bar>
     <imathas-testreader @testRead="gotoSettings"></imathas-testreader>
 </template>
 
 <script>
 import { defineAsyncComponent } from 'vue'
+import ToolBar from '@/components/ToolBar.vue'
 const ImathasTestreader = defineAsyncComponent(
     () => import("@/components/imathas/Testreader.vue")
 )
 //import ImathasInstructions from "@/components/IMathAs/instructions.vue"
 export default {
     components: {
+        ToolBar,
         ImathasTestreader
     },
     methods: {

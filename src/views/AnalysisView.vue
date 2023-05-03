@@ -1,5 +1,5 @@
 <template>
-   
+   <tool-bar></tool-bar>
     <v-container v-if="layout == 'all' && questionsNr != 0">
         <h2>{{ $t("Test.h21") }}</h2>
         <p>
@@ -24,6 +24,7 @@
 </template>
 
 <script>
+import ToolBar from "@/components/ToolBar.vue";
 import ScoreDistribution from "@/components/ScoreDistribution.vue";
 import More from "@/components/More.vue";
 import Less from "@/components/Less.vue";
@@ -35,6 +36,7 @@ import Discriminator from "@/components/Discriminator.vue";
 export default {
     name: "AnalysisView",
     components: {
+        ToolBar,
         ScoreDistribution,
         More,
         Less,

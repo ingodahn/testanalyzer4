@@ -1,7 +1,8 @@
 <template>
   <v-responsive>
+    
     <v-container fluid tag="section" aria-labelledby="title">
-      <v-main>
+      
         <v-row>
           <v-col cols="10" offset="1">
             <div id="context" v-if="showContext">
@@ -10,7 +11,7 @@
             </div>
           </v-col>
         </v-row>
-      </v-main>
+      
     </v-container>
   </v-responsive>
 </template>
