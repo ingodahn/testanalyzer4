@@ -1,5 +1,5 @@
 <template>
-    <tool-bar></tool-bar>
+    <tool-bar :disabled="toolbarOptions.disabled"></tool-bar>
     <imathas-testreader @testRead="gotoSettings"></imathas-testreader>
 </template>
 
@@ -15,6 +15,11 @@ export default {
         ToolBar,
         ImathasTestreader
     },
+    data () {
+        return {
+            Test: this.$root.$data.Test
+        }
+    },
     methods: {
         gotoAnalysis() {
             console.log('TestReader emitted testRead at', JSON.parse(JSON.stringify(this.$root.$data.Test)))
@@ -26,6 +31,29 @@ export default {
             console.log('TestReader emitted testRead for Settings at', JSON.parse(JSON.stringify(this.$root.$data.Test)))
             this.$router.push({ name: "Settings" })
         },
+    },
+    computed: {
+        toolbarOptions() {
+            const options = {
+                disabled: {
+                    drawer: true,
+                    file: true,
+                    settings: false,
+                    analysis: false,
+                    hints: false,
+                    print: false,
+                    report: false
+                }
+            }
+            if (!this.Test) {
+                options.disabled.settings = true
+                options.disabled.analysis = true
+                options.disabled.hints = true
+                options.disabled.print = true
+                options.disabled.report = true
+            }
+            return options
+        }
     }
 }
 

@@ -13,6 +13,15 @@
     "questionStatistics": "Question Statistics",
     "discriminator": "Item Discrimination"
   },
+  "Toolbar": {
+    "file": "Load new file",
+    "settings": "Settings",
+    "print": "Print",
+    "analysis": "Test-Analyse",
+    "hints": "Show only hints",
+    "all": "Show all",
+    "report": "Report a problem"
+  },
   "Test": {
     "title": "Test Analysis",
     "btn1": "Load new file",

@@ -1,5 +1,5 @@
 <template>
-    <tool-bar></tool-bar>
+    <tool-bar :disabled="toolbarOptions.disabled"></tool-bar>
     <v-container>
         <h2>{{ $t("Settings.h2") }}</h2>
         <p>
@@ -27,6 +27,17 @@ export default {
             Test: this.$root.$data.Test,
             Mode: this.$root.$data.Test.Mode,
             layout: 'all',
+            toolbarOptions: {
+                disabled: {
+                    drawer: true,
+                    file: false,
+                    settings: true,
+                    analysis: false,
+                    hints: true,
+                    print: true,
+                    report: false
+                }
+            }
         }
     },
     components: {
@@ -45,7 +56,7 @@ export default {
             console.log('Going to analysis with test', JSON.parse(JSON.stringify(this.Test)))
             this.$router.push({ name: 'Analysis' })
         }
-    }
+    },
 }
 </script>
 

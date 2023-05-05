@@ -13,6 +13,15 @@
     "questionStatistics": "Fragen-Statistik",
     "discriminator": "Trennschärfe"
   },
+  "Toolbar": {
+    "file": "Neue Datei laden",
+    "settings": "Einstellungen",
+    "print": "Drucken",
+    "analysis": "Test-Analyse",
+    "hints": "Nur Hinweise anzeigen",
+    "all": "Alles anzeigen",
+    "report": "Problem melden"
+  },
   "Test": {
     "title": "Test-Analyse",
     "btn1": "Neue Datei laden",

@@ -1,5 +1,5 @@
 <template>
-   <tool-bar></tool-bar>
+   <tool-bar :disabled="toolbarOptions.disabled"></tool-bar>
     <v-container v-if="layout == 'all' && questionsNr != 0">
         <h2>{{ $t("Test.h21") }}</h2>
         <p>
@@ -11,20 +11,28 @@
     <score-distribution :ScoredSorted="scoredSorted" :TotalScore="Test.setMaxScore" :Questions="questions"
         :ComponentStatus="componentStatus" :Layout="layout">
     </score-distribution>
+    <to-top></to-top>
     <More id="more" :Score="score" :ComponentStatus="componentStatus" :Layout="layout"></More>
+    <to-top></to-top>
     <Less id="less" :Score="score" :ComponentStatus="componentStatus" :Layout="layout"></Less>
+    <to-top></to-top>
     <Attempts id="attempts" :Questions="questions" :ComponentStatus="componentStatus" :Layout="layout">
     </Attempts>
+    <to-top></to-top>
     <BestStudents id="best" :ScoredSorted="scoredSorted" :Questions="questions" :ComponentStatus="componentStatus"
         :Layout="layout"></BestStudents>
+    <to-top></to-top>
     <QuestionStatistics id="questionStatistics" v-if="layout == 'all'">
     </QuestionStatistics>
+    <to-top></to-top>
     <Discriminator :ScoredSorted="scoredSorted" :Questions="questions" :ComponentStatus="componentStatus"
         :Layout="layout"></Discriminator>
+    <to-top></to-top>
 </template>
 
 <script>
 import ToolBar from "@/components/ToolBar.vue";
+import ToTop from "@/components/ToTop.vue";
 import ScoreDistribution from "@/components/ScoreDistribution.vue";
 import More from "@/components/More.vue";
 import Less from "@/components/Less.vue";
@@ -37,6 +45,7 @@ export default {
     name: "AnalysisView",
     components: {
         ToolBar,
+        ToTop,
         ScoreDistribution,
         More,
         Less,
@@ -71,6 +80,17 @@ export default {
                 best: "warn_0",
                 discriminator: "warn_0"
             },
+            toolbarOptions: {
+                disabled: {
+                    drawer: false,
+                    file: false,
+                    settings: false,
+                    analysis: true,
+                    hints: false,
+                    print: false,
+                    report: false
+                }
+            },
             showContext: true,
             showUpload: true,
             layout: "all",
@@ -79,6 +99,9 @@ export default {
     },
     
     methods: {
+        toTop() {
+            window.scrollTo(0, 0);
+        },
     },
     computed: {
         

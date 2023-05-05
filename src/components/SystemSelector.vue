@@ -6,7 +6,7 @@
     <nav>
         <v-btn class="hvr-grow"
            color="primary"
-           large to="/imathas" >
+           large to="/IMathAS" >
           IMathAS
         </v-btn>
     </nav>
