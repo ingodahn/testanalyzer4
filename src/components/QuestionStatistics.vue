@@ -21,14 +21,17 @@
       </v-container>
       <p>{{ $t("Stat.p2") }}</p>
     </div>
+    <to-top></to-top>
   </v-container>
 </template>
 
 <script>
+import ToTop from "@/components/ToTop.vue";
 import ChartPlayer from "./ChartPlayer.vue";
 export default {
   name: "questionStatistics",
   components: {
+    ToTop,
     ChartPlayer
   },
   props: [],
@@ -39,9 +42,8 @@ export default {
       Mode: this.$root.$data.Test.Mode,
     };
   },
-mounted () {
-  console.log('Statistics:',JSON.parse(JSON.stringify(this.Questions)))
-},
+  mounted() {
+  },
   computed: {
     statChart: function () {
       let chart = {
@@ -71,7 +73,6 @@ mounted () {
           borderColor: "red"
         };
       }
-      console.log('QS-Chart:',JSON.parse(JSON.stringify(chart)))
       return chart;
     },
     QNames: function () {

@@ -20,10 +20,12 @@
         </div>
         <b>{{ $t("More.hint") }}</b> <span v-html="hint"></span>
       </div>
+      <to-top></to-top>
     </v-container>
   </template>
   
   <script>
+  import ToTop from "@/components/ToTop.vue";
   function avg(q) {
     var avgScore = 0;
     var scores = q.scores;
@@ -42,6 +44,13 @@
       };
     },
     props: ["Score", "ComponentStatus", "Layout"],
+    components: {
+      ToTop
+    },
+    emits: ["warnLevel"],
+    mounted () {
+        this.$emit("warnLevel", 'more',this.warnLevel);
+    },
     computed: {
       questionSuccess: function() {
         var threshold = 0.8;

@@ -10,8 +10,8 @@
     <v-btn icon :disabled="disabled['analysis']" :title="$t('Toolbar.analysis')" :to="systemPath+'/analysis'">
       <v-icon icon="mdi-file-chart" />
     </v-btn>
-    <v-btn icon :disabled="disabled['hints']" :title="$t('Toolbar.hints')">
-      <v-icon icon="mdi-exclamation-thick" color="warning" />
+    <v-btn icon :disabled="disabled['hints']" :title="hintTitle" @click="toggleHints">
+      <v-icon :icon="hintIcon" color="warning" />
     </v-btn>
     <v-btn icon :disabled="disabled['print']" :title="$t('Toolbar.print')">
       <v-icon icon="mdi-printer" />
@@ -42,7 +42,15 @@ export default {
   data() {
     return {
       drawer: false,
+      hints: true
     }
+  },
+  emits: ['toggleHints'],
+  methods: {
+    toggleHints () {
+      this.hints=!this.hints
+      this.$emit('toggleHints')
+    },
   },
   computed: {
     system() {
@@ -52,18 +60,11 @@ export default {
     systemPath() {
       return '/'+this.$route.params.system;
     },
-    system1() {
-      const system = this.$route.params.system
-      switch (system) {
-        case "imathas":
-          return "IMathAS"
-        case "ilias":
-          return "ILIAS"
-        case "olat":
-          return "OpenOLAT"
-        default:
-          return ""
-      }
+    hintTitle() {
+      return (this.hints) ? this.$t('Toolbar.hints') : this.$t('Toolbar.all');
+    },
+    hintIcon() {
+      return (this.hints) ? 'mdi-tooltip-text' : 'mdi-tooltip-text-outline';
     }
   }
 }

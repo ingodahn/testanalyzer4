@@ -39,10 +39,12 @@
         <div v-html="hint50"></div>
       </div>
     </div>
+    <to-top></to-top>
   </v-container>
 </template>
 
 <script>
+import ToTop from "@/components/ToTop.vue";
 function avg(qScore) {
   var avgScore = 0;
   var scores = qScore.scores;
@@ -62,6 +64,13 @@ export default {
       Mode: this.$root.$data.Test.Mode
     };
   },
+  components: {
+    ToTop
+  },
+  emits: ["warnLevel"],
+  mounted () {
+        this.$emit("warnLevel", 'less',this.warnLevel);
+    },
   computed: {
     questionSuccess: function () {
       var threshold = 0.2;

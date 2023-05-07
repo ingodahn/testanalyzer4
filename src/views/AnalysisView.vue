@@ -1,5 +1,5 @@
 <template>
-   <tool-bar :disabled="toolbarOptions.disabled"></tool-bar>
+    <tool-bar :disabled="toolbarOptions.disabled" @toggleHints="toggleHints"></tool-bar>
     <v-container v-if="layout == 'all' && questionsNr != 0">
         <h2>{{ $t("Test.h21") }}</h2>
         <p>
@@ -9,25 +9,26 @@
         </p>
     </v-container>
     <score-distribution :ScoredSorted="scoredSorted" :TotalScore="Test.setMaxScore" :Questions="questions"
-        :ComponentStatus="componentStatus" :Layout="layout">
+        :ComponentStatus="componentStatus" :Layout="layout" @warnLevel="setWarnLevel">
     </score-distribution>
-    <to-top></to-top>
-    <More id="more" :Score="score" :ComponentStatus="componentStatus" :Layout="layout"></More>
-    <to-top></to-top>
-    <Less id="less" :Score="score" :ComponentStatus="componentStatus" :Layout="layout"></Less>
-    <to-top></to-top>
-    <Attempts id="attempts" :Questions="questions" :ComponentStatus="componentStatus" :Layout="layout">
+    <More id="more" :Score="score" :ComponentStatus="componentStatus" :Layout="layout" @warnLevel="setWarnLevel"></More>
+    
+    <Less id="less" :Score="score" :ComponentStatus="componentStatus" :Layout="layout" @warnLevel="setWarnLevel"></Less>
+    
+    <Attempts id="attempts" :Questions="questions" :ComponentStatus="componentStatus" :Layout="layout"
+        @warnLevel="setWarnLevel">
     </Attempts>
-    <to-top></to-top>
+    
     <BestStudents id="best" :ScoredSorted="scoredSorted" :Questions="questions" :ComponentStatus="componentStatus"
-        :Layout="layout"></BestStudents>
-    <to-top></to-top>
+        :Layout="layout" @warnLevel="setWarnLevel"></BestStudents>
+    
     <QuestionStatistics id="questionStatistics" v-if="layout == 'all'">
     </QuestionStatistics>
-    <to-top></to-top>
-    <Discriminator :ScoredSorted="scoredSorted" :Questions="questions" :ComponentStatus="componentStatus"
-        :Layout="layout"></Discriminator>
-    <to-top></to-top>
+    
+    <Discriminator :ScoredSorted="scoredSorted" :Questions="questions" :ComponentStatus="componentStatus" :Layout="layout"
+        @warnLevel="setWarnLevel">
+    </Discriminator>
+    
 </template>
 
 <script>
@@ -86,10 +87,10 @@ export default {
                     file: false,
                     settings: false,
                     analysis: true,
-                    hints: false,
+                    hints: true,
                     print: false,
                     report: false
-                }
+                },
             },
             showContext: true,
             showUpload: true,
@@ -97,14 +98,33 @@ export default {
             loading: false
         };
     },
-    
+
     methods: {
         toTop() {
             window.scrollTo(0, 0);
         },
+        warnLevel: function (c) {
+            return this.componentStatus[c];
+        },
+        setWarnLevel(component, level) {
+            this.componentStatus[component] = level;
+            if (level == "warn_1") this.toolbarOptions.disabled.hints = false;
+        },
+        warnColor: function (c) {
+            return this.warnLevel(c) == "warn_1" ? "warning" : "none";
+        },
+        toggleHints() {
+            if (this.layout == "all") {
+                this.layout = "hints";
+            } else {
+                this.layout = "all";
+            }
+        }
+    },
+    watch: {
+
     },
     computed: {
-        
         score: function () {
             var scores = [];
             for (var i = 0; i < this.questionsNr; i++) {
@@ -136,7 +156,7 @@ export default {
             }
             return tScore;
         },
-        
+
         testStudentScores: function () {
             let studentScores = [];
             let nameArray = Object.keys(this.students);

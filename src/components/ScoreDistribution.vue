@@ -2,32 +2,35 @@
     <v-container id="diagram" :class="warnLevel" v-if="Layout == 'all' || warnLevel == 'warn_1'">
         <h2>{{ $t("Score.h2") }}</h2>
     </v-container>
-    <v-container>
+    <v-container :class="warnLevel">
         <v-card elevation="20">
             <BarChart :chartData="studentScoreChart"></BarChart>
         </v-card>
     </v-container>
-    <v-container v-if="hint">
+    <v-container v-if="hint" :class="warnLevel">
         <b>{{ $t("Score.p1") }}</b>
         {{ hint }}
     </v-container>
-    <v-container v-if="hintDetails != ''">
+    <v-container v-if="hintDetails != ''" :class="warnLevel">
         <p>{{ hintDetails }}</p>
-
-        <ul>
-            <li>{{ $t("Score.li1") }}</li>
-            <li>{{ $t("Score.li2") }}</li>
-            <li>{{ $t("Score.li3") }}</li>
-        </ul>
+        <v-container>
+            <ul>
+                <li>{{ $t("Score.li1") }}</li>
+                <li>{{ $t("Score.li2") }}</li>
+                <li>{{ $t("Score.li3") }}</li>
+            </ul>
+        </v-container>
     </v-container>
 
-    <v-container>
+    <v-container :class="warnLevel">
         <Race id="trackComponent" :ScoredSorted="ScoredSorted" :TotalScore="TotalScore" :Questions="Questions"
             v-if="Layout == 'all'"></Race>
+        <to-top></to-top>
     </v-container>
 </template>
 
 <script>
+import ToTop from "@/components/ToTop.vue";
 import Testgraph from "@/components/Graphics/Testgraph.vue";
 import BarChart from "@/components/Graphics/BarChart.vue";
 import Race from "@/components/Race.vue"
@@ -58,10 +61,15 @@ export default {
         "ComponentStatus",
         "Layout"
     ],
+    emits: ["warnLevel"],
     components: {
+        ToTop,
         Testgraph,
         BarChart,
         Race
+    },
+    mounted() {
+        this.$emit("warnLevel", 'ScoreDistribution', this.warnLevel);
     },
     computed: {
         scoreClasses: function () {

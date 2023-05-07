@@ -6,13 +6,22 @@
     <nav>
         <v-btn class="hvr-grow"
            color="primary"
-           large to="/IMathAS" >
+           large @click="gotoSettings('IMathAS')" >
           IMathAS
         </v-btn>
     </nav>
   </div>
 </template>
-
+<script>
+export default {
+  methods: {
+    gotoSettings(system) {
+            this.$root.$data.Test= {system: system}
+            this.$router.push({ path: '/'+system })
+        }
+  }
+}
+</script>
 <style scoped>
 body {
   background-color: #eeeeee;

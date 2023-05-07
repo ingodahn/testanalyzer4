@@ -1,7 +1,7 @@
 <template>
   <v-app-bar app color="primary" dense>
     <v-toolbar-title class="text-h4 d-flex justify-center">
-      <span class="apptitle">{{ system1 }} {{ $t("Test.title") }}</span>
+      <span class="apptitle">{{ system }} {{ $t("Test.title") }}</span>
     </v-toolbar-title>
     <v-spacer></v-spacer>
     <LanguageSwitcher></LanguageSwitcher>
@@ -14,10 +14,12 @@ import LanguageSwitcher from "@/components/LanguageSwitcher.vue"
 export default {
   components: {LanguageSwitcher },
   computed: {
+    
     system() {
       const test=this.$root.$data.Test;
       return (test)?test.system:'';
     },
+    
     system1() {
       const system = this.$route.params.system
       switch (system) {

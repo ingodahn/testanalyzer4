@@ -66,13 +66,16 @@
         </div>
       </div>
     </div>
+    <to-top></to-top>
   </v-container>
 </template>
 
 <script>
+import ToTop from "@/components/ToTop.vue";
 import ChartPlayer from "./ChartPlayer.vue";
 export default {
   components: {
+    ToTop,
     ChartPlayer
   },
   props: ["ScoredSorted", "Questions", "ComponentStatus", "Layout"],
@@ -82,7 +85,10 @@ export default {
       Mode: this.$root.$data.Test.Mode,
     };
   },
-
+  emits: ["warnLevel"],
+  mounted () {
+        this.$emit("warnLevel", 'discriminator',this.warnLevel);
+    },
   computed: {
     discriminatorChart: function() {
       var chart = {

@@ -15,10 +15,12 @@
       <b>{{ $t("Best.hint") }}&nbsp;</b>
       <span v-html="hint"></span>
     </div>
+    <to-top></to-top>
   </v-container>
 </template>
 
 <script>
+import ToTop from "@/components/ToTop.vue";
 import ListPlayer from "./ListPlayer.vue";
 export default {
   name: "BestStudents",
@@ -26,8 +28,11 @@ export default {
     return {};
   },
   props: ["ScoredSorted", "Questions", "ComponentStatus", "Layout"],
-  components: { ListPlayer },
-
+  emits: ["warnLevel"],
+  components: { ToTop, ListPlayer },
+  mounted () {
+        this.$emit("warnLevel", 'best',this.warnLevel);
+    },
   computed: {
     qNameStudents: function () {
       var best = this.ScoredSorted.slice(0);

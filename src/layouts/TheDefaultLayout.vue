@@ -26,10 +26,6 @@ export default defineComponent({
         };
     },
     computed: {
-        system() {
-            const test = this.$root.$data.Test;
-            return test ? test.system : "";
-        },
     },
 });
 </script>
@@ -37,7 +33,7 @@ export default defineComponent({
 <template>
     <v-layout>
 
-        <app-bar :key="system" />
+        <app-bar/>
 
 
         <v-main>
@@ -71,4 +67,9 @@ export default defineComponent({
     </v-layout>
 </template>
 
-```
+<style>
+.warn_1 {
+  border-style: none solid none solid;
+  border-color: #ffc107;
+  padding: 1em;
+}</style>

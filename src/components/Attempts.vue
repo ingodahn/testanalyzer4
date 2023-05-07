@@ -25,10 +25,12 @@
       <b>{{ $t("Attempts.hint") }} </b>
       <div v-html="hint"></div>
     </div>
+    <to-top></to-top>
   </v-container>
 </template>
 
 <script>
+import ToTop from "@/components/ToTop.vue";
 import ChartPlayer from "./ChartPlayer.vue";
 import ListPlayer from "./ListPlayer.vue";
 export default {
@@ -40,7 +42,12 @@ export default {
       Mode: this.$root.$data.Test.Mode,
     };
   },
+  emits: ["warnLevel"],
+  mounted () {
+        this.$emit("warnLevel", 'attempts',this.warnLevel);
+    },
   components: {
+    ToTop,
     ChartPlayer,
     ListPlayer
   },

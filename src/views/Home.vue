@@ -49,6 +49,12 @@ export default {
     Context,
     SystemSelector,
   },
+  methods: {
+    gotoSettings(system) {
+          this.$root.$data.Test= {system: system}
+            this.$router.push({ name: 'Settings' })
+        }
+  }
 }
 </script>
 
