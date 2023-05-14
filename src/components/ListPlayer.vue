@@ -73,6 +73,9 @@
         </span>
       </span>
     </span>
+    <span v-if="PlayerType =='bracketed'">
+      ({{ listItemsString(ListData) }})
+    </span>
   </v-container>
 </template>
 
@@ -92,7 +95,18 @@ export default {
       curItem: 0
     };
   },
-
+  methods: {
+    listItemsString: function(list) {
+      var str = "";
+      for (var i = 0; i < list.length; i++) {
+        str += list[i];
+        if (i < list.length - 1) {
+          str += ", ";
+        }
+      }
+      return str;
+    }
+  },
   computed: {
     listItem: function() {
       return this.ListData[this.curItem];

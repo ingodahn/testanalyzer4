@@ -1,10 +1,12 @@
 <template>
-  <v-container id="less" v-if="Layout == 'all' || warnLevel == 'warn_1'">
-    <h2 :class="warnLevel">
+  <div id="less" v-if="Layout == 'all' || warnLevel == 'warn_1'">
+    <v-container :class="warnLevel">
+    <h2>
       {{ $t("Less.h2") }}
     </h2>
+    </v-container>
     <div v-if="Score.length != 0">
-      <div :class="warnLevel1" v-if="Layout == 'all' || warnLevel1 == 'warn_1'">
+      <v-container :class="warnLevel1" v-if="Layout == 'all' || warnLevel1 == 'warn_1'">
         <div v-if="questionSuccess.length == 0">
           <p>
             {{ $t("Less.p0", [tp]) }}
@@ -27,8 +29,8 @@
           <p>{{ $t("Less.p2", [tp]) }}</p>
         </div>
         <div v-html="hint"></div>
-      </div>
-      <div :class="warnLevel2" v-if="Layout == 'all' || warnLevel2 == 'warn_1'">
+      </v-container>
+      <v-container :class="warnLevel2" v-if="Layout == 'all' || warnLevel2 == 'warn_1'">
         <p>{{ start50 }}</p>
         <v-container>
           <ul>
@@ -37,10 +39,10 @@
         </v-container>
         <p>{{ end50 }}</p>
         <div v-html="hint50"></div>
-      </div>
+      </v-container>
     </div>
     <to-top></to-top>
-  </v-container>
+  </div>
 </template>
 
 <script>

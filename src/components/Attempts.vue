@@ -18,7 +18,7 @@
           {{ qName(item) }}, {{ $t("Attempts.li") }}
           <ListPlayer
             :ListData="unattemptedList(item)"
-            PlayerType="selector"
+            PlayerType="bracketed"
           ></ListPlayer>
         </li>
       </ul>

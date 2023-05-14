@@ -6,7 +6,7 @@
       <ul>
         <li v-for="item in qNameStudents['ql']" :key="item">
           {{ item }}:
-          <ListPlayer :ListData="qNameStudents['so'][item]" PlayerType="selector"></ListPlayer>
+          <ListPlayer :ListData="qNameStudents['so'][item]" PlayerType="bracketed"></ListPlayer>
         </li>
       </ul>
     </v-container>
