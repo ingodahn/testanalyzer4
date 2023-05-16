@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container v-if="playerType == 'player'">
     <v-card class="chart-containerx" elevation="20">
       <v-card-title class="text-center">
         <span>{{ $t("Player.q") }} {{ curGroupStart + 1 }} -
@@ -7,7 +7,8 @@
       </v-card-title>
       <v-card-actions class="justify-center" v-if="ChartGroups.length > 1">
         <!-- Go to first -->
-        <v-btn icon color="primary" v-on:click="curGroup = 0" :disabled="curGroup == 0" v-if="ChartGroups.length > 2"><v-icon>mdi-skip-backward</v-icon>
+        <v-btn icon color="primary" v-on:click="curGroup = 0" :disabled="curGroup == 0"
+          v-if="ChartGroups.length > 2"><v-icon>mdi-skip-backward</v-icon>
         </v-btn>
         <v-btn icon color="primary" v-on:click="curGroup--" :disabled="curGroup == 0"><v-icon>mdi-step-backward</v-icon>
         </v-btn>
@@ -21,6 +22,12 @@
       <LineChart :chartData="ThisChart(curGroupStart, curGroupEnd)"></LineChart>
     </v-card>
   </v-container>
+  <v-container v-else>
+    <v-card class="chart-containerx" elevation="20">
+      <v-card-title class="text-center">{{ $t("Player.q") }}</v-card-title>
+      <LineChart :chartData="ThisChart(0, Chart.labels.length)"></LineChart>
+    </v-card>
+  </v-container>
 </template>
 
 <script>
@@ -29,7 +36,21 @@ export default {
   components: {
     LineChart
   },
-  props: ["Chart"],
+  props: {
+    Chart: {
+      type: Object,
+      default: () => {
+        return {
+          labels: [],
+          datasets: []
+        };
+      }
+    },
+    Layout: {
+      type: String,
+      default: "all"
+    }
+  },
   data() {
     return {
       curGroup: 0
@@ -58,7 +79,7 @@ export default {
         };
         chart.datasets.push(chartData);
       });
-
+      console.log('CP-81:', chart)
       return chart;
     },
     ResetCurGroup: function () {
@@ -102,6 +123,9 @@ export default {
     curGroupEnd: function () {
       if (this.curGroup >= this.ChartGroups.length) this.ResetCurGroup();
       return this.ChartGroups.length ? this.ChartGroups[this.curGroup][1] : 0;
+    },
+    playerType: function() {
+      return (this.Layout == "print")?"showAll":"player";
     }
   }
 };
@@ -109,8 +133,8 @@ export default {
 
 <style scoped>
 .chart-container {
-    border: 1px solid hsl(198, 65%, 40%);
-    border-radius: 10px;
-    box-shadow: -10px 19px 15px silver;
+  border: 1px solid hsl(198, 65%, 40%);
+  border-radius: 10px;
+  box-shadow: -10px 19px 15px silver;
 }
 </style>

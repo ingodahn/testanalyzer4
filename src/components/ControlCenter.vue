@@ -1,41 +1,11 @@
 <template>
-  <v-container id="controlCenter">
-    <!--
+  <v-container v-if="Layout == 'print'">
     <h3>{{ $t("Control.h3") }}</h3>
     <p></p>
-    
-      <div v-html="modeText"></div>
-    -->
-    
-    <p>
-      <!--
-        <nav>
-      <v-btn class="hvr-grow" color="primary" large v-on:click="showControls = false" v-if="showControls">{{
-        $t("Control.btn1") }}</v-btn>
-        <v-btn class="hvr-grow" color="primary" large v-on:click="showControls = true" v-if="!showControls">{{
-        $t("Control.btn2") }}</v-btn>
-    </nav>
-      -->
-    
-    <!--
-      <v-hover
-        v-if="!showControls"
-        v-slot:default="{ hover }"
-        open-delay="200"
-        class="ma-1"
-      >
-        <v-btn
-          color="primary"
-          v-on:click="showControls = true"
-          :elevation="hover ? 16 : 2"
-        >
-          {{ $t("Control.btn2") }}
-        </v-btn>
-      </v-hover>
-    -->
-    </p>
-  
-    <v-card v-if="showControls" class="ma-auto" raised elevation="0">
+    <div v-html="modeText"></div>
+  </v-container>
+  <v-container id="controlCenter" v-else>
+    <v-card class="ma-auto" raised elevation="0">
       <v-card-title>{{ $t("Control.vct1") }}</v-card-title>
       <v-card-subtitle>{{ $t("Control.vcst1") }}</v-card-subtitle>
       <v-card-text class="ma-auto">
@@ -100,9 +70,14 @@ export default {
   name: "ControlCenter",
   data() {
     return {
-      showControls: true,
       Mode: this.$root.$data.Test.Mode
     };
+  },
+  props: {
+    Layout: {
+      type: String,
+      default: "all"
+    }
   },
   methods: {
     typeSelected: function (typeval) {

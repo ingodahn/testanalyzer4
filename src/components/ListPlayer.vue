@@ -1,79 +1,32 @@
 <template>
   <v-container>
-    <span v-if="PlayerType == 'selector'">
+    <span v-if="playerType == 'selector'">
       <span v-if="ListData.length == 1">{{ ListData[0] }}</span>
       <span v-else>
         <v-select :items="ListData" :value="ListData[0]" solo dense></v-select>
       </span>
     </span>
-    <span v-if="PlayerType == 'player'">
-      <span v-if="curItem < ListData.length">
-        {{ listItem }}
-        <span class="listSwitch">
-          <v-hover
-            v-if="curItem > 1"
-            v-slot:default="{ hover }"
-            open-delay="200"
-            class="ma-1"
-          >
-            <v-btn
-              icon
-              color="primary"
-              v-on:click="curItem = 0"
-              :elevation="hover ? 16 : 2"
-            >
-              <v-icon>mdi-skip-backward</v-icon>
-            </v-btn>
-          </v-hover>
-          <v-hover
-            v-if="curItem > 0"
-            v-slot:default="{ hover }"
-            open-delay="200"
-            class="ma-1"
-          >
-            <v-btn
-              icon
-              color="primary"
-              v-on:click="curItem--"
-              :elevation="hover ? 16 : 2"
-            >
-              <v-icon>mdi-step-backward</v-icon>
-            </v-btn>
-          </v-hover>
-          <v-hover
-            v-if="curItem < ListData.length - 1"
-            v-slot:default="{ hover }"
-            open-delay="200"
-            class="ma-1"
-          >
-            <v-btn
-              icon
-              color="primary"
-              v-on:click="curItem++"
-              :elevation="hover ? 16 : 2"
-            >
-              <v-icon>mdi-step-forward</v-icon>
-            </v-btn>
-          </v-hover>
-          <v-hover
-            v-if="curItem < ListData.length - 2"
-            v-slot:default="{ hover }"
-            open-delay="200"
-            class="ma-1"
-          >
-            <v-btn
-              icon
-              color="primary"
-              v-on:click="curItem = ListData.length - 1"
-              :elevation="hover ? 16 : 2"
-            >
-              <v-icon>mdi-skip-forward</v-icon>
-            </v-btn>
-          </v-hover>
+
+    <v-card v-if="playerType == 'player'" class="chart-containerx" elevation="20">
+      <v-card-actions class="justify-center">
+        <span v-if="curItem < ListData.length">
+          <v-btn icon color="primary" v-on:click="curItem = 0" :disabled="curItem == 0"
+            v-if="ListData.length > 2"><v-icon>mdi-skip-backward</v-icon>
+          </v-btn>
+          <v-btn icon color="primary" v-on:click="curItem--" :disabled="curItem == 0"
+            v-if="ListData.length > 1"><v-icon>mdi-step-backward</v-icon>
+          </v-btn>
+          {{ listItem }}
+          <v-btn icon color="primary" v-if="ListData.length > 1" v-on:click="curItem++"
+            :disabled="curItem == ListData.length - 1"><v-icon>mdi-step-forward</v-icon>
+          </v-btn>
+          <v-btn icon color="primary" v-on:click="curItem = ListData.length - 1"
+            :disabled="curItem == ListData.length - 1" v-if="ListData.length > 1"><v-icon>mdi-skip-forward</v-icon>
+          </v-btn>
         </span>
-      </span>
-    </span>
-    <span v-if="PlayerType =='bracketed'">
+      </v-card-actions>
+    </v-card>
+    <span v-if="playerType == 'showAll'">
       ({{ listItemsString(ListData) }})
     </span>
   </v-container>
@@ -85,9 +38,9 @@ export default {
     ListData: {
       type: Array
     },
-    PlayerType: {
+    Layout: {
       type: String,
-      default: "player"
+      default: "all"
     }
   },
   data() {
@@ -96,20 +49,23 @@ export default {
     };
   },
   methods: {
-    listItemsString: function(list) {
+    listItemsString: function (list) {
       var str = "";
       for (var i = 0; i < list.length; i++) {
         str += list[i];
         if (i < list.length - 1) {
-          str += ", ";
+          str += "; ";
         }
       }
       return str;
     }
   },
   computed: {
-    listItem: function() {
+    listItem: function () {
       return this.ListData[this.curItem];
+    },
+    playerType: function () {
+      return (this.Layout == "print") ? "showAll" : "selector";
     }
   }
 };

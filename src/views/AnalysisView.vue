@@ -1,6 +1,6 @@
 <template>
-    <tool-bar :disabled="toolbarOptions.disabled" @toggleHints="toggleHints"></tool-bar>
-    <v-container v-if="layout == 'all' && questionsNr != 0">
+    <tool-bar :disabled="toolbarOptions.disabled" @toggleLayout="toggleLayout"></tool-bar>
+    <v-container v-if="layout != 'hints' && questionsNr != 0">
         <h2>{{ $t("Test.h21") }}</h2>
         <p>
             {{
@@ -8,6 +8,8 @@
             }}
         </p>
     </v-container>
+    <control-center v-if="layout == 'print'" Layout="print">
+    </control-center>
     <score-distribution :ScoredSorted="scoredSorted" :TotalScore="Test.setMaxScore" :Questions="questions"
         :ComponentStatus="componentStatus" :Layout="layout" @warnLevel="setWarnLevel">
     </score-distribution>
@@ -22,7 +24,7 @@
     <BestStudents id="best" :ScoredSorted="scoredSorted" :Questions="questions" :ComponentStatus="componentStatus"
         :Layout="layout" @warnLevel="setWarnLevel"></BestStudents>
     
-    <QuestionStatistics id="questionStatistics" v-if="layout == 'all'">
+    <QuestionStatistics id="questionStatistics" v-if="layout != 'hints'" :Layout="layout">
     </QuestionStatistics>
     
     <Discriminator :ScoredSorted="scoredSorted" :Questions="questions" :ComponentStatus="componentStatus" :Layout="layout"
@@ -34,6 +36,7 @@
 <script>
 import ToolBar from "@/components/ToolBar.vue";
 import ToTop from "@/components/ToTop.vue";
+import ControlCenter from "@/components/ControlCenter.vue";
 import ScoreDistribution from "@/components/ScoreDistribution.vue";
 import More from "@/components/More.vue";
 import Less from "@/components/Less.vue";
@@ -47,6 +50,7 @@ export default {
     components: {
         ToolBar,
         ToTop,
+        ControlCenter,
         ScoreDistribution,
         More,
         Less,
@@ -87,8 +91,7 @@ export default {
                     file: false,
                     settings: false,
                     analysis: true,
-                    hints: true,
-                    print: false,
+                    layout: false,
                     report: false
                 },
             },
@@ -113,13 +116,10 @@ export default {
         warnColor: function (c) {
             return this.warnLevel(c) == "warn_1" ? "warning" : "none";
         },
-        toggleHints() {
-            if (this.layout == "all") {
-                this.layout = "hints";
-            } else {
-                this.layout = "all";
-            }
-        }
+        
+        toggleLayout(layout) {
+            this.layout = layout;
+        },
     },
     watch: {
 

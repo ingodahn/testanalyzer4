@@ -2,7 +2,7 @@
   <v-container id="questionStatistics">
     <h2>{{ $t("Stat.h2") }}</h2>
     <div v-if="Questions.length > 0" style="margin-top: 25px;">
-      <ChartPlayer :Chart="statChart"></ChartPlayer>
+      <ChartPlayer :Chart="statChart" :Layout="Layout"></ChartPlayer>
       <b>{{ $t("Stat.hint") }}:</b>
       <div v-if="Mode.multiLine || Mode.multiQuestion">
         <span v-html="multiLineHint"></span>
@@ -34,7 +34,12 @@ export default {
     ToTop,
     ChartPlayer
   },
-  props: [],
+  props: {
+    Layout: {
+      type: String,
+      default: "all"
+    }
+  },
   data() {
     return {
       Questions: this.$root.$data.Test.questions,

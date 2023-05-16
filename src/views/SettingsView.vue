@@ -12,7 +12,7 @@
         </nav>
         </p>
         <adapt v-if="adaptable" />
-        <control-center v-if="layout == 'all'" id="controlCenter"></control-center>
+        <control-center v-if="layout != 'hints'" id="controlCenter" :Layout="layout"></control-center>
     </v-container>
 </template>
 
@@ -33,8 +33,7 @@ export default {
                     file: false,
                     settings: true,
                     analysis: false,
-                    hints: true,
-                    print: true,
+                    layout: true,
                     report: false
                 }
             }

@@ -4,17 +4,14 @@
     <v-btn icon :disabled="disabled['file']" :title="$t('Toolbar.file')" :to="systemPath">
       <v-icon icon="mdi-file-import" />
     </v-btn>
-    <v-btn icon :disabled="disabled['settings']" :title="$t('Toolbar.settings')" :to="systemPath+'/settings'">
+    <v-btn icon :disabled="disabled['settings']" :title="$t('Toolbar.settings')" :to="systemPath + '/settings'">
       <v-icon icon="mdi-cog" />
     </v-btn>
-    <v-btn icon :disabled="disabled['analysis']" :title="$t('Toolbar.analysis')" :to="systemPath+'/analysis'">
+    <v-btn icon :disabled="disabled['analysis']" :title="$t('Toolbar.analysis')" :to="systemPath + '/analysis'">
       <v-icon icon="mdi-file-chart" />
     </v-btn>
-    <v-btn icon :disabled="disabled['hints']" :title="hintTitle" @click="toggleHints">
-      <v-icon :icon="hintIcon" color="warning" />
-    </v-btn>
-    <v-btn icon :disabled="disabled['print']" :title="$t('Toolbar.print')">
-      <v-icon icon="mdi-printer" />
+    <v-btn icon :disabled="disabled['layout']" :title="layoutTitle" @click="toggleLayout">
+      <v-icon :icon="layoutIcon" :color="layoutColor" />
     </v-btn>
     <v-btn icon :disabled="disabled['report']" :title="$t('Toolbar.report')">
       <v-icon icon="mdi-file-document-alert" />
@@ -34,22 +31,37 @@ export default {
         file: true,
         settings: true,
         analysis: true,
-        hints: true,
-        print: true,
-        report: true}
+        layout: true,
+        report: true
+      }
     }
   },
+  emits: ['toggleLayout'],
   data() {
     return {
       drawer: false,
+      layout: 'all',
       hints: true
     }
   },
-  emits: ['toggleHints'],
+  emits: ['toggleHints', 'toPrint'],
   methods: {
-    toggleHints () {
-      this.hints=!this.hints
-      this.$emit('toggleHints')
+    toggleLayout() {
+      switch (this.layout) {
+        case 'all':
+          this.layout = 'hints'
+          break;
+        case 'hints':
+          this.layout = 'print'
+          break;
+        case 'print':
+          this.layout = 'all'
+          break;
+        default:
+          this.layout = 'all'
+          break;
+      }
+      this.$emit('toggleLayout', this.layout)
     },
   },
   computed: {
@@ -58,13 +70,43 @@ export default {
       return (test) ? test.system : '';
     },
     systemPath() {
-      return '/'+this.$route.params.system;
+      return '/' + this.$route.params.system;
     },
-    hintTitle() {
-      return (this.hints) ? this.$t('Toolbar.hints') : this.$t('Toolbar.all');
+    layoutTitle() {
+      switch (this.layout) {
+        case 'all':
+          return this.$t('Toolbar.hints');
+        case 'hints':
+          return this.$t('Toolbar.print');
+        case 'print':
+          return this.$t('Toolbar.all');
+        default:
+          return this.$t('Toolbar.hints');
+      }
     },
-    hintIcon() {
-      return (this.hints) ? 'mdi-tooltip-text' : 'mdi-tooltip-text-outline';
+    layoutIcon() {
+      switch (this.layout) {
+        case 'all':
+          return 'mdi-tooltip-text';
+        case 'hints':
+          return 'mdi-printer';
+        case 'print':
+          return 'mdi-tooltip-text-outline';
+        default:
+          return 'mdi-tooltip-text';
+      }
+    },
+    layoutColor() {
+      switch (this.layout) {
+        case 'all':
+          return 'warning';
+        case 'hints':
+          return 'black';
+        case 'print':
+          return 'black';
+        default:
+          return 'warning';
+      }
     }
   }
 }

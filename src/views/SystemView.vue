@@ -40,8 +40,7 @@ export default {
                     file: true,
                     settings: false,
                     analysis: false,
-                    hints: false,
-                    print: false,
+                    layout: false,
                     report: false
                 }
             }

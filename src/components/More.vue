@@ -2,7 +2,7 @@
     <v-container
       id="more"
       :class="warnLevel"
-      v-if="Layout == 'all' || warnLevel == 'warn_1'"
+      v-if="Layout != 'hints' || warnLevel == 'warn_1'"
     >
       <h2>{{ $t("More.h2") }}</h2>
       <div v-if="Score.length != 0">

@@ -1,7 +1,7 @@
 <template>
   <v-container
     id="discriminator"
-    v-if="Layout == 'all' || warnLevel == 'warn_1'"
+    v-if="Layout != 'hints' || warnLevel == 'warn_1'"
     :class="warnLevel"
   >
     <h2>{{ $t("Disc.h2") }}</h2>
@@ -11,7 +11,7 @@
         style="text-align: center;"
         v-if="showDiscriminator && Layout == 'all'"
       >
-        <ChartPlayer :Chart="discriminatorChart"></ChartPlayer>
+        <ChartPlayer :Chart="discriminatorChart" :Layout="Layout"></ChartPlayer>
       </div>
 
       <p v-if="!showDiscriminator" v-html="$t('Disc.p2')"></p>

@@ -1,12 +1,12 @@
 <template>
-  <v-container id="best" :class="warnLevel" v-if="Layout == 'all' || warnLevel == 'warn_1'">
+  <v-container id="best" :class="warnLevel" v-if="Layout != 'hints' || warnLevel == 'warn_1'">
     <h2>{{ $t("Best.h2") }}</h2>
     <div v-html="msg" v-if="ScoredSorted.length"></div>
     <v-container>
       <ul>
         <li v-for="item in qNameStudents['ql']" :key="item">
           {{ item }}:
-          <ListPlayer :ListData="qNameStudents['so'][item]" PlayerType="bracketed"></ListPlayer>
+          <ListPlayer :ListData="qNameStudents['so'][item]" :Layout="Layout"></ListPlayer>
         </li>
       </ul>
     </v-container>
@@ -132,7 +132,7 @@ export default {
         bestLength = 10;
       }
       return bestLength;
-    }
+    },
   }
 };
 </script>

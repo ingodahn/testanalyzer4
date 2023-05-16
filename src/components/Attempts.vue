@@ -2,13 +2,14 @@
   <v-container
     id="less"
     :class="warnLevel"
-    v-if="Layout == 'all' || warnLevel == 'warn_1'"
+    v-if="Layout != 'hints' || warnLevel == 'warn_1'"
   >
     <h2>{{ $t("Attempts.h2") }}</h2>
-    <div style="text-align: center;" v-if="Layout == 'all'">
+    <div style="text-align: center;">
       <ChartPlayer
         :Chart="attemptChart"
         v-if="Questions.length > 0"
+        :Layout="Layout"
       ></ChartPlayer>
     </div>
     <div v-if="Questions.length != 0">
@@ -18,7 +19,7 @@
           {{ qName(item) }}, {{ $t("Attempts.li") }}
           <ListPlayer
             :ListData="unattemptedList(item)"
-            PlayerType="bracketed"
+            :Layout="Layout"
           ></ListPlayer>
         </li>
       </ul>
@@ -141,7 +142,7 @@ export default {
       } else {
         return this.$t("Attempts.hintText2");
       }
-    }
+    },
   }
 };
 </script>

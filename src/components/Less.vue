@@ -1,12 +1,12 @@
 <template>
-  <div id="less" v-if="Layout == 'all' || warnLevel == 'warn_1'">
+  <div id="attempts" v-if="Layout != 'hints' || warnLevel == 'warn_1'">
     <v-container :class="warnLevel">
     <h2>
       {{ $t("Less.h2") }}
     </h2>
     </v-container>
     <div v-if="Score.length != 0">
-      <v-container :class="warnLevel1" v-if="Layout == 'all' || warnLevel1 == 'warn_1'">
+      <v-container :class="warnLevel1" v-if="Layout != 'hints' || warnLevel1 == 'warn_1'">
         <div v-if="questionSuccess.length == 0">
           <p>
             {{ $t("Less.p0", [tp]) }}
@@ -30,7 +30,7 @@
         </div>
         <div v-html="hint"></div>
       </v-container>
-      <v-container :class="warnLevel2" v-if="Layout == 'all' || warnLevel2 == 'warn_1'">
+      <v-container :class="warnLevel2" v-if="Layout != 'hints' || warnLevel2 == 'warn_1'">
         <p>{{ start50 }}</p>
         <v-container>
           <ul>

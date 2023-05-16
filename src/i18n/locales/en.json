@@ -16,9 +16,9 @@
   "Toolbar": {
     "file": "Load new file",
     "settings": "Settings",
-    "print": "Print",
+    "print": "Print Layout",
     "analysis": "Test-Analyse",
-    "hints": "Show only hints",
+    "hints": "Show hints only",
     "all": "Show all",
     "report": "Report a problem"
   },
