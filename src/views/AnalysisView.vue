@@ -1,21 +1,8 @@
 <template>
     <tool-bar :disabled="toolbarOptions.disabled" @toggleLayout="toggleLayout"></tool-bar>
-    <v-menu activator="#drawer">
-    <v-list>
-      <v-list-item prepend-icon="mdi-cog">
-        <v-list-item-title>Item 1</v-list-item-title>
-      </v-list-item>
-      <v-list-item>
-        <v-list-item-title>Item 2</v-list-item-title>
-      </v-list-item>
-      <v-list-item>
-        <v-list-item-title>Item 3</v-list-item-title>
-      </v-list-item>
-      <v-list-item>
-        <v-list-item-title>Item 4</v-list-item-title>
-      </v-list-item>
-    </v-list>
-    </v-menu>
+
+    <sections-menu></sections-menu>
+   
     <v-container v-if="layout != 'hints' && questionsNr != 0">
         <h2>{{ $t("Test.h21") }}</h2>
         <p>
@@ -29,6 +16,7 @@
     <score-distribution :ScoredSorted="scoredSorted" :TotalScore="Test.setMaxScore" :Questions="questions"
         :ComponentStatus="componentStatus" :Layout="layout" @warnLevel="setWarnLevel">
     </score-distribution>
+
     <More id="more" :Score="score" :ComponentStatus="componentStatus" :Layout="layout" @warnLevel="setWarnLevel"></More>
     
     <Less id="less" :Score="score" :ComponentStatus="componentStatus" :Layout="layout" @warnLevel="setWarnLevel"></Less>
@@ -51,6 +39,7 @@
 
 <script>
 import ToolBar from "@/components/ToolBar.vue";
+import SectionsMenu from "@/components/SectionsMenu.vue";
 import ToTop from "@/components/ToTop.vue";
 import ControlCenter from "@/components/ControlCenter.vue";
 import ScoreDistribution from "@/components/ScoreDistribution.vue";
@@ -65,6 +54,7 @@ export default {
     name: "AnalysisView",
     components: {
         ToolBar,
+        SectionsMenu,
         ToTop,
         ControlCenter,
         ScoreDistribution,
