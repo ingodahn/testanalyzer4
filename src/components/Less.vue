@@ -1,5 +1,5 @@
 <template>
-  <div id="attempts" v-if="Layout != 'hints' || warnLevel == 'warn_1'">
+  <div id="less" v-if="Layout != 'hints' || warnLevel == 'warn_1'">
     <v-container :class="warnLevel">
     <h2>
       {{ $t("Less.h2") }}

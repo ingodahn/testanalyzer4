@@ -44,7 +44,6 @@ export default {
       hints: true
     }
   },
-  emits: ['toggleHints', 'toPrint'],
   methods: {
     toggleLayout() {
       switch (this.layout) {

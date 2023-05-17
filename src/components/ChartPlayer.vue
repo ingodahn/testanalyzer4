@@ -79,7 +79,6 @@ export default {
         };
         chart.datasets.push(chartData);
       });
-      console.log('CP-81:', chart)
       return chart;
     },
     ResetCurGroup: function () {

@@ -1,9 +1,9 @@
 <template>
     <tool-bar :disabled="toolbarOptions.disabled" @toggleLayout="toggleLayout"></tool-bar>
 
-    <sections-menu></sections-menu>
+    <sections-menu :Layout="layout" :ComponentStatus="componentStatus"></sections-menu>
    
-    <v-container v-if="layout != 'hints' && questionsNr != 0">
+    <v-container v-if="layout != 'hints' && questionsNr != 0" id="basics">
         <h2>{{ $t("Test.h21") }}</h2>
         <p>
             {{
@@ -113,6 +113,7 @@ export default {
             window.scrollTo(0, 0);
         },
         warnLevel: function (c) {
+            console.log("warnLevel", c, this.componentStatus[c])
             return this.componentStatus[c];
         },
         setWarnLevel(component, level) {

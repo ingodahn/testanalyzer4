@@ -70,6 +70,6 @@ export default defineComponent({
 <style>
 .warn_1 {
   border-style: none solid none solid;
-  border-color: #ffc107;
+  border-color: orange;
   padding: 1em;
 }</style>

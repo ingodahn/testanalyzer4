@@ -1,6 +1,6 @@
 <template>
-    <v-container id="diagram" :class="warnLevel" v-if="Layout == 'all' || warnLevel == 'warn_1'">
-        <h2>{{ $t("Score.h2") }}</h2>
+    <v-container id="diagram" :class="warnLevel" v-if="Layout != 'hints' || warnLevel == 'warn_1'">
+        <h2 id="scoreDistribution">{{ $t("Score.h2") }}</h2>
     </v-container>
     <v-container :class="warnLevel">
         <v-card elevation="20">
