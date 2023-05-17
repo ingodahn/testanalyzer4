@@ -1,5 +1,21 @@
 <template>
     <tool-bar :disabled="toolbarOptions.disabled" @toggleLayout="toggleLayout"></tool-bar>
+    <v-menu activator="#drawer">
+    <v-list>
+      <v-list-item prepend-icon="mdi-cog">
+        <v-list-item-title>Item 1</v-list-item-title>
+      </v-list-item>
+      <v-list-item>
+        <v-list-item-title>Item 2</v-list-item-title>
+      </v-list-item>
+      <v-list-item>
+        <v-list-item-title>Item 3</v-list-item-title>
+      </v-list-item>
+      <v-list-item>
+        <v-list-item-title>Item 4</v-list-item-title>
+      </v-list-item>
+    </v-list>
+    </v-menu>
     <v-container v-if="layout != 'hints' && questionsNr != 0">
         <h2>{{ $t("Test.h21") }}</h2>
         <p>

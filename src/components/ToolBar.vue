@@ -1,6 +1,6 @@
 <template>
   <v-toolbar app dense>
-    <v-app-bar-nav-icon :disabled="disabled['drawer']" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+    <v-app-bar-nav-icon id="drawer" :disabled="disabled['drawer']" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
     <v-btn icon :disabled="disabled['file']" :title="$t('Toolbar.file')" :to="systemPath">
       <v-icon icon="mdi-file-import" />
     </v-btn>
