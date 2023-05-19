@@ -17,9 +17,7 @@ export default {
       Error: null,
       Config: {
         systems: [
-          { name: "IMathAS",
-            path: "imathas"
-          }
+          "IMathAS"
         ],
         contact: 'dahn@dahn-research.eu'
       }

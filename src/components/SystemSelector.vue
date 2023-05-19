@@ -16,7 +16,6 @@
 export default {
   methods: {
     gotoSettings(system) {
-            this.$root.$data.Test= {system: system}
             this.$router.push({ path: '/'+system })
         }
   }

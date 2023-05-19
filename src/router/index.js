@@ -6,6 +6,7 @@ import { createRouter, createWebHistory, RouterView } from 'vue-router'
 const routes = [
   {
     path: '/',
+    name: 'Home',
     component: () => import(/* webpackChunkName: "home" */ '@/views/Home.vue'),
     meta: {
       layout: 'Default',

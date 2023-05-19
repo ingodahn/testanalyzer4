@@ -1,6 +1,6 @@
 <template>
     <tool-bar :disabled="toolbarOptions.disabled"></tool-bar>
-    <imathas-testreader @testRead="gotoSettings"></imathas-testreader>
+    <imathas-testreader v-if="system == 'IMathAS'" @testRead="gotoSettings"></imathas-testreader>
 </template>
 
 <script>
@@ -9,15 +9,24 @@ import ToolBar from '@/components/ToolBar.vue'
 const ImathasTestreader = defineAsyncComponent(
     () => import("@/components/imathas/Testreader.vue")
 )
-//import ImathasInstructions from "@/components/IMathAs/instructions.vue"
+
 export default {
     components: {
         ToolBar,
         ImathasTestreader
     },
-    data () {
+    data() {
         return {
-            Test: this.$root.$data.Test
+            Test: this.$root.$data.Test,
+            system: null
+        }
+    },
+    mounted() {
+        const mySystem = this.$route.params.system
+        if (this.$root.$data.Config.systems.includes(mySystem)) {
+            this.system = mySystem
+        } else {
+            this.$router.push("/")
         }
     },
     methods: {
@@ -34,6 +43,7 @@ export default {
     },
     computed: {
         toolbarOptions() {
+            console.log('toolbarOptions', this.Test)
             const options = {
                 disabled: {
                     drawer: true,
@@ -47,9 +57,7 @@ export default {
             if (!this.Test) {
                 options.disabled.settings = true
                 options.disabled.analysis = true
-                options.disabled.hints = true
-                options.disabled.print = true
-                options.disabled.report = false
+                options.disabled.layout = true
             }
             return options
         }

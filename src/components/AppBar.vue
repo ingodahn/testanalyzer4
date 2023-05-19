@@ -16,23 +16,13 @@ export default {
   computed: {
     
     system() {
-      const test=this.$root.$data.Test;
-      return (test)?test.system:'';
-    },
-    
-    system1() {
       const system = this.$route.params.system
-      switch (system) {
-        case "imathas":
-          return "IMathAS"
-        case "ilias":
-          return "ILIAS"
-        case "olat":
-          return "OpenOLAT"
-        default:
-          return ""
+      if (this.$root.$data.Config.systems.includes(system)) {
+        return system
+      } else {
+        return ''
       }
-    }
+    },
   },
   methods: {
   }
