@@ -49,7 +49,7 @@ export default {
                 options.disabled.analysis = true
                 options.disabled.hints = true
                 options.disabled.print = true
-                options.disabled.report = true
+                options.disabled.report = false
             }
             return options
         }

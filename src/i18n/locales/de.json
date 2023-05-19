@@ -97,7 +97,9 @@
     "msg6": "Problem melden",
     "msg7": "Daten anonymisieren",
     "msg8": "Absenden",
-    "msg9": "Problem melden"
+    "msg9": "Problem melden",
+    "msg10": "Wenn es mit dieser Testanalyse ein Problem gibt, so melden Sie es bitte. Bitte beschreiben Sie das Problem und fügen Sie, wenn möglich, eine anonymisierte Version Ihrer Datei bei.",
+    "msg11":"Eine solche anonymisierte Version wird mit der folgenden Schaltfläche erzeugt."
   },
   "Score": {
     "h2": "Punkteverteilung",

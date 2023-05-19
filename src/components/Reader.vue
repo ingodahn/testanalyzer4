@@ -8,12 +8,19 @@
                     </div>
                 </v-col>
             </v-row>
+            <v-row>
+                <v-col cols="12">
+                    <v-progress-linear v-if="loading" indeterminate color="primary"></v-progress-linear>
+                    <v-alert v-if="error" type="error" dismissible>
+                        {{ errorMessage }}
+                    </v-alert>
+                </v-col>
+            </v-row>
         </v-container>
     </div>
 </template>
 
 <script>
-import LanguageSwitcher from './LanguageSwitcher.vue';
 import csv from 'csvtojson';
 
 export default {
@@ -38,37 +45,32 @@ export default {
                     f = files[0],
                     csv;
                 let type = f.name.split(".").pop();
-                if (!type.match(/csv/i)) throw "loadError";
+                if (!type.match(/csv/i)) throw {name: "loadError", message: "File must be a CSV file"};
                 var reader = new FileReader();
                 reader.onload = e => {
-                    try {
                         // 1. Getting file
                         csv = e.target.result;
                         this.handleData(csv);
-                    } catch (er) {
-                        if (er == "loadError") component.handleLoadError();
-                    }
                 };
                 reader.readAsText(f);
             } catch (er) {
-                if (er == "loadError") component.handleLoadError();
+                component.handleLoadError(er);
             }
         },
         handleData(csvData) {
-            let component = this
             try {
                 const csv_1 = csvData.replace(/^\s*\n/gm, "");
                 let lineArray=[];
                 this.parseCSV(csv_1, ",");
             } catch (er) {
-                if (er == "loadError") component.handleLoadError(er);
+                throw {name: "loadError", message: "Error parsing CSV file: " + er.message + ""};
+
             }
         },
         handleLoadError(er) {
-            console.log('Handling Load Error', er.errorMessage)
             this.loading = false;
             this.error = true;
-            this.errorMessage = er.errorMessage;
+            this.errorMessage = er.message;
         },
         
         
@@ -87,7 +89,7 @@ export default {
                         this.$emit('dataRead')
                     })
             } catch (er) {
-                if (er == "loadError") component.handleLoadError(er);
+                throw {name: "loadError", message: "Error parsing CSV file: " + er.message + ""};
             }
         },
        

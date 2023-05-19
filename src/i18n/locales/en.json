@@ -97,7 +97,9 @@
     "msg6": "Report a problem",
     "msg7": "Anonymize data",
     "msg8": "Submit",
-    "msg9": "Report a problem"
+    "msg9": "Report a problem",
+    "msg10": "If you encounter a problem with this test analysis, please report it. Please include a description of the problem and, if possible, an anonymized version of your file.",
+    "msg11": "You can generate an anonymized version of your file with the button below."
   },
   "Score": {
     "h2": "Score Distribution",

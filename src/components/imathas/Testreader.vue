@@ -25,11 +25,13 @@
 <script>
 import Context from "@/components/Context.vue"
 import Reader from "@/components/Reader.vue"
-import { TestObject, Question, Line, ReaderErrors } from "@/util/Reader";
+import { TestObject, Question, Line} from "@/util/Reader";
+import ReaderErrors from "@/util/ReaderErrors";
 
 export default {
     name: "IMathASTestreader",
     emits: ["testRead"],
+    mixins: [ReaderErrors],
     data() {
         return {
             ShowUpload: true,
@@ -41,6 +43,7 @@ export default {
     },
     methods: {
         handleData() {
+            const component=this;
             //this.lineArray = data;
             try {
                 // 5. table2test
@@ -49,10 +52,10 @@ export default {
                 this.$emit("testRead",Test);
                 //console.log('Testreader emitted testRead at', JSON.parse(JSON.stringify(this.$root.$data.Test)))
                 this.loading = false;
-                this.Error.type = "loaded";
+                //this.Error.type = "loaded";
             } catch (er) {
-                //if (er == "loadError") component.handleLoadError();
-                if (er == "processError") component.handleProcessError();
+                console.log("Error in handleData: ", er);
+                this.handleProcessError(er);
             }
         },
         table2Test() {
@@ -65,7 +68,7 @@ export default {
                 // Making up Test.questions
                 // getQuestions returns the array of column nrs for the questionscores
                 let qCols = this.getQuestions(Test,headings);
-                if (qCols.length == 0) throw "processError";
+                if (qCols.length == 0) throw {name: "processError", message: "No questions found"};
                 Test.setMaxScore = this.getMaxScore(Test);
                 Test.studentsNr = table.length - 2;
                 for (let i = 2; i < table.length; i++) {
@@ -84,10 +87,8 @@ export default {
                     Test.studentNameLines.push(lineItems);
                 }
                 return Test;
-                //this.$root.$data.Test = Test;
             } catch (err) {
-                //throw "processError";
-                console.log('TR-70:', err)
+                throw {name: "processError", message:"Error making Test: " + err.message };
             }
         },
         makeQuestion(Test,cNr) {
@@ -101,7 +102,7 @@ export default {
                 Test.questions.push(qq);
                 return qq;
             } catch (err) {
-                throw "processError";
+                throw {name: "processError", message:"Error making question in column " + cNr.toString()};
             }
 
         },
@@ -140,8 +141,7 @@ export default {
                 Test.questionsNr = Test.questions.length;
                 return qPkt;
             } catch (er) {
-                //throw "processError";
-                console.log('TR-109:', er)
+                throw {name: "processError", message:"Error getting questions headings: " + er.message };
             }
         },
         groupData(qRoot, headings) {

@@ -13,7 +13,7 @@
     <v-btn icon :disabled="disabled['layout']" :title="layoutTitle" @click="toggleLayout">
       <v-icon :icon="layoutIcon" :color="layoutColor" />
     </v-btn>
-    <v-btn icon :disabled="disabled['report']" :title="$t('Toolbar.report')">
+    <v-btn icon :disabled="disabled['report']" :to="systemPath + '/problem'" :title="$t('Toolbar.report')">
       <v-icon icon="mdi-file-document-alert" />
     </v-btn>
   </v-toolbar>

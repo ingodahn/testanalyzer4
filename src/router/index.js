@@ -28,6 +28,14 @@ const routes = [
     },
   },
   {
+    path: '/:system/problem',
+    name: "Problem",
+    component: () => import('@/views/ProblemView.vue'),
+    meta: {
+      layout: 'Default',
+    },
+  },
+  {
     path: "/:system",
     name: "system",
     component: () => import('@/views/SystemView.vue'),
