@@ -23,9 +23,10 @@
 </template>
 
 <script>
+import axios from "axios";
 import Context from "@/components/Context.vue"
 import Reader from "@/components/Reader.vue"
-import { TestObject, Question, Line} from "@/util/Reader";
+import { TestObject, Question, Line } from "@/util/Reader";
 import ReaderErrors from "@/util/ReaderErrors";
 
 export default {
@@ -41,15 +42,46 @@ export default {
         Context,
         Reader,
     },
+    
+    created: function () {
+        let q = this.$route.query,
+            component = this,
+            callPath = document.referrer.substring(
+                0,
+                document.referrer.indexOf("course")
+            );
+        if (
+            Object.prototype.hasOwnProperty.call(q, "cid") &&
+            Object.prototype.hasOwnProperty.call(q, "aid")
+        ) {
+            let csvScript =
+                Object.prototype.hasOwnProperty.call(q, "ui") && q.ui == "2"
+                    ? "course/gb-aidexport2.php?aid="
+                    : "course/gb-aidexport.php?aid=";
+            var params = new URLSearchParams();
+            params.append("options", "Export");
+            params.append("pts", "1");
+            params.append("ba", "1");
+            axios.post(callPath + csvScript + q.aid + "&cid=" + q.cid, params).then(
+                result => {
+                    this.handleData(result.data);
+                },
+                () => {
+                    component.handleProcessError();
+                }
+            );
+        }
+    },
+    
     methods: {
         handleData() {
-            const component=this;
+            const component = this;
             //this.lineArray = data;
             try {
                 // 5. table2test
                 const Test = this.table2Test();
                 //  6. Emit signal (or modify Test object's parts?)
-                this.$emit("testRead",Test);
+                this.$emit("testRead", Test);
                 //console.log('Testreader emitted testRead at', JSON.parse(JSON.stringify(this.$root.$data.Test)))
                 this.loading = false;
                 //this.Error.type = "loaded";
@@ -60,15 +92,15 @@ export default {
         },
         table2Test() {
             try {
-                const Test=new TestObject("IMathAS");
-                Test.adaptOptions={groups: []};
+                const Test = new TestObject("IMathAS");
+                Test.adaptOptions = { groups: [] };
                 //const table=this.lineArray;
                 const table = this.$root.$data.lineArray;
                 const headings = table[0];
                 // Making up Test.questions
                 // getQuestions returns the array of column nrs for the questionscores
-                let qCols = this.getQuestions(Test,headings);
-                if (qCols.length == 0) throw {name: "processError", message: "No questions found"};
+                let qCols = this.getQuestions(Test, headings);
+                if (qCols.length == 0) throw { name: "processError", message: "No questions found" };
                 Test.setMaxScore = this.getMaxScore(Test);
                 Test.studentsNr = table.length - 2;
                 for (let i = 2; i < table.length; i++) {
@@ -88,10 +120,10 @@ export default {
                 }
                 return Test;
             } catch (err) {
-                throw {name: "processError", message:"Error making Test: " + err.message };
+                throw { name: "processError", message: "Error making Test: " + err.message };
             }
         },
-        makeQuestion(Test,cNr) {
+        makeQuestion(Test, cNr) {
             try {
                 let table = this.$root.$data.lineArray,
                     qTitle = table[0][cNr],
@@ -102,11 +134,11 @@ export default {
                 Test.questions.push(qq);
                 return qq;
             } catch (err) {
-                throw {name: "processError", message:"Error making question in column " + cNr.toString()};
+                throw { name: "processError", message: "Error making question in column " + cNr.toString() };
             }
 
         },
-        getQuestions(Test,headings) {
+        getQuestions(Test, headings) {
             try {
                 let table = this.$root.$data.lineArray,
                     // qPkt gets the column numbers of the questionscores
@@ -121,7 +153,7 @@ export default {
                 while (cNr < headings.length) {
                     if (headings[cNr].match(regexQ)) {
                         qPkt.push(cNr);
-                        let qq = this.makeQuestion(Test,cNr);
+                        let qq = this.makeQuestion(Test, cNr);
                         let qTitle = qq.name;
                         if (qTitle.match(regexG)) {
                             // getting question number
@@ -141,7 +173,7 @@ export default {
                 Test.questionsNr = Test.questions.length;
                 return qPkt;
             } catch (er) {
-                throw {name: "processError", message:"Error getting questions headings: " + er.message };
+                throw { name: "processError", message: "Error getting questions headings: " + er.message };
             }
         },
         groupData(qRoot, headings) {
@@ -185,7 +217,7 @@ export default {
         },
         // We consider each part of a question group as a separate question
         getMaxScore(Test) {
-                let maxScore = 0;
+            let maxScore = 0;
             Test.questions.forEach(q => {
                 maxScore += q.maxScore;
             });
@@ -193,80 +225,6 @@ export default {
         },
     }
 }
-/*
-function table2Test(table) {
-  try {
-    var Test = {
-      system: "IMathAS",
-      info: "",
-      questionsNr: 0,
-      studentsNr: 0,
-      setMaxScore: "none",
-      questions: [],
-      studentNameLines: []
-    };
-    const headings = table[0];
-    console.log("headings:", headings);
-    let qCols = getQuestions1();
-    console.log('getQuestions:', qCols)
-    
-  } catch (err){
-    //throw "processError";
-    console.log('TR-70:',err)
-  }
-  // getQuestions returns the array of column nrs for the questionscores
-  function getQuestions() {
-    try {
-      let qPkt = new Array(),
-        questionsNr = 0,
-        cNr = 0,
-        regex = /Points \((\d+) possible\)/;
-      while (cNr < headings.length) {
-        if (headings[cNr].match(/^Question/)) {
-          let qq = new Question(headings[cNr]);
-          var ms = regex.exec(table[1][cNr])[1];
-          qq.maxScore = parseInt(ms);
-          qPkt.push(cNr);
-          Test.questions.push(qq);
-          questionsNr++;
-          cNr = cNr + 2;
-        } else {
-          cNr++;
-        }
-      }
-      Test.questionsNr = questionsNr;
-      return qPkt;
-    } catch (er) {
-      //throw "processError";
-      console.log('TR-96:',er)
-    }
-  }
-
-  function getMaxScore() {
-    let maxScore = 0,
-      rex = /(Question\s\d+)-/,
-      root = "",
-      ssq = 0;
-    Test.questions.forEach(q => {
-      let qnParts = rex.exec(q.name);
-      if (qnParts) {
-        if (qnParts[1] != root) {
-          maxScore += ssq;
-          root = qnParts[1];
-          ssq = q.maxScore;
-        } else {
-          ssq = Math.max(ssq, q.maxScore);
-        }
-      } else {
-        maxScore += ssq;
-        maxScore += q.maxScore;
-      }
-    });
-    maxScore += ssq;
-    return maxScore;
-  }
-}
-*/
 </script>
 
 <style scoped>

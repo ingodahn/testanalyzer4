@@ -2,7 +2,7 @@
     <tool-bar :disabled="toolbarOptions.disabled" @toggleLayout="toggleLayout"></tool-bar>
 
     <sections-menu :Layout="layout" :ComponentStatus="componentStatus"></sections-menu>
-   
+
     <v-container v-if="layout != 'hints' && questionsNr != 0" id="basics">
         <h2>{{ $t("Test.h21") }}</h2>
         <p>
@@ -34,7 +34,6 @@
     <Discriminator :ScoredSorted="scoredSorted" :Questions="questions" :ComponentStatus="componentStatus" :Layout="layout"
         @warnLevel="setWarnLevel">
     </Discriminator>
-    
 </template>
 
 <script>
