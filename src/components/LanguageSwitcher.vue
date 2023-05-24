@@ -42,8 +42,6 @@ export default {
   },
   methods: {
     async selectLanguage(item) {
-      console.log('Locale:', this.locale)
-      console.log('Selected item', item);
       const newLocale = item
       await Tr.switchLanguage(newLocale)
       /*

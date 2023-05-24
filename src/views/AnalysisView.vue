@@ -112,7 +112,6 @@ export default {
             window.scrollTo(0, 0);
         },
         warnLevel: function (c) {
-            console.log("warnLevel", c, this.componentStatus[c])
             return this.componentStatus[c];
         },
         setWarnLevel(component, level) {

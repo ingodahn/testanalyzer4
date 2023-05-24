@@ -105,7 +105,6 @@ export class Question {
   // and then the average of these averages -
   //this prevents individual students with many attempts from dominating the statistics
   getStudentScoreAvg(questionScore) {
-    //console.log("getStudentScoreAvg", questionScore, this.studentScoreAvg)
     if (this.studentScoreAvg[questionScore] == "none") {
       let ssa = Object.values(this.studentScores);
       let sz = 0,
@@ -296,7 +295,6 @@ export class TestObject {
     this.studentsNr = (this.Mode.multiLine) ? Object.keys(this.students).length : this.studentLinesNr;
     this.showUpload = false;
     this.showContext = false;
-    console.log('Update finished')
     // Update FINISHED
   }
 

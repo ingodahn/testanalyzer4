@@ -16,7 +16,10 @@
 export default {
   methods: {
     gotoSettings(system) {
-            this.$router.push({ path: '/'+system })
+            //this.$router.push({ path: '/'+system })
+            this.$router.push(
+                { name: 'System', params: { system: system } }
+            )
         }
   }
 }

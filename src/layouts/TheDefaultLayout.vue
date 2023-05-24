@@ -16,7 +16,6 @@ export default defineComponent({
         onScroll(e) {
             if (typeof window === "undefined") return;
             const top = window.pageYOffset || e.target.scrollTop || 0;
-            console.log('top', top)
             this.fab = top > 20;
         },
     },

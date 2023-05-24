@@ -1,5 +1,5 @@
 // Composables
-import { createRouter, createWebHistory, RouterView } from 'vue-router'
+import { createRouter, createWebHistory, createWebHashHistory,RouterView } from 'vue-router'
 
 //import Tr from "@/i18n/translation"
 
@@ -38,7 +38,7 @@ const routes = [
   },
   {
     path: "/:system",
-    name: "system",
+    name: "System",
     component: () => import('@/views/SystemView.vue'),
     meta: {
       layout: 'Default',
@@ -71,7 +71,8 @@ const routes = [
 
 const router = createRouter({
   //In i18n tutorial: history: createWebHistory(import.meta.env.VITE_BASE_URL),
-  history: createWebHistory(process.env.BASE_URL),
+  //history: createWebHistory(process.env.BASE_URL),
+  history: createWebHashHistory(),
   routes,
 })
 

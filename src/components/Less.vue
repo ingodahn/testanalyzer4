@@ -158,7 +158,7 @@ export default {
       }
       var hint50 = "<p><b>" + this.$t("Less.hint0") + ":</b> ";
       if (qsl > 0 && l50l == 0) {
-        const frage = this.$tc("Less.question1", qsl);
+        const frage = this.$t("Less.question1", qsl);
         hint50 += this.$t("hint50x", [frage]);
         return hint50;
       }

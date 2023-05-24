@@ -10,8 +10,9 @@ import { fileURLToPath, URL } from 'node:url'
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  base: '/testanalyzer/',
   optimizeDeps: {
-    include: ['@intlify/vite-plugin-vue-i18n']
+    include: ['vue', 'vue-router','intlify/vite-plugin-vue-i18n']
   },
   build: {
     rollupOptions: {
@@ -54,5 +55,8 @@ export default defineConfig({
   },
   server: {
     port: 3000,
+    fs: {
+      strict: false
+    }
   },
 })

@@ -31,19 +31,16 @@ export default {
     },
     methods: {
         gotoAnalysis() {
-            console.log('TestReader emitted testRead at', JSON.parse(JSON.stringify(this.$root.$data.Test)))
             this.$router.push({ name: "Analysis" })
         },
         gotoSettings(Test) {
             Test.update();
             this.$root.$data.Test = Test
-            console.log('TestReader emitted testRead for Settings at', JSON.parse(JSON.stringify(this.$root.$data.Test)))
             this.$router.push({ name: "Settings" })
         },
     },
     computed: {
         toolbarOptions() {
-            console.log('toolbarOptions', this.Test)
             const options = {
                 disabled: {
                     drawer: true,

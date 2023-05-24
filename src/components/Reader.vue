@@ -33,9 +33,22 @@ export default {
             lineArray: null
         };
     },
+    props: {
+        data: {
+            type: String,
+            default: ""
+        },
+        type: {
+            type: String,
+            default: "csv"}
+    },
+    mounted() {
+        if (this.data) {
+            this.handleData(this.data);
+        }
+    },
     methods: {
         handleDrop: function (e) {
-            console.log('Handling Drop')
             let component = this;
             try {
                 e.stopPropagation();
@@ -45,7 +58,8 @@ export default {
                     f = files[0],
                     csv;
                 let type = f.name.split(".").pop();
-                if (!type.match(/csv/i)) throw {name: "loadError", message: "File must be a CSV file"};
+                const filetypeRegex = new RegExp(this.type, "i");
+                if (!type.match(filetypeRegex)) throw {name: "loadError", message: "File must be a "+this.type+" file"};
                 var reader = new FileReader();
                 reader.onload = e => {
                         // 1. Getting file

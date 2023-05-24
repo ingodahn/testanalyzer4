@@ -45,7 +45,6 @@ export default {
                 this.writeCSV(this.LineArray, ",", "imathas_anonymous.csv");
 
             } catch (er) {
-                console.log(er);
                 this.anonymizeError = { name: "anonymizeError", message: "Error anonymizing CSV file: " + er.message + "" };
             }
         }

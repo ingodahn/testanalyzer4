@@ -18,7 +18,7 @@
                 {{ $t("IMathAS.p2") }}
             </p>
         </div>
-        <reader @dataRead="handleData"></reader>
+        <reader @dataRead="handleData" :data="data" :type="type" :key="data.length"></reader>
     </v-container>
 </template>
 
@@ -28,6 +28,7 @@ import Context from "@/components/Context.vue"
 import Reader from "@/components/Reader.vue"
 import { TestObject, Question, Line } from "@/util/Reader";
 import ReaderErrors from "@/util/ReaderErrors";
+import csv from 'csvtojson';
 
 export default {
     name: "IMathASTestreader",
@@ -36,13 +37,15 @@ export default {
     data() {
         return {
             ShowUpload: true,
+            data: "",
+            type: 'csv'
         }
     },
     components: {
         Context,
         Reader,
     },
-    
+
     created: function () {
         let q = this.$route.query,
             component = this,
@@ -64,15 +67,15 @@ export default {
             params.append("ba", "1");
             axios.post(callPath + csvScript + q.aid + "&cid=" + q.cid, params).then(
                 result => {
-                    this.handleData(result.data);
+                    this.data=result.data;
                 },
-                () => {
-                    component.handleProcessError();
+                (er) => {
+                    component.handleProcessError(er);
                 }
             );
         }
     },
-    
+
     methods: {
         handleData() {
             const component = this;
@@ -82,11 +85,9 @@ export default {
                 const Test = this.table2Test();
                 //  6. Emit signal (or modify Test object's parts?)
                 this.$emit("testRead", Test);
-                //console.log('Testreader emitted testRead at', JSON.parse(JSON.stringify(this.$root.$data.Test)))
                 this.loading = false;
                 //this.Error.type = "loaded";
             } catch (er) {
-                console.log("Error in handleData: ", er);
                 this.handleProcessError(er);
             }
         },
@@ -120,7 +121,8 @@ export default {
                 }
                 return Test;
             } catch (err) {
-                throw { name: "processError", message: "Error making Test: " + err.message };
+                //throw { name: "processError", message: "Error making Test: " + err.message };
+                throw { name: "processError", message: "Test: " + err.message };
             }
         },
         makeQuestion(Test, cNr) {
