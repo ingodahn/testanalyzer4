@@ -2,6 +2,7 @@
 import vue from '@vitejs/plugin-vue'
 import VueI18nPlugin from '@intlify/unplugin-vue-i18n/vite'
 import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
+//import legacy from '@vitejs/plugin-legacy'
 
 // Utilities
 import { resolve, dirname } from 'node:path'
@@ -12,7 +13,7 @@ import { fileURLToPath, URL } from 'node:url'
 export default defineConfig({
   base: '/testanalyzer/',
   optimizeDeps: {
-    include: ['vue', 'vue-router','intlify/vite-plugin-vue-i18n']
+    include: ['vue', 'vue-router','@intlify/vite-plugin-vue-i18n']
   },
   build: {
     rollupOptions: {
@@ -22,6 +23,11 @@ export default defineConfig({
     },
   },
   plugins: [
+    /*
+    legacy({
+      targets: ['defaults', 'not IE 11']
+    }),
+    */
     vue({
       template: { transformAssetUrls }
     }),
