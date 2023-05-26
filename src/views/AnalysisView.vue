@@ -34,6 +34,8 @@
     <Discriminator :ScoredSorted="scoredSorted" :Questions="questions" :ComponentStatus="componentStatus" :Layout="layout"
         @warnLevel="setWarnLevel">
     </Discriminator>
+
+    <Grouping id="grouping" :Layout="layout" :ScoredSorted="scoredSorted"></Grouping>
 </template>
 
 <script>
@@ -48,6 +50,7 @@ import Attempts from "@/components/Attempts.vue";
 import BestStudents from "@/components/BestStudents.vue";
 import QuestionStatistics from "@/components/QuestionStatistics.vue";
 import Discriminator from "@/components/Discriminator.vue";
+import Grouping from "@/components/Grouping.vue";
 
 export default {
     name: "AnalysisView",
@@ -62,7 +65,8 @@ export default {
         Attempts,
         BestStudents,
         QuestionStatistics,
-        Discriminator
+        Discriminator,
+        Grouping
     },
     data() {
         return {

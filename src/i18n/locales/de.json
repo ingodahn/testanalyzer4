@@ -207,6 +207,20 @@
   "Player": {
     "q": "Fragen"
   },
+  "Group": {
+    "h0": "Group",
+    "h1": "Alle Studierenden",
+    "h2": "Name",
+    "h3": "Punktzahl",
+    "h5": "Gruppen mit Studierenden mit möglichst ähnlicher Punktzahl",
+    "h6": "Gruppen mit Studierenden mit möglichst unterschiedlicher Punktzahl",
+    "h7": "Keine Gruppen",
+    "summary": "Ca. {0} Studierende in jeder von {1} Gruppen, wobei die Studierenden innerhalb jeder Gruppe möglichst {2} Punktzahlen haben.",
+    "similar": "ähnliche",
+    "different": "unterschiedliche",
+    "size": "Gruppengröße",
+    "structure": "Gruppenstruktur"
+  },
   "Footer": {
     "license": "Lizenz: <a style='color: white;' href='https://creativecommons.org/licenses/by-sa/3.0/de/' target='_blank'  >CC-BY-SA 3.0</a>"
   }

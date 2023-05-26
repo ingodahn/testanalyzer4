@@ -207,6 +207,20 @@
   "Player": {
     "q": "Questions"
   },
+  "Group": {
+    "h0": "Group",
+    "h1": "All Students",
+    "h2": "Name",
+    "h3": "Score",
+    "h5": "Groups with students of similar scores",
+    "h6": "Groups with students of different scores",
+    "h7": "No groups",
+    "summary": "Ca. {0} students in each of {1} groups with students of {2} scores.",
+    "similar": "similar",
+    "different": "different",
+    "size": "Size of Groups",
+    "structure": "Group Structure"   
+  },
   "Footer": {
     "license": "License: <a style='color: white;' href='https://creativecommons.org/licenses/by-sa/3.0/' target='_blank'  >CC-BY-SA 3.0</a>"
   }
