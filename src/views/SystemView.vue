@@ -48,13 +48,15 @@ export default {
                     settings: false,
                     analysis: false,
                     layout: false,
+                    grouping:false,
                     report: false
                 }
             }
             if (!this.Test) {
                 options.disabled.settings = true
                 options.disabled.analysis = true
-                options.disabled.layout = true
+                options.disabled.layout = true,
+                options.disabled.grouping = true
             }
             return options
         }

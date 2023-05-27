@@ -15,6 +15,7 @@ export default {
       lineArray: null,
       Test: null,
       Error: null,
+      ScoredSorted: null,
       Config: {
         systems: [
           "IMathAS"

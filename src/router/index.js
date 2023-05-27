@@ -37,6 +37,14 @@ const routes = [
     },
   },
   {
+    path: '/:system/grouping',
+    name: "Grouping",
+    component: () => import('@/views/GroupingView.vue'),
+    meta: {
+      layout: 'Default',
+    },
+  },
+  {
     path: "/:system",
     name: "System",
     component: () => import('@/views/SystemView.vue'),
@@ -45,29 +53,6 @@ const routes = [
     },
   },
 ]
-
-/*
-const routes = [
-  {
-    path: '/:locale?',
-    //component: RouterView,
-    component: () => import('@/layouts/default/Default.vue'),
-    beforeEnter: Tr.routeMiddleware,
-    children: [
-      {
-        path: '',
-        name: 'home',
-        component: HomeView
-      },
-      {
-        path: 'system',
-        name: 'system',
-        component: () => import('@/views/SystemView.vue')
-      }
-    ]
-  }
-]
-*/
 
 const router = createRouter({
   //In i18n tutorial: history: createWebHistory(import.meta.env.VITE_BASE_URL),

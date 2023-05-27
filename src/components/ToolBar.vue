@@ -13,6 +13,9 @@
     <v-btn icon :disabled="disabled['layout']" :title="layoutTitle" @click="toggleLayout">
       <v-icon :icon="layoutIcon" :color="layoutColor" />
     </v-btn>
+    <v-btn icon :disabled="disabled['grouping']" :title="groupingTitle" :to="systemPath + '/grouping'">
+      <v-icon icon="mdi-account-multiple" />
+    </v-btn>
     <v-btn icon :disabled="disabled['report']" :to="systemPath + '/problem'" :title="$t('Toolbar.report')">
       <v-icon icon="mdi-file-document-alert" />
     </v-btn>
@@ -32,6 +35,7 @@ export default {
         settings: true,
         analysis: true,
         layout: true,
+        grouping: true,
         report: true
       }
     }
@@ -106,7 +110,10 @@ export default {
         default:
           return 'warning';
       }
-    }
+    },
+    groupingTitle () {
+      return this.$t('Toolbar.grouping');
+    },
   }
 }
 </script>

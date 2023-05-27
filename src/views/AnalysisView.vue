@@ -34,8 +34,9 @@
     <Discriminator :ScoredSorted="scoredSorted" :Questions="questions" :ComponentStatus="componentStatus" :Layout="layout"
         @warnLevel="setWarnLevel">
     </Discriminator>
-
+<!--
     <Grouping id="grouping" :Layout="layout" :ScoredSorted="scoredSorted"></Grouping>
+-->
 </template>
 
 <script>
@@ -101,6 +102,7 @@ export default {
                     settings: false,
                     analysis: true,
                     layout: false,
+                    grouping: false,
                     report: false
                 },
             },
@@ -110,7 +112,9 @@ export default {
             loading: false
         };
     },
-
+    created () {
+        this.$root.$data.ScoredSorted = this.scoredSorted;
+    },
     methods: {
         toTop() {
             window.scrollTo(0, 0);

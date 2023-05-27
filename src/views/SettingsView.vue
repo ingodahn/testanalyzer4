@@ -34,6 +34,7 @@ export default {
                     settings: true,
                     analysis: false,
                     layout: true,
+                    grouping: true,
                     report: false
                 }
             }

@@ -1,9 +1,6 @@
 <template>
     <v-container>
         <v-row>
-            <h2>Grouping</h2>
-        </v-row>
-        <v-row>
             <v-card class="ma-auto">
                 <v-card-title>Group Settings</v-card-title>
                 <v-card-actions>
@@ -20,7 +17,7 @@
             <template v-for="i in groupCount">
                 <v-col cols="12" md="6" lg="4" xl="3">
                     <v-card>
-                        <v-card-title v-if="groupCount > 1">Group {{ i }}</v-card-title>
+                        <v-card-title v-if="groupCount > 1">{{ $t('Group.h0') }} {{ i }}</v-card-title>
                         <v-card-title v-else>{{ $t('Group.h1') }}</v-card-title>
                         <v-card-subtitle>&empty; {{ avgGroupScore(groups[i - 1]) }}</v-card-subtitle>
                         <v-card-text>
@@ -53,10 +50,6 @@
 export default {
     name: "Grouping",
     props: {
-        ScoredSorted: {
-            type: Array,
-            default: () => []
-        },
         Layout: {
             type: String,
             default: 'all'
@@ -66,9 +59,12 @@ export default {
         return {
             grouping: [],
             groupingBy: 'similar',
-            groupSize: this.ScoredSorted.length,
+            groupSize: 0,
             groupByItems: [{ title: this.$t('Group.h5'), value: 'similar' }, { title: this.$t('Group.h6'), value: 'different' }]
         }
+    },
+    created() {
+        this.groupSize = this.studentsNr;
     },
     methods: {
         avgGroupScore(group) {
@@ -82,7 +78,7 @@ export default {
     },
     computed: {
         studentsNr() {
-            return this.ScoredSorted.length;
+            return this.scoredSorted.length;
         },
         groupSizes() {
             let itemsArray = [{ title: this.$t('Group.h7'), value: this.studentsNr }]
@@ -95,7 +91,6 @@ export default {
             return this.$t('Group.size');
         },
         groupCount() {
-            console.log('groupCount', this.studentsNr, this.groupSize)
             return Math.floor(this.studentsNr / this.groupSize);
         },
         groupDescription() {
@@ -106,25 +101,34 @@ export default {
         groupStructure() {
             return this.$t('Group.structure');
         },
+        scoredSorted() {
+            // We remove duplicate students and sort ascending by totalScore
+            let myScoredSorted = [], myStudents = [], ScoredSorted = this.$root.$data.ScoredSorted;
+            for (let i = ScoredSorted.length - 1; i >= 0; i--) {
+                if (myStudents.indexOf(ScoredSorted[i].realName) == -1) {
+                    myStudents.push(ScoredSorted[i].realName);
+                    myScoredSorted.push(ScoredSorted[i]);
+                }
+            }
+            return myScoredSorted;
+        },
         groups() {
-            console.log('ScoredSorted', this.ScoredSorted)
             const groups = [];
             const sn = this.studentsNr;
             const gn = this.groupCount;
             const gs = this.groupSize;
             let gr = sn % gn;
-            console.log('sn', sn, 'gn', gn, 'gs', gs, 'gr', gr)
-            if (this.groupSize == this.studentsNr) return [this.ScoredSorted];
+            if (this.groupSize == this.studentsNr) return [this.scoredSorted];
             if (this.groupingBy == 'similar') {
                 let i = 0;
                 for (let g = 0; g < gn; g++) {
                     const group = [];
                     for (let s = 0; s < gs; s++) {
-                        group.push(this.ScoredSorted[i]);
+                        group.push(this.scoredSorted[i]);
                         i++;
                     }
                     if (gr > 0) {
-                        group.push(this.ScoredSorted[i]);
+                        group.push(this.scoredSorted[i]);
                         i++;
                         gr--;
                     }
@@ -134,16 +138,14 @@ export default {
                 for (let g = 0; g < gn; g++) {
                     const group = [];
                     for (let s = 0; s < gs; s++) {
-                        group.push(this.ScoredSorted[g + s * gn]);
+                        group.push(this.scoredSorted[g + s * gn]);
                     }
                     groups.push(group);
                 }
                 for (let s = 0; s < gr; s++) {
-                    groups[s].push(this.ScoredSorted[gn * gs + s]);
+                    groups[s].push(this.scoredSorted[gn * gs + s]);
                 }
             }
-
-            console.log('groups', groups)
             return groups;
         },
         groupHeaders() {

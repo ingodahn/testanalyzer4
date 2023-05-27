@@ -43,6 +43,7 @@ export default {
           settings: true,
           analysis: true,
           layout: true,
+          grouping: true,
           report: true
         },
       },

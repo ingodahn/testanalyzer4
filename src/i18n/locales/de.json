@@ -20,7 +20,8 @@
     "analysis": "Test-Analyse",
     "hints": "Nur Hinweise anzeigen",
     "all": "Alles anzeigen",
-    "report": "Problem melden"
+    "report": "Problem melden",
+    "grouping": "Studierende und Gruppen"
   },
   "Test": {
     "title": "Test-Analyse",
@@ -208,7 +209,7 @@
     "q": "Fragen"
   },
   "Group": {
-    "h0": "Group",
+    "h0": "Gruppe",
     "h1": "Alle Studierenden",
     "h2": "Name",
     "h3": "Punktzahl",

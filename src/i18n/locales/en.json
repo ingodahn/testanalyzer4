@@ -20,7 +20,8 @@
     "analysis": "Test-Analyse",
     "hints": "Show hints only",
     "all": "Show all",
-    "report": "Report a problem"
+    "report": "Report a problem",
+    "grouping": "Students and groups"
   },
   "Test": {
     "title": "Test Analysis",
@@ -219,7 +220,7 @@
     "similar": "similar",
     "different": "different",
     "size": "Size of Groups",
-    "structure": "Group Structure"   
+    "structure": "Group Structure"
   },
   "Footer": {
     "license": "License: <a style='color: white;' href='https://creativecommons.org/licenses/by-sa/3.0/' target='_blank'  >CC-BY-SA 3.0</a>"
