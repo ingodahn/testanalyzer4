@@ -18,9 +18,12 @@ export default {
     system() {
       const system = this.$route.params.system
       if (this.$root.$data.Config.systems.includes(system)) {
-        return system
-      } else {
-        return ''
+        switch (system) {
+          case 'imathas':
+            return 'IMathAS'
+          default:
+            return ''
+        }
       }
     },
   },

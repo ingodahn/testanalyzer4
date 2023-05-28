@@ -11,7 +11,10 @@ import { fileURLToPath, URL } from 'node:url'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: '/testanalyzer/',
+  //For netmath server
+  base: '/services/testanalyzer/',
+  // for dahn-research server
+  // base: '/testanalyzer/',
   optimizeDeps: {
     include: ['vue', 'vue-router','@intlify/vite-plugin-vue-i18n']
   },

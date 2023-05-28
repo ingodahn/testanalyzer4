@@ -1,6 +1,6 @@
 <template>
     <tool-bar :disabled="toolbarOptions.disabled"></tool-bar>
-    <imathas-testreader v-if="system == 'IMathAS'" @testRead="gotoSettings"></imathas-testreader>
+    <imathas-testreader v-if="system == 'imathas'" @testRead="gotoSettings"></imathas-testreader>
 </template>
 
 <script>

@@ -1,11 +1,11 @@
 <template>
-    <v-container class="collapsed-text">"
-        <div class="collapsed-text__title">
+    <v-container class="collapsed-text">
+        <div class="collapsed-text__title" @click="isCollapsed = !isCollapsed">
                 <h2>
                     <slot name="title"></slot>
                 </h2>
                 <v-spacer></v-spacer>
-                <v-btn icon @click="isCollapsed = !isCollapsed">
+                <v-btn icon >
                     <v-icon v-if="isCollapsed">mdi-chevron-down</v-icon>
                     <v-icon v-else>mdi-chevron-up</v-icon>
                 </v-btn>

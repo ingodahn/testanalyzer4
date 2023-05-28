@@ -6,7 +6,7 @@
     <nav>
         <v-btn class="hvr-grow"
            color="primary"
-           large @click="gotoSettings('IMathAS')" >
+           large @click="gotoSettings('imathas')" >
           IMathAS
         </v-btn>
     </nav>
@@ -16,7 +16,6 @@
 export default {
   methods: {
     gotoSettings(system) {
-            //this.$router.push({ path: '/'+system })
             this.$router.push(
                 { name: 'System', params: { system: system } }
             )

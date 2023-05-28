@@ -67,11 +67,11 @@ export default {
         if (
             Object.prototype.hasOwnProperty.call(q, "cid") &&
             Object.prototype.hasOwnProperty.call(q, "aid")
-        ) {
-            let csvScript =
-                Object.prototype.hasOwnProperty.call(q, "ui") && q.ui == "2"
-                    ? "course/gb-aidexport2.php?aid="
-                    : "course/gb-aidexport.php?aid=";
+        ) { // We assume the new UI, the testanalyzer isn't linked from the old UI 
+            let csvScript = "course/gb-aidexport2.php?aid=";
+                //Object.prototype.hasOwnProperty.call(q, "ui") && q.ui == "2"
+                //   ? "course/gb-aidexport2.php?aid="
+                //    : "course/gb-aidexport.php?aid=";
             var params = new URLSearchParams();
             params.append("options", "Export");
             params.append("pts", "1");

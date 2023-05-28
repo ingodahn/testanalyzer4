@@ -11,19 +11,23 @@
             <v-btn class="hvr-grow" color="primary" large @click="gotoAnalysis()">{{ $t("Settings.continue" )}}</v-btn>
         </nav>
         </p>
-        <adapt v-if="adaptable" />
+        <imathas-adapt v-if="system=='imathas' && adaptable" />
         <control-center v-if="layout != 'hints'" id="controlCenter" :Layout="layout"></control-center>
     </v-container>
 </template>
 
 <script>
+import { defineAsyncComponent } from 'vue'
 import ToolBar from '@/components/ToolBar.vue'
-import Adapt from '@/components/imathas/Adapt.vue'
 import ControlCenter from '@/components/ControlCenter.vue'
+const ImathasAdapt= defineAsyncComponent(
+    () => import("@/components/imathas/Adapt.vue")
+)
 export default {
     name: 'SettingsView',
     data() {
         return {
+            system: null,
             Test: this.$root.$data.Test,
             Mode: this.$root.$data.Test.Mode,
             layout: 'all',
@@ -40,9 +44,17 @@ export default {
             }
         }
     },
+    mounted() {
+        const mySystem = this.$route.params.system
+        if (this.$root.$data.Config.systems.includes(mySystem)) {
+            this.system = mySystem
+        } else {
+            this.$router.push("/")
+        }
+    },
     components: {
         ToolBar,
-        Adapt,
+        ImathasAdapt,
         ControlCenter
     },
     methods: {

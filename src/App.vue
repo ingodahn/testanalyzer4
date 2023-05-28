@@ -18,7 +18,7 @@ export default {
       ScoredSorted: null,
       Config: {
         systems: [
-          "IMathAS"
+          "imathas"
         ],
         contact: 'dahn@dahn-research.eu'
       }
