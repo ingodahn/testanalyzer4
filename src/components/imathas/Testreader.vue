@@ -1,29 +1,39 @@
 <template>
-    <context></context>
     <v-container>
 
         <div v-if="ShowUpload">
-            <h2>
-                {{ $t("IMathAS.data") }}
-
-                <v-btn color="primary"
-                    onclick="location.href='https://dahn-research.eu/TestAnalyzerSampleData/TestdatenIMathAS.csv'"
-                    class="hvr-grow">
-                    {{ $t("IMathAS.demo") }}
-                </v-btn>
-            </h2>
-            <p v-html="$t('IMathAS.p1')"></p>
-            <img class="center" src="./assets/csvEinstellung.png" />
-            <p>
-                {{ $t("IMathAS.p2") }}
-            </p>
+            <collapsed-text>
+                <template #title>
+                    {{ $t('Test.context') }}
+                </template>
+                <template #default>
+                    <context></context>
+                </template>
+            </collapsed-text>
+            <collapsed-text>
+                <template #title>
+                    {{ $t("Test.data") }}
+                </template>
+                <template #default>
+                    <p v-html="$t('IMathAS.p1')"></p>
+                    <img class="center" src="./assets/csvEinstellung.png" />
+                </template>
+            </collapsed-text>
         </div>
+        <p>
+            {{ $t("IMathAS.p2") }}
+        </p>
         <reader @dataRead="handleData" :data="data" :type="type" :key="data.length"></reader>
+        <v-btn color="primary"
+            onclick="location.href='https://dahn-research.eu/TestAnalyzerSampleData/TestdatenIMathAS.csv'" class="hvr-grow">
+            {{ $t("IMathAS.demo") }}
+        </v-btn>
     </v-container>
 </template>
 
 <script>
 import axios from "axios";
+import CollapsedText from "@/components/CollapsedText.vue";
 import Context from "@/components/Context.vue"
 import Reader from "@/components/Reader.vue"
 import { TestObject, Question, Line } from "@/util/Reader";
@@ -42,6 +52,7 @@ export default {
         }
     },
     components: {
+        CollapsedText,
         Context,
         Reader,
     },
@@ -67,12 +78,17 @@ export default {
             params.append("ba", "1");
             axios.post(callPath + csvScript + q.aid + "&cid=" + q.cid, params).then(
                 result => {
-                    this.data=result.data;
+                    this.data = result.data;
                 },
                 (er) => {
                     component.handleProcessError(er);
                 }
             );
+        }
+    },
+    computed: {
+        p0test() {
+            return this.$t('Test.p1') + "<b>Bold</b> "
         }
     },
 

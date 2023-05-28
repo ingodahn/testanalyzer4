@@ -35,17 +35,19 @@
     "p3b": "Datenschutzhinweis:",
     "p3": "Diese Webseite überträgt nach ihrem Aufruf keine Daten an andere Systeme. Alle Berechnungen erfolgen ausschließlich in Ihrem Browser.",
     "p4": "<b>Bitte bachten Sie:</b> Es wird keinerlei Garantie übernommen. Hinweise auf Probleme und Wünsche zur Verbesserung der Seite sind jedoch <a href='mailto:dahn[at]dahn-research.eu'>ausdrücklich erwünscht</a>.",
-    "p5": "Der Test hat {0} Fragen. Es liegen Daten von {1} Studierenden vor. Maximal können {2} Punkte erreicht werden."
+    "p5": "Der Test hat {0} Fragen. Es liegen Daten von {1} Studierenden vor. Maximal können {2} Punkte erreicht werden.",
+    "context": "Über die Test-Analyse",
+    "data": "Woher kommen die Daten?"
   },
   "Selector": {
     "h2": "Bitte wählen Sie Ihr System",
     "p1": "Falls Sie <i>WAMAP</i> oder <i>MyOpenMath</i> nutzen, so wählen Sie <b><i>IMathAS</i></b>."
   },
   "IMathAS": {
-    "data": "Daten",
+    "data": "Woher kommen die Daten?",
     "demo": "Demo-Daten",
     "p1": "Testergebnisse finden Sie im Gradebook von IMathAS (bzw. WAMAP/MyOPenMath). Sie erreichen das Gradebook, wenn Sie auf das Zahnrad neben dem Test klicken und dann <i>Noten</i> auswählen. Auf der dann erscheinenden Seite gibt es unten den Link <i>Export Student Answer Details</i>. Klicken Sie darauf und nehmen Sie die Einstellungen genau so vor, wie auf diesem Bild gezeigt.",
-    "p2": "Ziehen Sie die so erstellte csv-Datei mit der Maus in diese Webseite auf die Fläche unten.",
+    "p2": "Ziehen Sie die csv-Datei mit Ihren Daten mit der Maus in diese Webseite auf die Fläche unten.",
     "p3": "Ziehen Sie die csv-Datei hier hin.",
     "adaptGroups": "Dieser Test enthält keine Fragengruppe. | Der Test enthält eine Fragengruppe: | Der Test enthält %{count} Gruppen von Fragen:",
     "adaptGroupItem": "Jeder Student hat höchstens %{ nrSelected} von den %{ nrQuestions } Fragen dieser Gruppe versucht. Dabei wurden höchstens %{ achievedScore } Punkte erreicht. Angenommene maximale Punktzahl für diese Gruppe:",
@@ -213,6 +215,7 @@
     "h1": "Alle Studierenden",
     "h2": "Name",
     "h3": "Punktzahl",
+    "h4": "Über Arbeitsgruppen",
     "h5": "Gruppen mit Studierenden mit möglichst ähnlicher Punktzahl",
     "h6": "Gruppen mit Studierenden mit möglichst unterschiedlicher Punktzahl",
     "h7": "Keine Gruppen",
@@ -220,7 +223,9 @@
     "similar": "ähnliche",
     "different": "unterschiedliche",
     "size": "Gruppengröße",
-    "structure": "Gruppenstruktur"
+    "structure": "Gruppenstruktur",
+    "settings": "Gruppen bilden",
+    "description": "<p>Manche didaktischen Szenarien, z.B. Projektarbeit oder <a href='https://www.e-teaching.org/lehrszenarien/vorlesung/inverted_classroom/index_html' target='_blank'>inverted classroom</a>, erfordern die Bildung von studentischen Arbeitsgruppen. Im Idealfall ergänzen sich die Kompetenzen der Studierenden in den Gruppen, so dass sie sich gegenseitig helfen können. Die Gruppen sollten aber auch nicht so groß sein, dass sich einzelne Studierende darin verstecken können. Schließlich ist auch zu bedenken, dass der Betreuungsaufwand mit der Anzahl der Gruppen steigt.</p><p>Wenn die Studierenden in den einzelnen Gruppen im Test <em>unterschiedliche</em> Punktzahlen erreicht haben, so können sie sich eher gegenseitig helfen.</p> <p>Haben die Studierenden in den Gruppen <em>ähnliche</em> Punktzahlen erreichet, so werden die Gruppen mit schwächeren Studierenden mehr Hilfe von Ihnen benötigen. Bei einer solchen Einteilung kann es zweckmäßig sein, den Gruppen unterschiedliche Aufgaben zu stellen, die an den Leistungsstand der Gruppenmitglieder angepasst sind.</p> <p>Die Effektivität einer Arbeitsgruppe hängt auch vom Verhältnis der Gruppenmitglieder zueinander ab. Deshalb kann es sinnvoll sein, den Studierenden zu Beginn der Gruppenarbeit die Möglichkeit zu geben, sich gegenseitig kennenzulernen und ggf. die Gruppe zu wechseln.</p>"
   },
   "Footer": {
     "license": "Lizenz: <a style='color: white;' href='https://creativecommons.org/licenses/by-sa/3.0/de/' target='_blank'  >CC-BY-SA 3.0</a>"

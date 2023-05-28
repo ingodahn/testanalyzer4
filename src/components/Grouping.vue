@@ -1,14 +1,23 @@
 <template>
     <v-container>
         <v-row>
+            <collapsed-text>
+                <template #title>{{ $t('Group.h4') }}</template>
+                <template #default>
+                    <div v-html="$t('Group.description')" />
+                </template>
+            </collapsed-text>
+        </v-row>
+        <v-row>
             <v-card class="ma-auto">
-                <v-card-title>Group Settings</v-card-title>
+                <v-card-title>{{ $t('Group.settings') }}</v-card-title>
                 <v-card-actions>
                     <v-select v-model="groupSize" :items="groupSizes" :label="sizeOfGroups" />
                     <v-select v-model="groupingBy" :items="groupByItems" :label="groupStructure" v-if="groupCount > 1" />
                 </v-card-actions>
                 <v-card-text v-if="groupCount > 1">
                     {{ groupDescription }}
+
                 </v-card-text>
             </v-card>
         </v-row>
@@ -47,6 +56,7 @@
 </template>
 
 <script>
+import CollapsedText from '@/components/CollapsedText.vue'
 export default {
     name: "Grouping",
     props: {
@@ -55,10 +65,13 @@ export default {
             default: 'all'
         }
     },
+    components: {
+        CollapsedText
+    },
     data() {
         return {
             grouping: [],
-            groupingBy: 'similar',
+            groupingBy: 'different',
             groupSize: 0,
             groupByItems: [{ title: this.$t('Group.h5'), value: 'similar' }, { title: this.$t('Group.h6'), value: 'different' }]
         }

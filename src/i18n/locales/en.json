@@ -35,17 +35,19 @@
     "p3b": "Privacy Policy:",
     "p3": "This web site does not transmit any data to other systems when loaded. All calculations are done in your browser.",
     "p4": "<b>Please note:</b> This software comes with no guarantee whatsoever. Nevertheless, bug reports and suggestions for improvement <a href='mailto:dahn[at]dahn-research.eu'>are encouraged</a>.",
-    "p5": "The test has {0} questions. There are data from {1} students. A maximum of {2} points can be achieved."
+    "p5": "The test has {0} questions. There are data from {1} students. A maximum of {2} points can be achieved.",
+    "context": "About the Test Analysis",
+    "data": "How can I obtain the required data?"
   },
   "Selector": {
     "h2": "Please, select your system",
     "p1": "Users of <i>WAMAP</i> or <i>MyOpenMath</i>: Please select <b><i>IMathAS</i></b>."
   },
   "IMathAS": {
-    "data": "Data",
+    "data": "How can I obtain the required data?",
     "demo": "Demo-Data",
     "p1": "You can find test results in the gradebook of IMathAS (resp. WAMAP/MyOpenMath). You can access the gradebook by clicking on the gear icon aside of the test and then select <i>Grades</i>. At the bottom of the following page there is a link <i>Export Student Answer Details</i>. Click it and make the export settings as shown in this image.",
-    "p2": "Drop the generated csv file with the mouse on the area below.",
+    "p2": "Drop the csv file with your data with the mouse on the area below.",
     "p3": "Drop the csv file here.",
     "adaptGroups": "This test has no question groups. | This test has one group of questions: | This test has %{count} groups of questions:",
     "adaptGroupItem": "Each student attempted at most %{ nrSelected} out of %{ nrQuestions } questions from this group. At most %{ achievedScore } points have been achieved. It is assumed that the maximum possible score for this group is:",
@@ -213,6 +215,7 @@
     "h1": "All Students",
     "h2": "Name",
     "h3": "Score",
+    "h4": "About Student Working Groups",
     "h5": "Groups with students of similar scores",
     "h6": "Groups with students of different scores",
     "h7": "No groups",
@@ -220,7 +223,10 @@
     "similar": "similar",
     "different": "different",
     "size": "Size of Groups",
-    "structure": "Group Structure"
+    "structure": "Group Structure",
+    "settings": "Partitioning into Groups",
+    "description": "<p>MSome scenarios, e.g. working in projects or <a href='https://creately.com/blog/education/what-is-a-flipped-classroom/' target='_blank'>flipped classrooms</a> require the formation of student working groups. Ideally, the competencies of the students complement each other in the group and students can get help from other group members when needed. However the groups should not be so large that students can hide in them. Finally, it should also be borne in mind that the amount of required support increases with the number of groups.</p><p>If students in each group have achieved <em>different</em> scores in the test they are more likely to help each other.</p> <p>If the students in each of the groups have <em>similar</em> scores, the groups with weaker students will need more support. With such a division, it can be useful to set different tasks for the groups, which are adapted to the performance level of the group members.</p> <p>The effectiveness of a working group also depends on the relationship between the group members. It can therefore make sense to give the students the opportunity at the beginning of the group work to get to know each other and, if necessary, to change the group.</p>"
+    
   },
   "Footer": {
     "license": "License: <a style='color: white;' href='https://creativecommons.org/licenses/by-sa/3.0/' target='_blank'  >CC-BY-SA 3.0</a>"
