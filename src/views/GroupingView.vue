@@ -20,7 +20,9 @@ export default {
                     file: false,
                     settings: false,
                     analysis: false,
-                    layout: true,
+                    allLayout: true,
+                    hintsLayout: true,
+                    printLayout: true,
                     grouping: true,
                     report: false
                 }

@@ -47,7 +47,9 @@ export default {
                     file: true,
                     settings: false,
                     analysis: false,
-                    layout: false,
+                    allLayout: false,
+                    hintsLayout: false,
+                    printLayout: false,
                     grouping:false,
                     report: false
                 }
@@ -55,7 +57,9 @@ export default {
             if (!this.Test) {
                 options.disabled.settings = true
                 options.disabled.analysis = true
-                options.disabled.layout = true,
+                options.disabled.allLayout = true,
+                options.disabled.hintsLayout = true,
+                options.disabled.printLayout = true,
                 options.disabled.grouping = true
             }
             return options

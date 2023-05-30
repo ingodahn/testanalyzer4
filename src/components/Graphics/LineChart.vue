@@ -50,7 +50,6 @@ export default {
   },
   computed: {
     myStyles: function () {
-      console.log("width: " + this.width)
       return {
         width: "100%",
         //width: "50%",

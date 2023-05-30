@@ -37,7 +37,9 @@ export default {
                     file: false,
                     settings: true,
                     analysis: false,
-                    layout: true,
+                    allLayout: true,
+                    hintsLayout: true,
+                    printLayout: true,
                     grouping: true,
                     report: false
                 }

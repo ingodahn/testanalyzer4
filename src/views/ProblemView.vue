@@ -16,7 +16,7 @@
       <p>{{ $t('Problem.msg10') }}</p>
     </v-row>
   </v-container>
-  <imathas-anonymizer v-if="system == 'IMathAS' &&LineArray && LineArray.length > 0"></imathas-anonymizer>
+  <imathas-anonymizer v-if="system == 'IMathAS' && LineArray && LineArray.length > 0"></imathas-anonymizer>
   <v-container>
     <v-row>
       <v-btn link color="green" :href="contact">{{ $t('Problem.msg8') }}</v-btn>
@@ -29,7 +29,7 @@
 import { defineAsyncComponent } from 'vue'
 import ToolBar from '@/components/ToolBar.vue'
 const ImathasAnonymizer = defineAsyncComponent(
-    () => import("@/components/imathas/Anonymizer.vue")
+  () => import("@/components/imathas/Anonymizer.vue")
 )
 
 export default {
@@ -42,14 +42,16 @@ export default {
           file: false,
           settings: true,
           analysis: true,
-          layout: true,
+          allLayout: true,
+          hintsLayout: true,
+          printLayout: true,
           grouping: true,
           report: true
         },
       },
       Error: this.$root.$data.Error,
       LineArray: this.$root.$data.lineArray,
-      contact: 'mailto://'+this.$root.$data.Config.contact,
+      contact: 'mailto://' + this.$root.$data.Config.contact,
     }
   },
   components: {

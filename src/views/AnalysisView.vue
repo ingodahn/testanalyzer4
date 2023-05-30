@@ -13,29 +13,29 @@
     </v-container>
     <control-center v-if="layout == 'print'" Layout="print">
     </control-center>
-    
+
     <score-distribution :ScoredSorted="scoredSorted" :TotalScore="Test.setMaxScore" :Questions="questions"
         :ComponentStatus="componentStatus" :Layout="layout" @warnLevel="setWarnLevel">
     </score-distribution>
 
     <More id="more" :Score="score" :ComponentStatus="componentStatus" :Layout="layout" @warnLevel="setWarnLevel"></More>
-    
+
     <Less id="less" :Score="score" :ComponentStatus="componentStatus" :Layout="layout" @warnLevel="setWarnLevel"></Less>
-    
+
     <Attempts id="attempts" :Questions="questions" :ComponentStatus="componentStatus" :Layout="layout"
         @warnLevel="setWarnLevel">
     </Attempts>
-    
+
     <BestStudents id="best" :ScoredSorted="scoredSorted" :Questions="questions" :ComponentStatus="componentStatus"
         :Layout="layout" @warnLevel="setWarnLevel"></BestStudents>
-    
+
     <QuestionStatistics id="questionStatistics" v-if="layout != 'hints'" :Layout="layout">
     </QuestionStatistics>
-    
+
     <Discriminator :ScoredSorted="scoredSorted" :Questions="questions" :ComponentStatus="componentStatus" :Layout="layout"
         @warnLevel="setWarnLevel">
     </Discriminator>
-<!--
+    <!--
     <Grouping id="grouping" :Layout="layout" :ScoredSorted="scoredSorted"></Grouping>
 -->
 </template>
@@ -102,7 +102,9 @@ export default {
                     file: false,
                     settings: false,
                     analysis: true,
-                    layout: false,
+                    allLayout: true,
+                    hintsLayout: false,
+                    printLayout: false,
                     grouping: false,
                     report: false
                 },
@@ -113,7 +115,7 @@ export default {
             loading: false
         };
     },
-    created () {
+    created() {
         this.$root.$data.ScoredSorted = this.scoredSorted;
     },
     methods: {
@@ -130,9 +132,12 @@ export default {
         warnColor: function (c) {
             return this.warnLevel(c) == "warn_1" ? "warning" : "none";
         },
-        
+
         toggleLayout(layout) {
             this.layout = layout;
+            for (var c in ['all','hints','print']) {
+                this.toolbarOptions.disabled[c+'Layout'] = (c == layout) ? true : false;
+            }   
         },
     },
     watch: {
@@ -223,10 +228,10 @@ export default {
 </script>
 <style>
 @media print {
-  body { 
-    overflow: auto;
-    height: auto;
-    width:auto;
-  }  
+    body {
+        overflow: auto;
+        height: auto;
+        width: auto;
+    }
 }
 </style>

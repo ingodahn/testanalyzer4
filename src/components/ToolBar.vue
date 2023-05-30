@@ -10,9 +10,20 @@
     <v-btn icon :disabled="disabled['analysis']" :title="$t('Toolbar.analysis')" :to="systemPath + '/analysis'">
       <v-icon icon="mdi-file-chart" />
     </v-btn>
+    <v-btn icon :disabled="disabled['allLayout']" :title="layoutTitle('all')" @click="toggleLayout('all')">
+      <v-icon icon="mdi-tooltip-text" />
+    </v-btn>
+    <v-btn icon :disabled="disabled['hintsLayout']" :title="layoutTitle('hints')" @click="toggleLayout('hints')">
+      <v-icon icon="mdi-alert" />
+    </v-btn>
+    <v-btn icon :disabled="disabled['printLayout']" :title="layoutTitle('print')" @click="toggleLayout('print')">
+      <v-icon icon="mdi-printer" />
+    </v-btn>
+    <!--
     <v-btn icon :disabled="disabled['layout']" :title="layoutTitle" @click="toggleLayout">
       <v-icon :icon="layoutIcon" :color="layoutColor" />
     </v-btn>
+  -->
     <v-btn icon :disabled="disabled['grouping']" :title="groupingTitle" :to="systemPath + '/grouping'">
       <v-icon icon="mdi-account-multiple" />
     </v-btn>
@@ -34,7 +45,9 @@ export default {
         file: true,
         settings: true,
         analysis: true,
-        layout: true,
+        allLayout: true,
+        hintsLayout: true,
+        printLayout: true,
         grouping: true,
         report: true
       }
@@ -49,22 +62,12 @@ export default {
     }
   },
   methods: {
-    toggleLayout() {
-      switch (this.layout) {
-        case 'all':
-          this.layout = 'hints'
-          break;
-        case 'hints':
-          this.layout = 'print'
-          break;
-        case 'print':
-          this.layout = 'all'
-          break;
-        default:
-          this.layout = 'all'
-          break;
-      }
-      this.$emit('toggleLayout', this.layout)
+    layoutTitle(layout) {
+      return this.$t('Toolbar.' + layout);
+    },
+    toggleLayout(L) {
+      this.layout = L;
+      this.$emit('toggleLayout', L)
     },
   },
   computed: {
@@ -75,18 +78,7 @@ export default {
     systemPath() {
       return '/' + this.$route.params.system;
     },
-    layoutTitle() {
-      switch (this.layout) {
-        case 'all':
-          return this.$t('Toolbar.hints');
-        case 'hints':
-          return this.$t('Toolbar.print');
-        case 'print':
-          return this.$t('Toolbar.all');
-        default:
-          return this.$t('Toolbar.hints');
-      }
-    },
+    
     layoutIcon() {
       switch (this.layout) {
         case 'all':
@@ -111,7 +103,7 @@ export default {
           return 'warning';
       }
     },
-    groupingTitle () {
+    groupingTitle() {
       return this.$t('Toolbar.grouping');
     },
   }
