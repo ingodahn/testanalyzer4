@@ -1,5 +1,7 @@
 <template>
-  <Bar :data="chartData" :options="chartOptions" />
+  <v-container :style="chartStyle">
+  <Bar :data="chartData" :options="chartOptions"/>
+  </v-container>
 </template>
   
 <script>
@@ -29,8 +31,14 @@ export default {
       type: Object,
       required: true
     },
+    layout: {
+      type: String,
+      default: "all"}
   },
   computed: {
+    chartStyle () {
+      return this.layout == "print" ? "align: center; max-width: 650px;" : "align: center; max.width: 100%;"
+    }
   },
 }
 </script>

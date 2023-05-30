@@ -1,5 +1,5 @@
 <template>
-  <Line :data="chartData" :options="chartOptions" />
+  <Line :data="chartData" :options="chartOptions" :style="myStyles"/>
 </template>
 <script>
 // See vue-charts documentation
@@ -44,6 +44,17 @@ export default {
             beginAtZero: true
           }
         }
+      },
+      width: "1ß00"
+    }
+  },
+  computed: {
+    myStyles: function () {
+      console.log("width: " + this.width)
+      return {
+        width: "100%",
+        //width: "50%",
+        position: 'relative'
       }
     }
   }

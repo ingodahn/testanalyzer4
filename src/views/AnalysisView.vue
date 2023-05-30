@@ -13,6 +13,7 @@
     </v-container>
     <control-center v-if="layout == 'print'" Layout="print">
     </control-center>
+    
     <score-distribution :ScoredSorted="scoredSorted" :TotalScore="Test.setMaxScore" :Questions="questions"
         :ComponentStatus="componentStatus" :Layout="layout" @warnLevel="setWarnLevel">
     </score-distribution>
@@ -220,3 +221,12 @@ export default {
     }
 }
 </script>
+<style>
+@media print {
+  body { 
+    overflow: auto;
+    height: auto;
+    width:auto;
+  }  
+}
+</style>

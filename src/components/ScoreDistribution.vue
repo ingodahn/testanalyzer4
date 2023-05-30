@@ -4,7 +4,7 @@
     </v-container>
     <v-container :class="warnLevel">
         <v-card elevation="20">
-            <BarChart :chartData="studentScoreChart"></BarChart>
+            <BarChart :chartData="studentScoreChart" :layout="Layout"></BarChart>
         </v-card>
     </v-container>
     <v-container v-if="hint" :class="warnLevel">
@@ -24,7 +24,7 @@
 
     <v-container :class="warnLevel">
         <Race id="trackComponent" :ScoredSorted="ScoredSorted" :TotalScore="TotalScore" :Questions="Questions"
-            v-if="Layout == 'all'"></Race>
+            v-if="Layout != 'hints'"></Race>
         <to-top></to-top>
     </v-container>
 </template>

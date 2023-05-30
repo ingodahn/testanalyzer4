@@ -14,6 +14,7 @@
     </div>
     <div v-if="Questions.length != 0">
       <p>{{ msg }}</p>
+      <v-container>
       <ul>
         <li v-for="item in attemptsNrs" :key="item">
           {{ qName(item) }}, {{ $t("Attempts.li") }}
@@ -23,6 +24,7 @@
           ></ListPlayer>
         </li>
       </ul>
+      </v-container>
       <b>{{ $t("Attempts.hint") }} </b>
       <div v-html="hint"></div>
     </div>

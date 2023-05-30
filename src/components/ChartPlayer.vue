@@ -1,6 +1,6 @@
 <template>
   <v-container v-if="playerType == 'player'">
-    <v-card class="chart-containerx" elevation="20">
+    <v-card class="chart-container" elevation="20">
       <v-card-title class="text-center">
         <span>{{ $t("Player.q") }} {{ curGroupStart + 1 }} -
           {{ curGroupEnd }}</span>
@@ -22,7 +22,7 @@
       <LineChart :chartData="ThisChart(curGroupStart, curGroupEnd)"></LineChart>
     </v-card>
   </v-container>
-  <v-container v-else>
+  <v-container v-else style="align: center; max-width: 650px;">
     <v-card class="chart-containerx" elevation="20">
       <v-card-title class="text-center">{{ $t("Player.q") }}</v-card-title>
       <LineChart :chartData="ThisChart(0, Chart.labels.length)"></LineChart>
@@ -135,5 +135,6 @@ export default {
   border: 1px solid hsl(198, 65%, 40%);
   border-radius: 10px;
   box-shadow: -10px 19px 15px silver;
+  max-width: 100%;
 }
 </style>
