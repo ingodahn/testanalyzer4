@@ -40,7 +40,12 @@ export default {
         },
         type: {
             type: String,
-            default: "csv"}
+            default: "csv"
+        },
+        delimiter: {
+            type: String,
+            default: ","
+        }
     },
     mounted() {
         if (this.data) {
@@ -75,7 +80,7 @@ export default {
             try {
                 const csv_1 = csvData.replace(/^\s*\n/gm, "");
                 let lineArray=[];
-                this.parseCSV(csv_1, ",");
+                this.parseCSV(csv_1, this.delimiter);
             } catch (er) {
                 throw {name: "loadError", message: "Error parsing CSV file: " + er.message + ""};
 

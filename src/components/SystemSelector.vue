@@ -9,6 +9,11 @@
            large @click="gotoSettings('imathas')" >
           IMathAS
         </v-btn>
+        <v-btn class="hvr-grow"
+           color="primary"
+           large @click="gotoSettings('ilias')" >
+          ILIAS
+        </v-btn>
     </nav>
   </div>
 </template>
@@ -43,6 +48,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   transition-duration: 0.3s;
   transition-property: transform;
+  margin: 10px;
 }
 
 .hvr-grow:hover,
