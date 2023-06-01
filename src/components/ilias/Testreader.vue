@@ -76,12 +76,10 @@ export default {
                 const Test = new TestObject("ILIAS");
                 //???? Test.adaptOptions = { groups: [] };
                 const table = this.$root.$data.lineArray;
-                console.log('Original table: ', JSON.parse(JSON.stringify(table)))
                 var iliasType = "normal";
                 if (table[0][0] == table[2][0]) {
                     iliasType = "shuffled";
                 }
-                console.log('iliasType: ', iliasType)
                 /* Anonymous test */
                 if (table[0][0] != "Name") this.addNameLogin(table);
                 let rowName = "",
@@ -132,15 +130,14 @@ export default {
                         }
                     }
                 }
-
-                console.log("Test: ", Test)
+                // Ilias files don't contain max scores for individual questions therefore we mus ensure that EditMaxScores is included in ilias-adapt
+                Test.adaptOptions = { questionMaxScore: [] };
                 return Test;
             } catch (err) {
                 throw { name: "processError", message: "Test: " + err.message };
             }
         },
         addNameLogin(table) {
-            console.log("addNameLogin");
             if (table[0][0] == "Zähler") {
                 table[0][0] = "Benutzername";
             } else {
@@ -150,7 +147,6 @@ export default {
             for (let i = 1; i < table.length; i++) {
                 table[i].unshift("Name_" + table[i][0]);
             }
-            console.log("table: ", table);
         },
         // In selected tests an random choice of all questions is presented
         table2TestShuffled(table, Test) {
@@ -214,6 +210,7 @@ export default {
                 return qTitlePos;
             }
         }
+        
     }
 }
 

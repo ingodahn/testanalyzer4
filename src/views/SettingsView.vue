@@ -12,6 +12,7 @@
         </nav>
         </p>
         <imathas-adapt v-if="system=='imathas' && adaptable" />
+        <ilias-adapt v-if="system=='ilias' && adaptable" />
         <control-center v-if="layout != 'hints'" id="controlCenter" :Layout="layout"></control-center>
     </v-container>
 </template>
@@ -22,6 +23,9 @@ import ToolBar from '@/components/ToolBar.vue'
 import ControlCenter from '@/components/ControlCenter.vue'
 const ImathasAdapt= defineAsyncComponent(
     () => import("@/components/imathas/Adapt.vue")
+)
+const IliasAdapt= defineAsyncComponent(
+    () => import("@/components/ilias/Adapt.vue")
 )
 export default {
     name: 'SettingsView',
@@ -57,6 +61,7 @@ export default {
     components: {
         ToolBar,
         ImathasAdapt,
+        IliasAdapt,
         ControlCenter
     },
     methods: {

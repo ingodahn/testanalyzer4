@@ -1,16 +1,9 @@
 <template>
-  <v-container
-    id="discriminator"
-    v-if="Layout != 'hints' || warnLevel == 'warn_1'"
-    :class="warnLevel"
-  >
+  <v-container id="discriminator" v-if="Layout != 'hints' || warnLevel == 'warn_1'" :class="warnLevel">
     <h2>{{ $t("Disc.h2") }}</h2>
     <div v-if="Questions.length > 0">
       <p v-html="$t('Disc.p1')"></p>
-      <div
-        style="text-align: center;"
-        v-if="showDiscriminator && Layout == 'all'"
-      >
+      <div style="text-align: center;" v-if="showDiscriminator && Layout == 'all'">
         <ChartPlayer :Chart="discriminatorChart" :Layout="Layout"></ChartPlayer>
       </div>
 
@@ -20,49 +13,52 @@
         <p>
           {{ $t("Disc.ul") }}
         </p>
-        <ul>
-          <!--
-            <li v-html="$t('Disc.li1')">
-            {{ $t("Disc.li1") }}
-          </li>
-          -->
-          <li>
-            {{ $t("Disc.li1") }}
-          </li>
-          <li>
-            {{ $t("Disc.li2") }}
-          </li>
-          <li v-if="nanHint">
-            {{ $t("Disc.li3") }}
-          </li>
-        </ul>
+        <v-container>
+          <ul>
+            <li>
+              {{ $t("Disc.li1") }}
+            </li>
+            <li>
+              {{ $t("Disc.li2") }}
+            </li>
+            <li v-if="nanHint">
+              {{ $t("Disc.li3") }}
+            </li>
+          </ul>
+        </v-container>
         <div v-if="hintQuestionNames.low.length">
           <p>{{ lowPhrase }} {{ $t("Disc.p3") }}</p>
+          <v-container>
           <ul>
             <li v-for="item in hintQuestionNames.low" :key="item">
               {{ item }}
             </li>
           </ul>
+          </v-container>
         </div>
         <div v-if="hintQuestionNames.zero.length">
           <p>
             {{ zeroPhrase }}
           </p>
+          <v-container>
           <ul>
             <li v-for="item in hintQuestionNames.zero" :key="item">
               {{ item }}
             </li>
           </ul>
+          </v-container>
         </div>
         <div v-if="hintQuestionNames.negative.length">
           <p>
             {{ negativePhrase }}
           </p>
+          <v-container>
           <ul>
             <li v-for="item in hintQuestionNames.negative" :key="item">
               {{ item }}
             </li>
           </ul>
+          </v-container>
         </div>
       </div>
     </div>
@@ -86,11 +82,11 @@ export default {
     };
   },
   emits: ["warnLevel"],
-  mounted () {
-        this.$emit("warnLevel", 'discriminator',this.warnLevel);
-    },
+  mounted() {
+    this.$emit("warnLevel", 'discriminator', this.warnLevel);
+  },
   computed: {
-    discriminatorChart: function() {
+    discriminatorChart: function () {
       var chart = {
         labels: [],
         datasets: []
@@ -110,10 +106,10 @@ export default {
       chart.datasets[0] = discData;
       return chart;
     },
-    QNames: function() {
+    QNames: function () {
       return this.Questions.map(x => x["name"]);
     },
-    Cors: function() {
+    Cors: function () {
       if (!this.Questions.length) return 300;
       let sAll = [],
         sQ = [];
@@ -122,7 +118,7 @@ export default {
       }
       this.ScoredSorted.forEach(stud => {
         sAll.push(stud.totalScore);
-        this.Questions.forEach(function(q, i) {
+        this.Questions.forEach(function (q, i) {
           if (q.answers[stud.realName] == undefined) {
             sQ[i].push(0);
           } else {
@@ -136,7 +132,7 @@ export default {
       }
       return cors;
     },
-    nanHint: function() {
+    nanHint: function () {
       let cors = this.Cors,
         ch = false;
       for (let i = 0; i < cors.length; i++) {
@@ -147,12 +143,12 @@ export default {
       }
       return ch;
     },
-    hintQuestionNames: function() {
+    hintQuestionNames: function () {
       let lowC = [],
         zerC = [],
         negC = [];
       let cl = this.Cors;
-      this.QNames.forEach(function(qn, i) {
+      this.QNames.forEach(function (qn, i) {
         let c = cl[i];
         if (isNaN(c)) return;
         if (c >= 0.29) return;
@@ -168,28 +164,28 @@ export default {
       });
       return { low: lowC, zero: zerC, negative: negC };
     },
-    lowPhrase: function() {
+    lowPhrase: function () {
       return this.$t("Disc.low", this.hintQuestionNames.low.length);
     },
-    zeroPhrase: function() {
+    zeroPhrase: function () {
       return this.$t("Disc.zero", this.hintQuestionNames.zero.length);
     },
-    negativePhrase: function() {
+    negativePhrase: function () {
       return this.$t("Disc.neg", this.hintQuestionNames.negative.length);
     },
-    warnLevel: function() {
+    warnLevel: function () {
       let h = this.hintQuestionNames;
       var s = this.ComponentStatus;
       var ss =
         this.showDiscriminator &&
-        (h.low.length || h.zero.length || h.negative.length)
+          (h.low.length || h.zero.length || h.negative.length)
           ? "warn_1"
           : "warn_0";
       s["discriminator"] = ss;
       return ss;
     },
     // Chart-Funktionen
-    showDiscriminator: function() {
+    showDiscriminator: function () {
       return this.Mode.questionScore != "compulsory" || this.Mode.multiLine
         ? false
         : true;
