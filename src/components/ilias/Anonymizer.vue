@@ -16,7 +16,6 @@
 
 <script>
 import AnonymizerMixin from '@/util/AnonymizerMixin';
-
 export default {
     name: 'IMathASAnonymizer',
     data() {
@@ -32,20 +31,26 @@ export default {
         anonymize: function () {
             try {
                 let firstRows = new Object();
-                for (let lineNr = 2; lineNr < this.LineArray.length; lineNr++) {
+                let shuffled = this.LineArray[0][0] == this.LineArray[2][0];
+                for (let lineNr = 1; lineNr < this.LineArray.length; lineNr++) {
                     let line = this.LineArray[lineNr];
                     let pii = line[0];
                     if (!Object.prototype.hasOwnProperty.call(firstRows, pii))
                         firstRows[pii] = lineNr;
                     let ns = firstRows[pii].toString();
                     line[0] = "Name_" + ns;
-                    //if (line[3].length) line[3] = "anonymized";
+                    line[1] = "k.A.";
+                    if (shuffled) lineNr++;
                 }
                 this.anonymized = true;
-                this.writeCSV(this.LineArray, ",", "imathas_anonymous.csv");
-
+                this.writeCSV(this.LineArray, ";", "ilias_anonymous.csv");
+                return;
             } catch (er) {
-                this.anonymizeError = { name: "anonymizeError", message: "Error anonymizing CSV file: " + er.message + "" };
+                this.anonymizeError = {
+                    name: "anonymizeError",
+                    message: "Error anonymizing CSV file: " + er.message + ""
+                };
+
             }
         }
     },
@@ -54,5 +59,5 @@ export default {
             return this.$t('Problem.msg5')
         }
     }
-}
+}  
 </script>

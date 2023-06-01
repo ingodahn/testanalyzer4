@@ -12,15 +12,17 @@
 import LanguageSwitcher from "@/components/LanguageSwitcher.vue"
 
 export default {
-  components: {LanguageSwitcher },
+  components: { LanguageSwitcher },
   computed: {
-    
+
     system() {
       const system = this.$route.params.system
       if (this.$root.$data.Config.systems.includes(system)) {
         switch (system) {
           case 'imathas':
             return 'IMathAS'
+          case 'ilias':
+            return 'ILIAS'
           default:
             return ''
         }
@@ -36,9 +38,11 @@ export default {
 .apptitle {
   color: white;
 }
+
 v-toolbar-title__content {
   display: flex;
 }
+
 .fixing {
   position: fixed;
   top: 0;

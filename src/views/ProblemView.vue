@@ -17,6 +17,8 @@
     </v-row>
   </v-container>
   <imathas-anonymizer v-if="system == 'IMathAS' && LineArray && LineArray.length > 0"></imathas-anonymizer>
+  <ilias-anonymizer v-if="system == 'ILIAS' && LineArray && LineArray.length > 0"></ilias-anonymizer>
+  
   <v-container>
     <v-row>
       <v-btn link color="green" :href="contact">{{ $t('Problem.msg8') }}</v-btn>
@@ -30,6 +32,9 @@ import { defineAsyncComponent } from 'vue'
 import ToolBar from '@/components/ToolBar.vue'
 const ImathasAnonymizer = defineAsyncComponent(
   () => import("@/components/imathas/Anonymizer.vue")
+)
+const IliasAnonymizer = defineAsyncComponent(
+  () => import("@/components/ilias/Anonymizer.vue")
 )
 
 export default {
@@ -56,7 +61,8 @@ export default {
   },
   components: {
     ToolBar,
-    ImathasAnonymizer
+    ImathasAnonymizer,
+    IliasAnonymizer
   },
   methods: {
   },
