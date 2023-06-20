@@ -23,6 +23,8 @@ export default {
             return 'IMathAS'
           case 'ilias':
             return 'ILIAS'
+          case 'olat':
+            return 'Open OLAT'
           default:
             return ''
         }

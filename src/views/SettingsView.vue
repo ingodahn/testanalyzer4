@@ -11,8 +11,9 @@
             <v-btn class="hvr-grow" color="primary" large @click="gotoAnalysis()">{{ $t("Settings.continue" )}}</v-btn>
         </nav>
         </p>
-        <imathas-adapt v-if="system=='imathas' && adaptable" />
-        <ilias-adapt v-if="system=='ilias' && adaptable" />
+        <imathas-adapt v-if="system=='imathas' && adaptable()" />
+        <ilias-adapt v-if="system=='ilias'" />
+        <olat-adapt v-if="system=='olat'" />
         <control-center v-if="layout != 'hints'" id="controlCenter" :Layout="layout"></control-center>
     </v-container>
 </template>
@@ -26,6 +27,9 @@ const ImathasAdapt= defineAsyncComponent(
 )
 const IliasAdapt= defineAsyncComponent(
     () => import("@/components/ilias/Adapt.vue")
+)
+const OlatAdapt= defineAsyncComponent(
+    () => import("@/components/olat/Adapt.vue")
 )
 export default {
     name: 'SettingsView',
@@ -62,10 +66,12 @@ export default {
         ToolBar,
         ImathasAdapt,
         IliasAdapt,
+        OlatAdapt,
         ControlCenter
     },
     methods: {
         adaptable() {
+            console.log("adaptable", this.Test.adaptOptions)
             return Object.keys(this.Test.adaptOptions).length
         },
         setMode: function (typeval) {

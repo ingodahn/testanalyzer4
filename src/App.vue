@@ -19,7 +19,8 @@ export default {
       Config: {
         systems: [
           "imathas",
-          "ilias"
+          "ilias",
+          "olat"
         ],
         contact: 'dahn@dahn-research.eu'
       }

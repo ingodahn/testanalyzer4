@@ -1,6 +1,11 @@
 <template>
   <div id="maxScores">
-    <h3>{{ $t("EditScores.h3") }}</h3>
+    <h3>{{ $t("EditScores.h3") }}:
+      <v-input style="width: 6em;">
+        <v-text-field type="number" step="0.1" min="0" v-model="Test.setMaxScore"></v-text-field>
+      </v-input>
+    </h3>
+
     <p>
       {{ $t("EditScores.p0") }}
     </p>
@@ -18,7 +23,9 @@
       <tr v-for="(question, index) in Questions" :key="index">
         <td>{{ question.name }}</td>
         <td class="scoreCol">
-          <input type="number" min="0" step="0.1" v-model="question.maxScore" />
+          <v-input style="width: 6em;">
+            <v-text-field type="number" step="0.1" min="0" v-model="question.maxScore"></v-text-field>
+          </v-input>
         </td>
       </tr>
     </table>
@@ -29,7 +36,10 @@
 export default {
   name: "EditMaxScores",
   data() {
-    return {};
+    return {
+      testval: 2,
+      Test: this.$root.$data.Test,
+    };
   },
   props: ["Questions", "CalcMaxScore", "TotalScore"]
 };
@@ -40,13 +50,18 @@ table {
   margin-left: auto;
   margin-right: auto;
 }
+
 .scoreCol {
   text-align: center;
 }
+
 th,
 td {
   border-bottom: 1px solid #ddd;
+  text-align: left;
+  padding: 1em;
 }
+
 input[type="number"] {
   width: 50px;
 }

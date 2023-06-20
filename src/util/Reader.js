@@ -246,6 +246,7 @@ export class TestObject {
     var snlThis = new Object();
     this.studentLinesNr = 0;
     var snlThat = this.studentNameLines;
+    console.log('snlThat', snlThat)
     for (var i = 0; i < snlThat.length; i++) {
       let snli = snlThat[i],
         snlName = snli.lineName,
@@ -278,6 +279,7 @@ export class TestObject {
         this.studentLinesNr++;
       }
     }
+    console.log('snlThis', snlThis)
     let sNames = Object.keys(snlThis);
 
     this.stundentsNr == sNames.length;

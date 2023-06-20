@@ -38,7 +38,6 @@ import Context from "@/components/Context.vue"
 import Reader from "@/components/Reader.vue"
 import { TestObject, Question, Line } from "@/util/Reader";
 import ReaderErrors from "@/util/ReaderErrors";
-import csv from 'csvtojson';
 
 export default {
     name: "IMathASTestreader",
@@ -95,7 +94,6 @@ export default {
     methods: {
         handleData() {
             const component = this;
-            //this.lineArray = data;
             try {
                 // 5. table2test
                 const Test = this.table2Test();

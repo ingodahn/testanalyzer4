@@ -14,6 +14,11 @@
            large @click="gotoSettings('ilias')" >
           ILIAS
         </v-btn>
+        <v-btn class="hvr-grow"
+           color="primary"
+           large @click="gotoSettings('olat')" >
+          Open Olat
+        </v-btn>
     </nav>
   </div>
 </template>

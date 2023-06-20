@@ -2,6 +2,7 @@
     <tool-bar :disabled="toolbarOptions.disabled"></tool-bar>
     <imathas-testreader v-if="system == 'imathas'" @testRead="gotoSettings"></imathas-testreader>
     <ilias-testreader v-if="system == 'ilias'" @testRead="gotoSettings"></ilias-testreader>
+    <olat-testreader v-if="system == 'olat'" @testRead="gotoSettings"></olat-testreader>
 </template>
 
 <script>
@@ -13,12 +14,16 @@ const ImathasTestreader = defineAsyncComponent(
 const IliasTestreader = defineAsyncComponent(
     () => import("@/components/ilias/Testreader.vue")
 )
+const OlatTestreader = defineAsyncComponent(
+    () => import("@/components/olat/Testreader.vue")
+)
 
 export default {
     components: {
         ToolBar,
         ImathasTestreader,
-        IliasTestreader
+        IliasTestreader,
+        OlatTestreader
     },
     data() {
         return {

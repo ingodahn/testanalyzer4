@@ -2,8 +2,10 @@
     <v-container>
         <p>{{ allGroupsText }}</p>
         <v-list>
-            <v-list-item v-for="g in groups" :key="g.name" :title="g.name">{{ groupItemText(g) }} <input type="number" :min="initialMinScores[g.name]" :max="initialMaxScores[g.name]" step="1"
-                    v-model="g.groupMaxScore" /> <b v-if="toCheck(g)">&#8592; edit!</b></v-list-item>
+            <v-list-item v-for="g in groups" :key="g.name" :title="g.name">{{ groupItemText(g) }} <input type="number"
+                    :min="initialMinScores[g.name]" :max="initialMaxScores[g.name]" step="1" v-model="g.groupMaxScore" /> <b
+                    v-if="toCheck(g)">&#8592; edit!</b>
+                </v-list-item>
         </v-list>
         <p>{{ maxScoreText }}.</p>
     </v-container>
