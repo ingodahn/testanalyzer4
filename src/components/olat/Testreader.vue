@@ -71,7 +71,6 @@ export default {
     },
     methods: {
         handleData(type) {
-            console.log("handleData for Olat of type", type)
             this.gotType = type
             const Test = this.table2Test();
             if (type == "xls") {
@@ -79,7 +78,6 @@ export default {
             }
             this.$emit("testRead", Test);
             this.loading = false;
-            console.log("Data handled")
         },
         table2Test() {
             try {
@@ -94,17 +92,15 @@ export default {
                     rowName = "",
                     tl = table.length;
                 if (this.gotType == "xls") tl--;
-                if (this.gotType == "xlsx") Test.setMaxScore=0;
-                console.log('Got type', this.gotType, 'tl', tl)
+                // Test.setMaxScore Maximum score if all atempted in a row got maxScore
+                if (this.gotType == "xlsx") Test.setMaxScore = 0;
                 while (rowNr <= tl) {
                     var line = table[rowNr - 1],
                         lineItems = new Line();
                     rowName = Test.isSelfTest ? line[1] : line[1] + " " + line[2];
                     lineItems.lineName = rowName;
                     lineItems.lineNr = rowNr;
-                    if (this.gotType == "xlsx") {
-                        Test.setMaxScore = Math.max(Test.setMaxScore, Number(line[4]));
-                    }
+                    let rowMaxScore = 0;
                     for (var q1 = 0; q1 < Test.questionsNr; q1++) {
                         var qq = Test.questions[q1];
                         let rowAnswer = new Object();
@@ -127,13 +123,14 @@ export default {
                                 };
                             }
                         }
+                        if (rowAnswer.attempted) rowMaxScore += Test.questions[q1].maxScore;
                         rowAnswer["name"] = qq.name;
                         lineItems.lineAnswers.push(rowAnswer);
                     }
+                    Test.setMaxScore = Math.max(Test.setMaxScore, rowMaxScore);
                     Test.studentNameLines.push(lineItems);
                     rowNr++;
                 }
-                console.log("table2Test", JSON.parse(JSON.stringify(Test)))
                 return Test;
             } catch (err) {
                 throw { name: "processError", message: "Test: " + err.message };

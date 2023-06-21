@@ -179,6 +179,7 @@ export default {
         testStudentScores: function () {
             let studentScores = [];
             let nameArray = Object.keys(this.students);
+            console.log('testStudentScores', this.questions)
 
             if (!this.Mode.multiLine) {
                 nameArray.forEach(sname => {
@@ -214,6 +215,7 @@ export default {
                     });
                 });
             }
+            console.log('studentScores',studentScores)
             return studentScores;
         },
         scoredSorted: function () {

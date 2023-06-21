@@ -17,7 +17,7 @@
 <script>
 import AnonymizerMixin from '@/util/AnonymizerMixin';
 export default {
-    name: 'IMathASAnonymizer',
+    name: 'IliasAnonymizer',
     data() {
         return {
             LineArray: this.$root.$data.lineArray,

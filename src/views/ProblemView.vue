@@ -18,6 +18,7 @@
   </v-container>
   <imathas-anonymizer v-if="system == 'IMathAS' && LineArray && LineArray.length > 0"></imathas-anonymizer>
   <ilias-anonymizer v-if="system == 'ILIAS' && LineArray && LineArray.length > 0"></ilias-anonymizer>
+  <olat-anonymizer v-if="system == 'Open OLAT' && LineArray && LineArray.length > 0"></olat-anonymizer>
   
   <v-container>
     <v-row>
@@ -35,6 +36,10 @@ const ImathasAnonymizer = defineAsyncComponent(
 )
 const IliasAnonymizer = defineAsyncComponent(
   () => import("@/components/ilias/Anonymizer.vue")
+)
+
+const OlatAnonymizer = defineAsyncComponent(
+  () => import("@/components/olat/Anonymizer.vue")
 )
 
 export default {
@@ -62,7 +67,8 @@ export default {
   components: {
     ToolBar,
     ImathasAnonymizer,
-    IliasAnonymizer
+    IliasAnonymizer,
+    OlatAnonymizer
   },
   methods: {
   },
