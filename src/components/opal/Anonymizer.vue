@@ -1,0 +1,3 @@
+<template>
+    Opal Anonymizer
+</template>

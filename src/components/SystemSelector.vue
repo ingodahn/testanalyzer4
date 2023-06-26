@@ -19,6 +19,11 @@
            large @click="gotoSettings('olat')" >
           Open Olat
         </v-btn>
+        <v-btn class="hvr-grow"
+           color="primary"
+           large @click="gotoSettings('opal')" >
+          Open Opal
+        </v-btn>
     </nav>
   </div>
 </template>

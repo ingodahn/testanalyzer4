@@ -25,6 +25,8 @@ export default {
             return 'ILIAS'
           case 'olat':
             return 'Open OLAT'
+          case 'opal':
+            return 'Open OPAL'
           default:
             return ''
         }

@@ -3,6 +3,7 @@
     <imathas-testreader v-if="system == 'imathas'" @testRead="gotoSettings"></imathas-testreader>
     <ilias-testreader v-if="system == 'ilias'" @testRead="gotoSettings"></ilias-testreader>
     <olat-testreader v-if="system == 'olat'" @testRead="gotoSettings"></olat-testreader>
+    <opal-testreader v-if="system == 'opal'" @testRead="gotoSettings"></opal-testreader>
 </template>
 
 <script>
@@ -17,13 +18,17 @@ const IliasTestreader = defineAsyncComponent(
 const OlatTestreader = defineAsyncComponent(
     () => import("@/components/olat/Testreader.vue")
 )
+const OpalTestreader = defineAsyncComponent(
+    () => import("@/components/opal/Testreader.vue")
+)
 
 export default {
     components: {
         ToolBar,
         ImathasTestreader,
         IliasTestreader,
-        OlatTestreader
+        OlatTestreader,
+        OpalTestreader
     },
     data() {
         return {

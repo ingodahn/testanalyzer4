@@ -20,7 +20,8 @@ export default {
         systems: [
           "imathas",
           "ilias",
-          "olat"
+          "olat",
+          "opal"
         ],
         contact: 'dahn@dahn-research.eu'
       }
