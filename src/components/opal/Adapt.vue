@@ -1,3 +1,0 @@
-<template>
-    Opal Adapt
-</template>

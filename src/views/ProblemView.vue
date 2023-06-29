@@ -19,6 +19,7 @@
   <imathas-anonymizer v-if="system == 'IMathAS' && LineArray && LineArray.length > 0"></imathas-anonymizer>
   <ilias-anonymizer v-if="system == 'ILIAS' && LineArray && LineArray.length > 0"></ilias-anonymizer>
   <olat-anonymizer v-if="system == 'Open OLAT' && LineArray && LineArray.length > 0"></olat-anonymizer>
+  <opal-anonymizer v-if="system == 'Open OPAL' && LineArray && LineArray.length > 0"></opal-anonymizer>
   
   <v-container>
     <v-row>
@@ -40,6 +41,10 @@ const IliasAnonymizer = defineAsyncComponent(
 
 const OlatAnonymizer = defineAsyncComponent(
   () => import("@/components/olat/Anonymizer.vue")
+)
+
+const OpalAnonymizer = defineAsyncComponent(
+  () => import("@/components/opal/Anonymizer.vue")
 )
 
 export default {
@@ -68,7 +73,8 @@ export default {
     ToolBar,
     ImathasAnonymizer,
     IliasAnonymizer,
-    OlatAnonymizer
+    OlatAnonymizer,
+    OpalAnonymizer
   },
   methods: {
   },
@@ -76,6 +82,7 @@ export default {
 
     system() {
       const test = this.$root.$data.Test;
+      console.log("system", test.system)
       return (test) ? test.system : 'xxx';
     },
   }

@@ -10,6 +10,7 @@ const ReaderErrors = {
         {
           this.$root.$data.Error=error;
           this.loading = false;
+          console.log(error);
           this.$router.push({ name: "Problem" })
         }
       },

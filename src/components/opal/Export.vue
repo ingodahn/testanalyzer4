@@ -68,7 +68,7 @@
                   weiteres Pop-Up-Fenster
                   <b>Archivierung beendet</b>, bei dem Sie, wenn Sie auf
                   <b>Datei anzeigen</b> klicken, die Möglichkeit haben, die
-                  Testergebnisse als <i>.xls-Datei</i> oder
+                  Testergebnisse als
                   <i>.csv-Datei</i> abzuspeichern.
                 </p>
               </div>

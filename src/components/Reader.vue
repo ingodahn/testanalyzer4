@@ -134,7 +134,7 @@ export default {
                 csv({
                     noheader: true,
                     output: "csv",
-                    delimiter: del
+                    delimiter: "auto"
                 })
                     .fromString(dataString)
                     .then(csvRow => {
