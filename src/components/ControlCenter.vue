@@ -1,6 +1,6 @@
 <template>
   <v-container v-if="Layout == 'print'">
-    <h3>{{ $t("Control.h3") }}</h3>
+    <h2>{{ $t("Control.h3") }}</h2>
     <p></p>
     <div v-html="modeText"></div>
   </v-container>

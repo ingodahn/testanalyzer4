@@ -73,20 +73,13 @@ export default {
                 reader.onload = e => {
                     // 1. Getting file
                     dataString = e.target.result;
-                    console.log('dataString Bytes', dataString.length)
                     this.handleData(dataString);
                 };
                 switch (this.gotType) {
-                    case "xls":
-                        console.log('Reading xls as buffer')
-                        reader.readAsArrayBuffer(f);
-                        break;
                     case "xlsx":
-                        console.log('Reading xlsx as buffer')
                         reader.readAsArrayBuffer(f);
                         break;
                     case "csv":
-                        console.log('Reading csv as text')
                         reader.readAsText(f);
                         break;
                     default:
@@ -116,10 +109,6 @@ export default {
                     case "csv":
                         const csv_1 = dataString.replace(/^\s*\n/gm, "");
                         this.parseCSV(csv_1, this.delimiter);
-                        break;
-                    case "xls":
-                        console.log('Parsing xls')
-                        this.parseXLSX(dataString);
                         break;
                     case "xlsx":
                         this.parseXLSX(this.fixdata(dataString));
@@ -162,7 +151,6 @@ export default {
             try {
                 const workbook = new Excel.Workbook();
                 workbook.xlsx.load(dataBuffer).then(() => {
-                    console.log('loaded',workbook.worksheets.length,'worksheets')
                     const worksheet = workbook.worksheets[0];
                     let A = []
                     for (let i = 1; i <= worksheet.rowCount; i++) {
@@ -174,7 +162,6 @@ export default {
                         }
                         A.push(B)
                     }
-                    console.log('A', A)
                     this.$root.$data.lineArray = A;
                     this.$emit('dataRead', this.gotType)
                 })
@@ -182,29 +169,6 @@ export default {
                 throw { name: "loadError", message: "Error parsing " + this.type + " file: " + er.message + "" };
             }
         },
-        /*
-                parseXLSX: async (dataBuffer,A) => {
-                    try {
-                        console.log("parseXLSX")
-                        // load from buffer
-                        const workbook = new Excel.Workbook();
-                        await workbook.xlsx.load(dataBuffer);
-                        const worksheet = workbook.worksheets[0];
-                        console.log(worksheet.rowCount)
-                        console.log(worksheet.columnCount)
-                        console.log(worksheet.getRow(1).values)
-                        let A=[]
-                        for (let i = 1; i <= worksheet.rowCount; i++) {
-                            A.push(worksheet.getRow(i).values)
-                        }
-                        console.log(A)
-                        
-                                //this.$emit('dataRead')
-                    } catch (er) {
-                        throw { name: "loadError", message: "Error parsing xlsx file: " + er.message + "" };
-                    }
-                },
-        */
         handleDragover(e) {
             e.preventDefault();
             e.stopPropagation();

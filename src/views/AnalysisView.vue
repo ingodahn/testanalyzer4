@@ -2,17 +2,26 @@
     <tool-bar :disabled="toolbarOptions.disabled" @toggleLayout="toggleLayout"></tool-bar>
 
     <sections-menu :Layout="layout" :ComponentStatus="componentStatus"></sections-menu>
-
-    <v-container v-if="layout != 'hints' && questionsNr != 0" id="basics">
-        <h2>{{ $t("Test.h21") }}</h2>
-        <p>
-            {{
-                $t("Test.p5", [questionsNr, Test.studentsNr, Test.setMaxScore])
-            }}
-        </p>
-    </v-container>
-    <control-center v-if="layout == 'print'" Layout="print">
-    </control-center>
+    <v-container>
+<v-card v-if="layout != 'hints' && questionsNr != 0" id="settings" outlined elevation="6">
+    <v-card-title>
+        <h2>{{ $t("Settings.h2") }} <v-btn color="primary" @click="gotoSettings()" v-if="layout!='print'">{{ $t('Control.btn2') }}</v-btn>
+            </h2>
+        </v-card-title>
+    <v-card-text>
+        <v-container id="basics">
+            <h2>{{ $t("Test.h21") }}</h2>
+            <p>
+                {{
+                    $t("Test.p5", [questionsNr, Test.studentsNr, Test.setMaxScore])
+                }}
+            </p>
+        </v-container>
+        <control-center Layout="print">
+        </control-center>
+    </v-card-text>
+</v-card>
+</v-container>
 
     <score-distribution :ScoredSorted="scoredSorted" :TotalScore="Test.setMaxScore" :Questions="questions"
         :ComponentStatus="componentStatus" :Layout="layout" @warnLevel="setWarnLevel">
@@ -122,6 +131,9 @@ export default {
         toTop() {
             window.scrollTo(0, 0);
         },
+        gotoSettings () {
+            this.$router.push({ name: 'Settings' })
+        },
         warnLevel: function (c) {
             return this.componentStatus[c];
         },
@@ -179,8 +191,6 @@ export default {
         testStudentScores: function () {
             let studentScores = [];
             let nameArray = Object.keys(this.students);
-            console.log('testStudentScores', this.questions)
-
             if (!this.Mode.multiLine) {
                 nameArray.forEach(sname => {
                     studentScores.push({
@@ -215,7 +225,6 @@ export default {
                     });
                 });
             }
-            console.log('studentScores',studentScores)
             return studentScores;
         },
         scoredSorted: function () {
@@ -228,7 +237,10 @@ export default {
     }
 }
 </script>
-<style>
+<style scoped>
+#settings {
+    max-width: 80%
+}
 @media print {
     body {
         overflow: auto;

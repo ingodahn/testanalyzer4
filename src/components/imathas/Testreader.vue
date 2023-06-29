@@ -193,7 +193,7 @@ export default {
             }
         },
         groupData(qRoot, headings) {
-            let qData = { name: qRoot, nrQuestions: 0, nrSelected: 0, groupMaxScore: 0, achievedScore: 0 }, table = this.$root.$data.lineArray, groupColumns = new Array()
+            let qData = { name: qRoot, nrQuestions: 0, nrSelected: 0, groupMaxScore: 0, groupCalcMaxScore:0, achievedScore: 0 }, table = this.$root.$data.lineArray, groupColumns = new Array()
             //Get all columns relevant for group
             let qi = 0;
             while (qi < headings.length) {
@@ -210,7 +210,9 @@ export default {
             for (let c = 0; c < groupColumns.length; c++) {
                 let cc = groupColumns[c]
                 let ms = regexP.exec(table[1][cc])[1];
-                groupScores.push(parseInt(ms));
+                let msi=parseInt(ms);
+                qData.groupCalcMaxScore += msi;
+                groupScores.push(msi);
             }
             // How many questions from group have been presented to students and what is the maximum score achieved?
             for (let row = 2; row < table.length; row++) {

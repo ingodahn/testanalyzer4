@@ -28,7 +28,7 @@
       <v-icon icon="mdi-account-multiple" />
     </v-btn>
     <v-btn icon :disabled="disabled['report']" :to="systemPath + '/problem'" :title="$t('Toolbar.report')">
-      <v-icon icon="mdi-file-document-alert" />
+      <v-icon icon="mdi-star-check" />
     </v-btn>
   </v-toolbar>
 </template>
@@ -67,6 +67,27 @@ export default {
     },
     toggleLayout(L) {
       this.layout = L;
+      switch (L) {
+        case 'all':
+          this.disabled['allLayout'] = true;
+          this.disabled['hintsLayout'] = false;
+          this.disabled['printLayout'] = false;
+          break;
+        case 'hints':
+          this.disabled['allLayout'] = false;
+          this.disabled['hintsLayout'] = true;
+          this.disabled['printLayout'] = false;
+          break;
+        case 'print':
+          this.disabled['allLayout'] = false;
+          this.disabled['hintsLayout'] = false;
+          this.disabled['printLayout'] = true;
+          break;
+        default:
+          this.disabled['allLayout'] = true;
+          this.disabled['hintsLayout'] = false;
+          this.disabled['printLayout'] = false;
+      }
       this.$emit('toggleLayout', L)
     },
   },

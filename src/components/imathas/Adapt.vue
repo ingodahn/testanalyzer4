@@ -46,6 +46,7 @@ export default {
             for (let i = 0; i < this.groups.length; i++) {
                 maxScore += this.groups[i].groupMaxScore;
             }
+            Test.setMaxScore = maxScore;
             return maxScore;
         }
     },
@@ -60,7 +61,7 @@ export default {
     mounted() {
         let groups = this.$root.$data.Test.adaptOptions.groups
         for (let i = 0; i < groups.length; i++) {
-            this.initialMaxScores[groups[i].name] = groups[i].groupMaxScore;
+            this.initialMaxScores[groups[i].name] = groups[i].groupCalcMaxScore;
             this.initialMinScores[groups[i].name] = Math.ceil(groups[i].achievedScore);
         }
     }

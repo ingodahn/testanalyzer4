@@ -24,19 +24,19 @@
                     </p>
                     <p>
                         Sie erhalten ein zip-Archiv, in dem Sie nach dem Entpacken u.a. eine
-                        Datei mit der Endung .xls oder ,xlsx vorfinden. Überschreiben Sie diese
+                        Datei mit der Endung ,xlsx vorfinden. Überschreiben Sie diese
                         Datei
                         <u>nicht</u> mit einem anderen Programm, wie etwa einer
-                        Tabellenkalkulation! Ziehen Sie diese xls- oder xlsx-Datei mit der Maus
+                        Tabellenkalkulation! Ziehen Sie diese xlsx-Datei mit der Maus
                         in diese Webseite auf die Fläche unten.
                     </p>
                 </template>
             </collapsed-text>
         </div>
         <v-container>
-            Ziehen Sie die xls- bzw. xlsx-Datei mit Ihren Daten mit der Maus in diese Webseite auf die Fläche unten.
+            Ziehen Sie die xlsx-Datei mit Ihren Daten mit der Maus in diese Webseite auf die Fläche unten.
         </v-container>
-        <reader @dataRead="handleData" :data="data" type="xls|xlsx" :key="data.length"></reader>
+        <reader @dataRead="handleData" :data="data" type="xlsx" :key="data.length"></reader>
         <v-btn color="primary" onclick="location.href='https://dahn-research.eu/TestAnalyzerSampleData/TestdatenOlat.xlsx'"
             class="hvr-grow">
             Demo-Daten
@@ -60,7 +60,7 @@ export default {
         return {
             ShowUpload: true,
             data: "",
-            type: 'xls|xlsx',
+            type: 'xlsx',
             gotType: null,
         }
     },
@@ -73,9 +73,6 @@ export default {
         handleData(type) {
             this.gotType = type
             const Test = this.table2Test();
-            if (type == "xls") {
-                addMaxScores(test.questions, this.legend);
-            }
             this.$emit("testRead", Test);
             this.loading = false;
         },
@@ -91,9 +88,10 @@ export default {
                 var rowNr = 3,
                     rowName = "",
                     tl = table.length;
-                if (this.gotType == "xls") tl--;
                 // Test.setMaxScore Maximum score if all atempted in a row got maxScore
-                if (this.gotType == "xlsx") Test.setMaxScore = 0;
+                Test.setMaxScore = 0;
+                for (var q1 = 0; q1 < Test.questionsNr; q1++)
+                    Test.questions[q1].getMaxScore()
                 while (rowNr <= tl) {
                     var line = table[rowNr - 1],
                         lineItems = new Line();
@@ -104,26 +102,14 @@ export default {
                     for (var q1 = 0; q1 < Test.questionsNr; q1++) {
                         var qq = Test.questions[q1];
                         let rowAnswer = new Object();
-                        switch (this.gotType) {
-                            case "xlsx": {
-                                // In xlsx-Dateien erkennt man unversuchte Aufgaben an einem leeren Punkteeintrag
-                                let scoreVal = Number(line[qPkt[q1]]);
-                                rowAnswer =
-                                    line[qPkt[q1]].length == 0
-                                        ? { attempted: false, score: 0 }
-                                        : { attempted: true, score: scoreVal };
-                                break;
-                            }
-                            default: {
-                                // in xls-Dateien erkennt man unversuchte Aufgaben an einem "n/a" in der auf die Punktspalte folgenden Spalte für die Startzeit oder 0 für die Dauer
-                                let regex = /^n\/a$|^0$/;
-                                rowAnswer = {
-                                    score: Number(line[qPkt[q1]]),
-                                    attempted: line[qPkt[q1] + 1].match(regex) ? false : true
-                                };
-                            }
-                        }
+                        // In xlsx-Dateien erkennt man unversuchte Aufgaben an einem leeren Punkteeintrag
+                        let scoreVal = Number(line[qPkt[q1]]);
+                        rowAnswer =
+                            line[qPkt[q1]].length == 0
+                                ? { attempted: false, score: 0 }
+                                : { attempted: true, score: scoreVal };
                         if (rowAnswer.attempted) rowMaxScore += Test.questions[q1].maxScore;
+                        if (typeof rowMaxScore != "number") throw { name: "processError", message: "No maxScore found-String:"+Test.questions[q1].maxScore };
                         rowAnswer["name"] = qq.name;
                         lineItems.lineAnswers.push(rowAnswer);
                     }
@@ -133,7 +119,7 @@ export default {
                 }
                 return Test;
             } catch (err) {
-                throw { name: "processError", message: "Test: " + err.message };
+                console.log("ProcessError in OLAT-Testreader:", err.message);
             }
 
         },
@@ -154,23 +140,6 @@ export default {
                 }
             }
             return qPkt;
-        },
-        addMaxScores(myQuestions, legend) {
-            try {
-                const regex = /maxValue\s*([\d.]+)/g;
-                var i = 0;
-                var match = true;
-                do {
-                    match = regex.exec(legend);
-                    if (match) {
-                        myQuestions[i].maxScore = Number(match[1]);
-                        i++;
-                    }
-                } while (match);
-                return "ok";
-            } catch (err) {
-                throw { name: "processError", message: "Test: " + err.message };
-            }
         }
     }
 

@@ -1,8 +1,8 @@
 <template>
     <tool-bar :disabled="toolbarOptions.disabled"></tool-bar>
-    <imathas-testreader v-if="system == 'imathas'" @testRead="gotoSettings"></imathas-testreader>
-    <ilias-testreader v-if="system == 'ilias'" @testRead="gotoSettings"></ilias-testreader>
-    <olat-testreader v-if="system == 'olat'" @testRead="gotoSettings"></olat-testreader>
+    <imathas-testreader v-if="system == 'imathas'" @testRead="gotoAnalysis"></imathas-testreader>
+    <ilias-testreader v-if="system == 'ilias'" @testRead="gotoAnalysis"></ilias-testreader>
+    <olat-testreader v-if="system == 'olat'" @testRead="gotoAnalysis"></olat-testreader>
     <opal-testreader v-if="system == 'opal'" @testRead="gotoSettings"></opal-testreader>
 </template>
 
@@ -45,14 +45,21 @@ export default {
         }
     },
     methods: {
+        /*
         gotoAnalysis() {
             this.$router.push({ name: "Analysis" })
         },
+        */
         gotoSettings(Test) {
             Test.update();
             this.$root.$data.Test = Test
             this.$router.push({ name: "Settings" })
         },
+        gotoAnalysis(Test) {
+            Test.update();
+            this.$root.$data.Test = Test
+            this.$router.push({ name: "Analysis" })
+        }
     },
     computed: {
         toolbarOptions() {

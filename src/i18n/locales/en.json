@@ -72,7 +72,7 @@
   "Control": {
     "h3": "Type of Test",
     "btn1": "Hide selection",
-    "btn2": "Change settings",
+    "btn2": "Change",
     "vct1": "Type of Test",
     "vcst1": "The test is ...",
     "vc1": "... mandatory. All students are expected to answer all questions. An unanswered question is scored  the same way as an incorrectly answered question.",
