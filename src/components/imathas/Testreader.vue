@@ -109,7 +109,6 @@ export default {
             try {
                 const Test = new TestObject("IMathAS");
                 Test.adaptOptions = { groups: [] };
-                //const table=this.lineArray;
                 const table = this.$root.$data.lineArray;
                 const headings = table[0];
                 // Making up Test.questions

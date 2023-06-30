@@ -52,6 +52,7 @@ export default {
     emits: ["dataRead"],
     mounted() {
         if (this.data) {
+            this.gotType = this.type;
             this.handleData(this.data);
         }
     },
