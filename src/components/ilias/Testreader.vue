@@ -72,7 +72,7 @@ export default {
             }
         },
         table2Test() {
-            try {
+            
                 const Test = new TestObject("ILIAS");
                 //???? Test.adaptOptions = { groups: [] };
                 const table = this.$root.$data.lineArray;
@@ -133,9 +133,7 @@ export default {
                 // Ilias files don't contain max scores for individual questions therefore we mus ensure that EditMaxScores is included in ilias-adapt
                 Test.adaptOptions = { questionMaxScore: [] };
                 return Test;
-            } catch (err) {
-                throw { name: "processError", message: "Test: " + err.message };
-            }
+            
         },
         addNameLogin(table) {
             if (table[0][0] == "Zähler") {

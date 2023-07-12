@@ -123,7 +123,6 @@
     },
     computed: {
       studentScores: function() {
-        console.log("Race ScoredSorted", this.ScoredSorted)
         var studentScores = [];
         var diff = this.right - this.left;
         for (var i = 0; i < this.ScoredSorted.length; i++) {

@@ -53,6 +53,18 @@ export default {
         gotoAnalysis(Test) {
             Test.update();
             this.$root.$data.Test = Test
+            if (!Test.questions.length) {
+                throw {
+                    name: "processError",
+                    message: "No questions found in the test.",
+                };
+            }
+            if (! parseFloat(Test.setMaxScore)) {
+                throw {
+                    name: "processError",
+                    message: "Could not determine maximum score for test.",
+                };
+            }
             this.$router.push({ name: "Analysis" })
         }
     },
@@ -67,7 +79,7 @@ export default {
                     allLayout: false,
                     hintsLayout: false,
                     printLayout: false,
-                    grouping:false,
+                    grouping: false,
                     report: false
                 }
             }
@@ -75,9 +87,9 @@ export default {
                 options.disabled.settings = true
                 options.disabled.analysis = true
                 options.disabled.allLayout = true,
-                options.disabled.hintsLayout = true,
-                options.disabled.printLayout = true,
-                options.disabled.grouping = true
+                    options.disabled.hintsLayout = true,
+                    options.disabled.printLayout = true,
+                    options.disabled.grouping = true
             }
             return options
         }
