@@ -1,3 +1,8 @@
+# Testanalyzer
+This system analyzes results of online tests from IMathAS, ILIAS, Open OLAT and Open OPAL.
+
+It has ben developed with Vue 3 and Vuetify 3
+
 # base
 
 ## Project setup
