@@ -34,6 +34,7 @@
     "p2": "The quality of a test question can only be evaluated with respect to the objective of the test - e.g. a test done primarily to motivate students will usually provide a higher success rate than a diagnostic test which aims to determine the limits of knowledge, skills, and competencies of the students. It remains up to you, the instructor, to evaluate the given recommendations, to pick up what suits your teaching.",
     "p3b": "Privacy Policy:",
     "p3": "This web site does not transmit any data to other systems when loaded. All calculations are done in your browser.",
+    "p3c": "The source code is available in the master branch of the repository https://github.com/ingodahn/testanalyzer4 .",
     "p4": "<b>Please note:</b> This software comes with no guarantee whatsoever. Nevertheless, bug reports and suggestions for improvement <a href='mailto:dahn[at]dahn-research.eu'>are encouraged</a>.",
     "p5": "The test has {0} questions. There are data from {1} students. A maximum of {2} points can be achieved.",
     "context": "About the Test Analysis",
