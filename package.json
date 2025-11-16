@@ -2,6 +2,7 @@
   "name": "testanalyzer4",
   "version": "0.0.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build --base ./",
@@ -9,7 +10,6 @@
     "lint": "eslint . --fix --ignore-path .gitignore"
   },
   "dependencies": {
-    "@intlify/unplugin-vue-i18n": "^0.10.0",
     "@mdi/font": "7.0.96",
     "axios": "^1.7.4",
     "chart.js": "^4.2.1",
@@ -20,17 +20,18 @@
     "roboto-fontface": "*",
     "vue": "^3.2.13",
     "vue-chartjs": "^5.2.0",
-    "vue-i18n": "^9.2.2",
+    "vue-i18n": "^9.14.5",
     "vue-router": "^4.0.0",
-    "vuetify": "^3.2.2",
     "webfontloader": "^1.0.0"
   },
   "devDependencies": {
+    "@intlify/unplugin-vue-i18n": "^2.0.0",
     "@vitejs/plugin-vue": "^5.2.1",
     "eslint": "^8.22.0",
     "eslint-plugin-vue": "^9.3.0",
     "sass": "^1.55.0",
     "vite": "^6.0.11",
-    "vite-plugin-vuetify": "^1.0.0-alpha.12"
+    "vite-plugin-vuetify": "^2.1.2",
+    "vuetify": "^3.10.11"
   }
 }

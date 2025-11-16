@@ -16,7 +16,9 @@ export default defineConfig({
   // for dahn-research server
   base: '/testanalyzer/',
   optimizeDeps: {
-    include: ['vue', 'vue-router','@intlify/vite-plugin-vue-i18n']
+    include: ['vue', 'vue-router'
+      //, '@intlify/vite-plugin-vue-i18n'
+    ]
   },
   build: {
     rollupOptions: {
@@ -67,5 +69,5 @@ export default defineConfig({
     fs: {
       strict: false
     }
-  },
+  }
 })

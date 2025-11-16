@@ -9,7 +9,9 @@
  * @param {App} app
  */
 export function registerLayouts(app) {
-  const layouts = import.meta.globEager('./*.vue');
+  // ALT (funktioniert nicht mehr):
+  //const layouts = import.meta.globEager('./*.vue');
+  const layouts = import.meta.glob('./*.vue', { eager: true })
 
   Object.entries(layouts).forEach(([, layout]) => {
     app.component(layout?.default?.name, layout?.default);

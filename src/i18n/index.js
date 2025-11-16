@@ -10,7 +10,8 @@ function getStartingLocale() {
   if (supportedLocalesInclude(browserLocale)) {
     return browserLocale;
   } else {
-    return process.env.VUE_APP_I18N_LOCALE || "en";
+    //return process.env.VUE_APP_I18N_LOCALE || "en";
+    return "en"; // Entfernen Sie process.env.VUE_APP_I18N_LOCALE
   }
 }
 
@@ -19,11 +20,14 @@ const startingLocale = getStartingLocale();
 export default createI18n({
   //locale: import.meta.env.VITE_DEFAULT_LOCALE,
   locale: startingLocale,
-  fallbackLocale: import.meta.env.VITE_FALLBACK_LOCALE,
-  legacy: false,
+  //fallbackLocale: import.meta.env.VITE_FALLBACK_LOCALE,
+  fallbackLocale: "en",
+  legacy: true,
   globalInjection: true,
   messages: {
     en,
     de
-  }
+  },
+  missingWarn: false,
+  fallbackWarn: false
 })
