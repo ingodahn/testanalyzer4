@@ -25,7 +25,7 @@
         </p>
         <reader @dataRead="handleData" :data="data" :type="type" :key="data.length"></reader>
         <v-btn color="primary"
-            onclick="location.href='https://dahn-research.eu/TestAnalyzerSampleData/TestdatenIMathAS.csv'" class="hvr-grow">
+            onclick="location.href='https://service.dahn-research.de/TestAnalyzerSampleData/TestdatenIMathAS.csv'" class="hvr-grow">
             {{ $t("IMathAS.demo") }}
         </v-btn>
     </v-container>

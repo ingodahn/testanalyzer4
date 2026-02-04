@@ -37,7 +37,7 @@
             Ziehen Sie die xlsx-Datei mit Ihren Daten mit der Maus in diese Webseite auf die Fläche unten.
         </v-container>
         <reader @dataRead="handleData" :data="data" type="xlsx" :key="data.length"></reader>
-        <v-btn color="primary" onclick="location.href='https://dahn-research.eu/TestAnalyzerSampleData/TestdatenOlat.xlsx'"
+        <v-btn color="primary" onclick="location.href='https://service.dahn-research.de/TestAnalyzerSampleData/TestdatenOlat.xlsx'"
             class="hvr-grow">
             Demo-Daten
         </v-btn>

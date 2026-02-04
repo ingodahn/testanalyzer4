@@ -25,7 +25,7 @@
             Ziehen Sie die so erstellte csv-Datei mit der Maus in diese Webseite auf die Fläche unten.
         </p>
         <reader @dataRead="handleData" :data="data" :type="type" delimiter=";" key="data.length"></reader>
-        <v-btn color="primary" onclick="location.href='https://dahn-research.eu/TestAnalyzerSampleData/TestdatenIlias.csv'"
+        <v-btn color="primary" onclick="location.href='https://service.dahn-research.de/TestAnalyzerSampleData/TestdatenIlias.csv'"
             class="hvr-grow">
             Demo-Daten
         </v-btn>

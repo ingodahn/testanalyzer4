@@ -36,7 +36,7 @@
         <reader @dataRead="handleData" :data="data" type="csv" delimiter="\t" key="data.length"></reader>
         <v-container>
             <v-btn color="primary"
-                onclick="location.href='https://dahn-research.eu/TestAnalyzerSampleData/TestdatenOpal.csv'"
+                onclick="location.href='https://service.dahn-research.de/TestAnalyzerSampleData/TestdatenOpal.csv'"
                 class="hvr-grow">
                 Demo-Daten
             </v-btn>
