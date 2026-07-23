@@ -57,6 +57,11 @@ npm run lint
 pnpm lint
 ```
 
+### In case of problems after merge
+npm run clean:system
+
+before npm run dev
+
 ### Customize configuration
 
 See [Configuration Reference](https://vitejs.dev/config/).

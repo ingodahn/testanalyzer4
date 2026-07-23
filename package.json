@@ -5,6 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "clean:system": "bash scripts/clean-system.sh",
+    "dev:reset": "npm run clean:system && npm install && vite --force",
     "build": "vite build --base ./",
     "preview": "vite preview",
     "lint": "eslint . --fix --ignore-path .gitignore"
